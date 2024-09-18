@@ -6,7 +6,7 @@ const Homepage = (props) => {
     return (
         <>
             <div>Homepage</div>
-            <h2>nuansa ganteng</h2>
+            <h2>nuansa ganteng 123</h2>
         </>
     );
 };
