@@ -26,7 +26,7 @@ const StickyNavbar = () => {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <a href="#" className="flex items-center">
+                <a href="/" className="flex items-center">
                     Beranda
                 </a>
             </Typography>
@@ -36,7 +36,7 @@ const StickyNavbar = () => {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <a href="#" className="flex items-center ">
+                <a href="/invesment-map" className="flex items-center ">
                     Peta Investasi
                 </a>
             </Typography>

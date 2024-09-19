@@ -8,6 +8,9 @@ use Inertia\Inertia;
 Route::get('/', function (){
     return Inertia::render('Homepage');
 });
+Route::get('/invesment-map', function (){
+    return Inertia::render('InvesmentMap');
+});
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
