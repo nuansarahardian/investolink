@@ -4,6 +4,7 @@ import NavBar from "@/Components/NavBar";
 import HeroSection from "@/Components/HeroSection"; // Impor komponen HeroSection
 import InvestmentGallery from "@/Components/InvestmentGallery"; // Impor komponen InvestmentGallery
 import ContactSection from "@/Components/ContactSection"; // Impor komponen ContactSection
+import Footer from "@/Components/Footer"; // Impor komponen Footer
 
 const Homepage = () => {
     return (
@@ -20,6 +21,9 @@ const Homepage = () => {
 
             {/* Memanggil ContactSection */}
             <ContactSection />
+
+            {/* Memanggil Footer di bagian bawah halaman */}
+            <Footer />
         </>
     );
 };
