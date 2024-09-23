@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, GeoJSON } from "react-leaflet";
-import "leaflet/dist/leaflet.css"; // pastikan untuk mengimpor leaflet CSS
+import "leaflet/dist/leaflet.css";
 
 const GeoMap = () => {
     const [geoData, setGeoData] = useState(null);
 
-    // Fetch GeoJSON data
     useEffect(() => {
         fetch("/geojson/indonesia-provinces.geojson")
             .then((response) => response.json())
@@ -13,8 +12,8 @@ const GeoMap = () => {
             .catch((error) => console.error("Error fetching GeoJSON:", error));
     }, []);
 
-    // Style for GeoJSON features
-    const style = {
+    // Default style for provinces
+    const defaultStyle = {
         fillColor: "red",
         weight: 2,
         opacity: 1,
@@ -22,32 +21,56 @@ const GeoMap = () => {
         fillOpacity: 0.7,
     };
 
-    // Function to add events to each feature
+    // Style when hovered
+    const highlightStyle = {
+        weight: 3,
+        color: "yellow",
+        fillColor: "orange",
+        fillOpacity: 0.9,
+    };
+
     const onEachFeature = (feature, layer) => {
-        if (feature.properties && feature.properties.state) {
-            // Add hover event
+        if (feature.properties) {
+            const provinceName = feature.properties.state;
+            const pdrb = feature.properties.pdrb || "Rp465.12 Triliun";
+            const pma = feature.properties.pma || "USD123 Triliun";
+            const sektorUnggulan =
+                feature.properties.sektor || "Lorem Ipsum, Lorem Ipsum";
+            const komoditasUnggulan =
+                feature.properties.komoditas || "Lorem Ipsum, Lorem Ipsum";
+
+            // Bind tooltip with custom styling for arrow
+            layer.bindTooltip(
+                `<div class="relative bg-white p-4 rounded-3xl  text-sm w-[250px]">
+                    <div class="font-bold text-lg text-gray-800 mb-1">${provinceName}</div>
+                    <div class="text-gray-500 text-xs mb-2">per Q4-2023</div>
+                    <div class="font-medium text-gray-800">PDRB: <span class="text-gray-600">${pdrb}</span></div>
+                    <div class="font-medium text-gray-800">PMA: <span class="text-gray-600">${pma}</span></div>
+                    <div class="font-medium text-gray-800">Sektor Unggulan:</div>
+                    <div class="text-gray-600">${sektorUnggulan}</div>
+                    <div class="font-medium text-gray-800">Komoditas Unggulan:</div>
+                    <div class="text-gray-600">${komoditasUnggulan}</div>
+
+           
+                    
+                 </div>`,
+                {
+                    className: "", // This removes default Leaflet styles
+                    sticky: false,
+                }
+            );
+
+            // Add event listeners for hover and mouse out
             layer.on({
                 mouseover: (e) => {
                     const layer = e.target;
-                    layer.setStyle({
-                        fillColor: "blue", // Change color on hover
-                        weight: 3, // Optional: Increase border thickness on hover
-                        color: "yellow", // Optional: Change border color
-                    });
+                    layer.setStyle(highlightStyle);
+                    layer.bringToFront(); // Bring the hovered layer to the front
                 },
                 mouseout: (e) => {
                     const layer = e.target;
-                    layer.setStyle({
-                        fillColor: "red", // Revert to original color
-                        weight: 2, // Revert to original border thickness
-                        color: "white", // Revert to original border color
-                    });
+                    layer.setStyle(defaultStyle);
                 },
-            });
-
-            // Bind tooltip with the name of the province
-            layer.bindTooltip(feature.properties.state, {
-                sticky: true, // Tooltip will follow the mouse cursor
             });
         }
     };
@@ -62,13 +85,13 @@ const GeoMap = () => {
                 }}
                 center={[-2.5, 118]}
                 zoom={5}
-                scrollWheelZoom={true}
+                scrollWheelZoom={false}
                 className="rounded-[6px] justify-center m-auto mt-4 mb-8"
             >
                 {geoData && (
                     <GeoJSON
                         data={geoData}
-                        style={style}
+                        style={defaultStyle}
                         onEachFeature={onEachFeature}
                     />
                 )}

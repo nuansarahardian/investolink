@@ -1,0 +1,44 @@
+{
+    "logos": [
+        {
+            "id": 1,
+            "name": "Indonesia SEZ",
+            "url": "/images/indonesia-sez.png"
+        },
+        {
+            "id": 2,
+            "name": "ina",
+            "url": "/images/ina.png"
+        },
+        {
+            "id": 3,
+            "name": "asean",
+            "url": "/images/asean.png"
+        },
+        {
+            "id": 4,
+            "name": "incorporated",
+            "url": "/images/incorporated.png"
+        },
+        {
+            "id": 5,
+            "name": "worldbank",
+            "url": "/images/worldbank.png"
+        },
+        {
+            "id": 6,
+            "name": "PIR",
+            "url": "/images/PIR.png"
+        },
+        {
+            "id": 7,
+            "name": "satudata",
+            "url": "/images/satudata.png"
+        },
+        {
+            "id": 8,
+            "name": "BPS",
+            "url": "/images/bps.png"
+        }
+    ]
+}

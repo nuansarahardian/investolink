@@ -5,6 +5,8 @@ import HeroSection from "@/Components/HeroSection"; // Impor komponen HeroSectio
 import InvestmentGallery from "@/Components/InvestmentGallery"; // Impor komponen InvestmentGallery
 import ContactSection from "@/Components/ContactSection"; // Impor komponen ContactSection
 import Footer from "@/Components/Footer"; // Impor komponen Footer
+import BrandSlider from "@/Components/BrandSlider"; // Impor komponen Footer
+import { Slider } from "@material-tailwind/react";
 
 const Homepage = () => {
     return (
@@ -12,7 +14,7 @@ const Homepage = () => {
             {/* Inertia.js Head Component to set the page title */}
             <Head title="Homepage" />
             <NavBar />
-            
+
             {/* Memanggil HeroSection */}
             <HeroSection />
 
@@ -21,6 +23,19 @@ const Homepage = () => {
 
             {/* Memanggil ContactSection */}
             <ContactSection />
+            <div className="flex flex-col mt-6 ">
+                <div className="flex flex-col m-auto mb-8 text-slate-800 ">
+                    <div className="m-auto text-3xl font-medium ">
+                        Situs Terkait
+                    </div>
+                    <div>
+                        Pastikan anda tetap terhubung dengan data ekonomi
+                        terbaru melalui situs-situs mitra BSKLN
+                    </div>
+                </div>
+
+                <BrandSlider className="" />
+            </div>
 
             {/* Memanggil Footer di bagian bawah halaman */}
             <Footer />

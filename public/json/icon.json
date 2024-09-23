@@ -1,0 +1,20 @@
+{
+    "icon": [
+        {
+            "img": "icon/ig.png",
+            "url": ""
+        },
+        {
+            "img": "icon/facebook.png",
+            "url": ""
+        },
+        {
+            "img": "icon/yt.png",
+            "url": ""
+        },
+        {
+            "img": "icon/twt.png",
+            "url": ""
+        }
+    ]
+}
