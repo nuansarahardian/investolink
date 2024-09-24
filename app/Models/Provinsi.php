@@ -38,4 +38,9 @@ class Provinsi extends Model
     {
         return $this->belongsToMany(Komoditas::class, 'provinsi_komoditas', 'provinsiID', 'komoditasID');
     }
+
+    public function kawasan_industri()
+    {
+        return $this->hasMany(kawasan_industri::class, 'provinsiID');
+    }
 }
