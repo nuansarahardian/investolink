@@ -16,4 +16,9 @@ class Sektor extends Model
     protected $fillable = [
         'nama_sektor',
     ];
+
+    public function komoditas()
+    {
+        return $this->hasMany(Komoditas::class, 'sektorID');
+    }
 }

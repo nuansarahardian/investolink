@@ -22,9 +22,47 @@ class SektorController extends Controller
     /**
      * Menampilkan data Sektor berdasarkan ID
      */
-    public function show($id)
+    // public function show($id)
+    // {
+    //     $sektor = Sektor::find($id);
+    //     if ($sektor) {
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'data' => $sektor
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => 'Data sektor tidak ditemukan'
+    //         ], 404);
+    //     }
+    // }
+
+    /**
+     * Menampilkan data Provinsi berdasarkan ID Sektor
+     */
+    public function showProvinsibySektor($id)
     {
-        $sektor = Sektor::find($id);
+        $sektor = Sektor::with('provinsi')->find($id);
+        if ($sektor) {
+            return response()->json([
+                'status' => 'success',
+                'data' => $sektor
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data sektor tidak ditemukan'
+            ], 404);
+        }
+    }
+
+    /**
+     * Menampilkan data Komoditas berdasarkan ID Sektor
+     */
+    public function showKomoditasbySektor($id)
+    {
+        $sektor = Sektor::with('komoditas')->find($id);
         if ($sektor) {
             return response()->json([
                 'status' => 'success',

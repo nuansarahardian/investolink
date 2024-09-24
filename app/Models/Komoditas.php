@@ -25,6 +25,6 @@ class Komoditas extends Model
 
     public function sektor()
     {
-        return $this->belongsTo(Sektor::class, 'sektorID');
+        return $this->belongsTo(Sektor::class);
     }
 }
