@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 const DataTable = () => {
     const [data, setData] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [sortOrder, setSortOrder] = useState("A-Z");
+    const [sortColumn, setSortColumn] = useState("provinsi");
+    const [isAscending, setIsAscending] = useState(true);
 
     useEffect(() => {
         // Fetch provinces from the local JSON file
@@ -29,15 +30,31 @@ const DataTable = () => {
             item.provinsi.toLowerCase().includes(searchTerm.toLowerCase())
         )
         .sort((a, b) => {
-            if (sortOrder === "A-Z") {
-                return a.provinsi.localeCompare(b.provinsi);
-            } else {
-                return b.provinsi.localeCompare(a.provinsi);
+            if (sortColumn === "provinsi") {
+                return isAscending
+                    ? a.provinsi.localeCompare(b.provinsi)
+                    : b.provinsi.localeCompare(a.provinsi);
+            } else if (sortColumn === "kawasanIndustri") {
+                return isAscending
+                    ? a.kawasanIndustri - b.kawasanIndustri
+                    : b.kawasanIndustri - a.kawasanIndustri;
+            } else if (sortColumn === "kek") {
+                return isAscending ? a.kek - b.kek : b.kek - a.kek;
             }
+            return 0;
         });
 
     const handleDetailClick = (provinsiName) => {
         alert(`You clicked on details for: ${provinsiName}`);
+    };
+
+    const handleSort = (column) => {
+        if (sortColumn === column) {
+            setIsAscending(!isAscending); // Toggle ascending/descending
+        } else {
+            setSortColumn(column);
+            setIsAscending(true); // Default to ascending when changing column
+        }
     };
 
     return (
@@ -45,7 +62,7 @@ const DataTable = () => {
             {/* Table header (sorting, search, and total count) */}
             <div className="flex justify-between items-center mb-4 flex-wrap space-y-2 sm:space-y-0">
                 <div>
-                    <label className="font-regular text-slate-800 text-lg ">
+                    <label className="font-medium text-slate-800 text-lg">
                         Menampilkan {filteredData.length} Provinsi
                     </label>
                 </div>
@@ -57,11 +74,14 @@ const DataTable = () => {
                         </label>
                         <select
                             className="border pr-10 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            value={sortOrder}
-                            onChange={(e) => setSortOrder(e.target.value)}
+                            value={sortColumn}
+                            onChange={(e) => handleSort(e.target.value)}
                         >
-                            <option value="A-Z">A-Z</option>
-                            <option value="Z-A">Z-A</option>
+                            <option value="provinsi">Nama Provinsi</option>
+                            <option value="kawasanIndustri">
+                                Kawasan Industri
+                            </option>
+                            <option value="kek">KEK</option>
                         </select>
                     </div>
 
@@ -79,21 +99,95 @@ const DataTable = () => {
             </div>
 
             {/* Scrollable table */}
-            <div className="overflow-y-auto max-h-96 ">
-                <table className="min-w-full table-auto border-collapse border border-gray-300 rounded-md bg-white shadow-md">
-                    <thead className="bg-gray-300 sticky top-[-0.1px] z-10 h-12 ">
-                        <tr className="text-center border border-collapse border-gray-300 ">
+            <div className="overflow-y-auto max-h-96 rounded-xl border border-gray-300 shadow-sm custom-scrollbar">
+                <table className="min-w-full table-auto border-collapse bg-white">
+                    <thead className="bg-gray-200 sticky top-0 z-10 h-12">
+                        <tr className="text-center border-b border-gray-300">
                             <th className="p-4 text-sm font-bold text-gray-700">
                                 No
                             </th>
-                            <th className="p-4 text-sm font-bold text-gray-700">
-                                Nama Provinsi
+                            <th
+                                className="p-4 text-sm font-bold text-gray-700 cursor-pointer"
+                                onClick={() => handleSort("provinsi")}
+                            >
+                                <div className="flex justify-center align-middle place-items-center">
+                                    Nama Provinsi
+                                    {sortColumn === "provinsi" && (
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            className={`w-4 h-4 ml-2 my-auto transition-transform duration-300 ${
+                                                isAscending
+                                                    ? "rotate-0"
+                                                    : "rotate-180"
+                                            }`}
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M5 15l7-7 7 7"
+                                            />
+                                        </svg>
+                                    )}
+                                </div>
                             </th>
-                            <th className="p-4 text-sm font-bold text-gray-700">
-                                Jumlah Kawasan Industri
+                            <th
+                                className="p-4 place-content-center text-sm font-bold text-gray-700 cursor-pointer"
+                                onClick={() => handleSort("kawasanIndustri")}
+                            >
+                                <div className="flex">
+                                    {" "}
+                                    Jumlah Kawasan Industri
+                                    {sortColumn === "kawasanIndustri" && (
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            className={`w-4 h-4 ml-2  my-auto transition-transform duration-300 ${
+                                                isAscending
+                                                    ? "rotate-0"
+                                                    : "rotate-180"
+                                            }`}
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M5 15l7-7 7 7"
+                                            />
+                                        </svg>
+                                    )}
+                                </div>
                             </th>
-                            <th className="p-4 text-sm font-bold text-gray-700">
+                            <th
+                                className="p-4 flex place-content-center text-sm font-bold text-gray-700 cursor-pointer"
+                                onClick={() => handleSort("kek")}
+                            >
                                 Jumlah Kawasan Ekonomi Khusus (KEK)
+                                {sortColumn === "kek" && (
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        className={`w-4 h-4 ml-2 my-auto transition-transform duration-300 ${
+                                            isAscending
+                                                ? "rotate-0"
+                                                : "rotate-180"
+                                        }`}
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M5 15l7-7 7 7"
+                                        />
+                                    </svg>
+                                )}
                             </th>
                             <th className="p-4 text-sm font-bold text-gray-700">
                                 Aksi
@@ -104,9 +198,9 @@ const DataTable = () => {
                         {filteredData.map((row, index) => (
                             <tr
                                 key={index}
-                                className={`border-t ${
+                                className={`border-t border-gray-300 transition duration-200 ${
                                     index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                                }`}
+                                } hover:bg-blue-50`}
                             >
                                 <td className="p-4 text-sm text-gray-600 text-center">
                                     {index + 1}
@@ -122,7 +216,7 @@ const DataTable = () => {
                                 </td>
                                 <td className="p-4 text-sm text-gray-600 text-center">
                                     <button
-                                        className="bg-slate-800 text-white border py-2 -my-1 px-4 m-auto rounded-lg hover:bg-slate-300 transition duration-300 ease-in-out flex items-center"
+                                        className="bg-slate-800 text-white border m-auto py-2 px-4 rounded-lg hover:bg-blue-500 transition duration-300 ease-in-out flex items-center"
                                         onClick={() =>
                                             handleDetailClick(row.provinsi)
                                         }

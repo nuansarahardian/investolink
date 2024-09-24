@@ -40,23 +40,23 @@ const StickyNavbar = () => {
 
     return (
         <div className="max-h-[768px] max-w-screen">
-            <div className="shadow-sm sticky top-0 z-10 rounded-none px-4 py-4 lg:px-8 lg:py-4">
+            <div className="shadow-sm bg-gradient-to-r from-[#5E7ADD] to-[#2D3985] sticky top-0 z-10 rounded-none px-4 py-4 lg:px-8 lg:py-4">
                 <div className="flex items-center justify-between text-blue-gray-900 sm:mx-20 mx-2">
                     <div className="flex items-center">
                         <img
                             src="images/KEMLU RI.png"
                             alt=""
-                            className="mr-4 h-8 w-8 sm:w-10 sm:h-10"
+                            className="mr-2 h-8 w-8 sm:w-10 sm:h-10"
                         />
                         <Typography
                             as="a"
                             href="#"
-                            className="mr-4 cursor-pointer py-1.5 font-medium text-slate-800"
+                            className="mr-4 cursor-pointer py-1.5 font-medium text-white"
                         >
                             <span className="font-bold sm:text-xl text-md">
                                 INVESTO
                             </span>
-                            <span className="font-light sm:text-xl text-md">
+                            <span className="font-normal sm:text-xl text-md -ml-1">
                                 {" "}
                                 LINK
                             </span>
@@ -67,10 +67,10 @@ const StickyNavbar = () => {
                         <Dropdown />
                         <Button
                             variant="gradient"
-                            size="sm"
-                            className="hidden lg:inline-block text-slate-100 bg-slate-800 rounded-md"
+                            size="md"
+                            className="hidden lg:inline-block text-slate-100 bg-slate-800 font-medium rounded-md"
                         >
-                            Sign in
+                            Masuk
                         </Button>
                         <IconButton
                             variant="text"

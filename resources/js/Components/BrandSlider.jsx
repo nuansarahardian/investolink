@@ -9,7 +9,7 @@ function PrevArrow(props) {
     const { onClick } = props;
     return (
         <div
-            className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-700 rounded-full p-2 cursor-pointer z-10"
+            className="absolute top-1/2 -left-10 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-700 rounded-full p-2 cursor-pointer z-10"
             onClick={onClick}
         >
             <FaArrowLeft className="text-white" />
@@ -22,7 +22,7 @@ function NextArrow(props) {
     const { onClick } = props;
     return (
         <div
-            className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-700 rounded-full p-2 cursor-pointer z-10"
+            className="absolute top-1/2 -right-10 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-700 rounded-full p-2 cursor-pointer z-10"
             onClick={onClick}
         >
             <FaArrowRight className="text-white" />
@@ -80,10 +80,10 @@ function BrandSlider() {
     };
 
     return (
-        <div className="slider-container pb-10 w-[90%] m-auto relative">
+        <div className="slider-container pb-10 w-[85%] m-auto relative">
             <Slider {...settings}>
                 {logos.map((logo) => (
-                    <div key={logo.id} className="text-center p-4">
+                    <div key={logo.id} className="text-center">
                         <img
                             src={logo.url}
                             alt={logo.name}
