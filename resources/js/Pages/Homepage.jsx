@@ -22,9 +22,6 @@ const Homepage = () => {
 
             {/* Memanggil InvestmentGallery */}
             <InvestmentGallery />
-
-            {/* Memanggil ContactSection */}
-            <ContactSection />
             <div className="flex flex-col mt-6 ">
                 <div className="flex flex-col m-auto mb-8 text-slate-800 ">
                     <div className="m-auto text-3xl font-medium ">
@@ -38,6 +35,9 @@ const Homepage = () => {
 
                 <BrandSlider className="" />
             </div>
+
+            {/* Memanggil ContactSection */}
+            <ContactSection />
 
             {/* Memanggil Footer di bagian bawah halaman */}
             <Footer />

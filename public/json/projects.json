@@ -1,0 +1,25 @@
+{
+    "projects": [
+        {
+            "location": "Tuban",
+            "category": "Karbon Tinggi",
+            "title": "Power & Steam Generation, Water Desalination Plant GRR Tuban Project",
+            "company": "PT Pertamina Power Indonesia",
+            "images": "images/invesment1.png"
+        },
+        {
+            "location": "Sumatera Utara",
+            "category": "Energi",
+            "title": "PLTM Lau Gunung 2 x 7,5 MW",
+            "company": "PT Inpola Meka Energi",
+            "images": "images/invesment1.png"
+        },
+        {
+            "location": "Tuban",
+            "category": "Karbon Rendah",
+            "title": "Power & Steam Generation, Water Desalination Plant GRR Tuban Project",
+            "company": "PT Pertamina Power Indonesia",
+            "images": "images/invesment1.png"
+        }
+    ]
+}
