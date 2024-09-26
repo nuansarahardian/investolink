@@ -77,8 +77,8 @@ const Footer = () => {
 
                     {/* Hak Cipta */}
                     <p className="text-base mt-6">
-                        © 2024 <span className="font-semibold">BSKLN</span> dan{" "}
-                        <span className="font-semibold">TPPE</span>. Hak cipta
+                        © 2024 <span className="font-semibold">BSKLN</span>{" "}
+                        <span className="font-semibold"></span>. Hak cipta
                         dilindungi Undang-Undang
                     </p>
                 </div>
