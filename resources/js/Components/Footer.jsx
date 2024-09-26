@@ -10,7 +10,7 @@ const Footer = () => {
     }, []);
 
     return (
-        <footer className="bg-gray-800 text-white py-8">
+        <footer className="bg-gradient-to-r from-[#5E7ADD] to-[#2D3985] text-white py-8">
             <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-24">
                 {/* Kolom Kiri */}
                 <div className="flex flex-col items-start">

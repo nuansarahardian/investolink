@@ -27,7 +27,7 @@ const InvestmentGallery = () => {
                             <img
                                 src={project.images}
                                 alt={project.title}
-                                className="w-full h-[160px] object-cover rounded-t-lg"
+                                className="w-full h-[160px] object-cover rounded-t-lg "
                             />
 
                             {/* Informasi Proyek */}
@@ -46,7 +46,7 @@ const InvestmentGallery = () => {
                                     <span
                                         className={`text-sm font-medium rounded-md text-[12px] border px-[10px] py-[6px] ${
                                             project.category === "Karbon Rendah"
-                                                ? "bg-green-100 text-green-600 border-green-600"
+                                                ? "bg-[#E2FAE7] text-[#328945] border-[#85C493] border-2"
                                                 : "bg-yellow-100 text-yellow-600 border-yellow-600"
                                         }`}
                                     >
