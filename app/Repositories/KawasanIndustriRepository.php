@@ -31,39 +31,13 @@ class KawasanIndustriRepository implements KawasanIndustriRepositoryInterface
     }
 
     /**
-     * Menyimpan data Sektor
-     * 
-     * @param array $data
-     */
-    // public function store($data)
-    // {
-    //     return Sektor::create($data);
-    // }
-
-    /**
-     * Mengupdate data Sektor berdasarkan ID
-     * 
-     * @param int $id
-     * @param array $data
-     */
-    // public function update($id, array $data)
-    // {
-    //     $sektor = Sektor::findOrFail($id);
-    //     $sektor->update($data);
-
-    //     return $sektor;
-    // }
-
-    /**
-     * Menghapus data Sektor berdasarkan ID
+     * Menampilkan data Kawasan Industri berdasarkan ID Provinsi
      * 
      * @param int $id
      */
-    // public function delete($id)
-    // {
-    //     $sektor = Sektor::findOrFail($id);
-    //     $sektor->delete();
-
-    //     return $sektor;
-    // }
+    public function showKawasanIndustribyProvinsi($id)
+    {
+        $data = Kawasan_Industri::where('provinsiID', $id)->get();
+        return $data;
+    }
 }

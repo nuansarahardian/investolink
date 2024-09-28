@@ -44,4 +44,51 @@ class KomoditasController extends Controller
             return ApiResponseClass::error('Data komoditas tidak ditemukan', 404);
         }
     }
+
+
+
+
+
+
+    /**
+     * Menampilkan data Komoditas berdasarkan ID Provinsi
+     */
+    public function showKomoditasbyProvinsi($id)
+    {
+        $data = $this->komoditasRepositoryInterface->showKomoditasbyProvinsi($id);
+
+        if ($data) {
+            return ApiResponseClass::success(KomoditasResource::collection($data), 'Data komoditas berhasil diambil', 200);
+        } else {
+            return ApiResponseClass::error('Data komoditas tidak ditemukan', 404);
+        }
+    }
+
+    /**
+     * Menampilkan data Komoditas berdasarkan ID Sektor
+     */
+    public function showKomoditasbySektor($id)
+    {
+        $data = $this->komoditasRepositoryInterface->showKomoditasbySektor($id);
+
+        if ($data) {
+            return ApiResponseClass::success(KomoditasResource::collection($data), 'Data komoditas berhasil diambil', 200);
+        } else {
+            return ApiResponseClass::error('Data komoditas tidak ditemukan', 404);
+        }
+    }
+
+    /**
+     * Menampilkan data Komoditas berdasarkan ID Provinsi dan ID Sektor
+     */
+    public function showKomoditasbyProvinsiandSektor($provinsi_id, $sektor_id)
+    {
+        $data = $this->komoditasRepositoryInterface->showKomoditasbyProvinsiandSektor($provinsi_id, $sektor_id);
+
+        if ($data) {
+            return ApiResponseClass::success(KomoditasResource::collection($data), 'Data komoditas berhasil diambil', 200);
+        } else {
+            return ApiResponseClass::error('Data komoditas tidak ditemukan', 404);
+        }
+    }
 }

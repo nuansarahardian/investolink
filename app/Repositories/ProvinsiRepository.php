@@ -7,6 +7,7 @@ use App\Models\Provinsi;
 use App\Models\Komoditas;
 use App\Models\KawasanIndustri;
 use App\Models\Sektor;
+use App\Models\Provinsi_Komoditas;
 
 class ProvinsiRepository implements ProvinsiRepositoryInterface
 {
@@ -17,7 +18,8 @@ class ProvinsiRepository implements ProvinsiRepositoryInterface
      */
     public function index()
     {
-        return Provinsi::all();
+        $data = Provinsi::all(); 
+        return $data;
     }
 
     /**
@@ -27,83 +29,19 @@ class ProvinsiRepository implements ProvinsiRepositoryInterface
      */
     public function show($id)
     {
-        return Provinsi::findOrFail($id);
+        $data = Provinsi::findOrFail($id); 
+        return $data;
     }
 
     /**
-     * Menyimpan data Provinsi
-     * 
-     * @param array $data
-     */
-    // public function store($data)
-    // {
-    //     return Provinsi::create($data);
-    // }
-
-    /**
-     * Mengupdate data Provinsi berdasarkan ID
-     * 
-     * @param int $id
-     * @param array $data
-     */
-    // public function update($id, array $data)
-    // {
-    //     $provinsi = Provinsi::findOrFail($id);
-    //     $provinsi->update($data);
-
-    //     return $provinsi;
-    // }
-
-    /**
-     * Menghapus data Provinsi berdasarkan ID
+     * Menampilkan data Provinsi berdasarkan ID Komoditas
      * 
      * @param int $id
      */
-    // public function delete($id)
-    // {
-    //     $provinsi = Provinsi::findOrFail($id);
-    //     $provinsi->delete();
-
-    //     return $provinsi;
-    // }
-
-    /**
-     * Menampilkan data Komoditas berdasarkan ID Provinsi
-     * 
-     * @param int $id
-     */
-    // public function showKomoditasbyProvinsi($id)
-    // {
-    //     $komoditas = Komoditas::where('provinsiID', $id)->get();
-
-    //     return $komoditas;
-    // }
-
-    /**
-     * Menampilkan data Sektor berdasarkan ID Provinsi
-     * 
-     * @param int $id
-     */
-    // public function showSektorbyProvinsi($id)
-    // {
-    //     $sektor = ProvinsiKomoditas::where('provinsiID', $id)
-    //     ->with('komoditas.sektor') 
-    //     ->get()
-    //     ->pluck('komoditas.sektor')
-    //     ->unique('id');
-
-    //     return $sektor;
-    // }
-
-    /**
-     * Menampilkan data Kawasan Industri berdasarkan ID Provinsi
-     * 
-     * @param int $id
-     */
-    // public function showKawasanIndustribyProvinsi($id)
-    // {
-    //     $kawasanIndustri = KawasanIndustri::where('provinsiID', $id)->get();
-        
-    //     return $kawasanIndustri;
-    // }
+    public function showProvinsibyKomoditas($id)
+    {
+        $provinsiIDs = Provinsi_Komoditas::where('komoditasID', $id)->pluck('provinsiID');
+        $data = Provinsi::whereIn('provinsiID', $provinsiIDs)->get();
+        return $data;
+    }
 }

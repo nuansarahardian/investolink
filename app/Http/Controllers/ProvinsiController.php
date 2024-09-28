@@ -46,40 +46,16 @@ class ProvinsiController extends Controller
     }
 
     /**
-     * Menampilkan data Komoditas berdasarkan ID Provinsi
+     * Menampilkan data Provinsi berdasarkan ID Komoditas
      */
-    // public function showKomoditasbyProvinsi($id)
-    // {
-    //     $provinsi = Provinsi::with('komoditas')->find($id);
-    //     if ($provinsi) {
-    //         return response()->json([
-    //             'status' => 'success',
-    //             'data' => $provinsi
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => 'Data provinsi tidak ditemukan'
-    //         ], 404);
-    //     }
-    // }
+    public function showProvinsibyKomoditas($id)
+    {
+        $data = $this->provinsiRepositoryInterface->showProvinsibyKomoditas($id);
 
-    /**
-     * Menampilkan data Kawasan_Industri berdasarkan ID Provinsi
-     */
-    // public function showKawasanIndustribyProvinsi($id)
-    // {
-    //     $provinsi = Provinsi::with('kawasan_industri')->find($id);
-    //     if ($provinsi) {
-    //         return response()->json([
-    //             'status' => 'success',
-    //             'data' => $provinsi
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => 'Data provinsi tidak ditemukan'
-    //         ], 404);
-    //     }
-    // }
+        if ($data) {
+            return ApiResponseClass::success(ProvinsiResource::collection($data), 'Data provinsi berhasil diambil', 200);
+        } else {
+            return ApiResponseClass::error('Data provinsi tidak ditemukan', 404);
+        }
+    }
 }

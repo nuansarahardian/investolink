@@ -43,4 +43,14 @@ class Provinsi extends Model
     {
         return $this->hasMany(kawasan_industri::class, 'provinsiID');
     }
+
+    public function pma()
+    {
+        return $this->hasMany(PMA::class, 'provinsiID');
+    }
+
+    // public function realisasi_investasi()
+    // {
+    //     return $this->hasMany()
+    // }
 }

@@ -44,4 +44,18 @@ class KawasanIndustriController extends Controller
             return ApiResponseClass::error('Data kawasan industri tidak ditemukan', 404);
         }
     }
+
+    /**
+     * Menampilkan data Kawasan Industri berdasarkan ID Provinsi
+     */
+    public function showKawasanIndustribyProvinsi($id)
+    {
+        $data = $this->kawasanIndustriRepositoryInterface->showKawasanIndustribyProvinsi($id);
+
+        if ($data) {
+            return ApiResponseClass::success(KawasanIndustriResource::collection($data), 'Data kawasan industri berhasil diambil', 200);
+        } else {
+            return ApiResponseClass::error('Data kawasan industri tidak ditemukan', 404);
+        }
+    }
 }
