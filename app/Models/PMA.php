@@ -11,7 +11,7 @@ class PMA extends Model
 
     protected $table = 'pma';
 
-    protected $primaryKey = 'ID';
+    protected $primaryKey = 'PMAID';
 
     protected $fillable = [
         'provinsiID',

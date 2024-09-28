@@ -11,7 +11,7 @@ class Realisasi_Investasi extends Model
 
     protected $table = 'realisasi_investasi';
 
-    protected $primaryKey = 'ID';
+    protected $primaryKey = 'realisasiinvestasiID';
 
     protected $fillable = [
         'provinsiID',
