@@ -11,20 +11,20 @@ class Provinsi_Komoditas extends Model
 
     protected $table = 'provinsi_komoditas';
 
-    public $incrementing = false; // provinsiID dan komoditasID bukan auto increment
+    protected $primaryKey = 'provinsi_komoditas_id';
 
     protected $fillable = [
-        'provinsiID',
-        'komoditasID',
+        'provinsi_id',
+        'komoditas_id',
     ];
 
     public function provinsi()
     {
-        return $this->belongsTo(Provinsi::class, 'provinsiID');
+        return $this->belongsTo(Provinsi::class, 'provinsi_id');
     }
 
     public function komoditas()
     {
-        return $this->belongsTo(Komoditas::class, 'komoditasID');
+        return $this->belongsTo(Komoditas::class, 'komoditas_id');
     }
 }

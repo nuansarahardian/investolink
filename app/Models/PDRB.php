@@ -11,10 +11,10 @@ class PDRB extends Model
 
     protected $table = 'pdrb';
 
-    protected $primaryKey = 'PDRBID';
+    protected $primaryKey = 'PDRB_id';  // Primary key
 
     protected $fillable = [
-        'provinsiID',
+        'provinsi_id',
         'tahun',
         'nilai_pdrb_konstan',
         'nilai_pdrb_berlaku',
@@ -22,6 +22,6 @@ class PDRB extends Model
 
     public function provinsi()
     {
-        return $this->belongsTo(Provinsi::class, 'provinsiID');
+        return $this->belongsTo(Provinsi::class, 'provinsi_id');
     }
 }

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sektor', function (Blueprint $table) {
-            $table->bigIncrements('sektorID');
-            $table->string('nama_sektor');
+            $table->unsignedSmallInteger('sektor_id')->autoIncrement();
+            $table->string('nama_sektor', 25);
             $table->timestamps();
         });
     }

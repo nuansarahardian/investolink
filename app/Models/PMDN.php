@@ -11,16 +11,16 @@ class PMDN extends Model
 
     protected $table = 'pmdn';
 
-    protected $primaryKey = 'PMDNID';
+    protected $primaryKey = 'PMDN_id';  // Primary key
 
     protected $fillable = [
-        'provinsiID',
+        'provinsi_id',
         'tahun',
         'nilai_pmdn',
     ];
 
     public function provinsi()
     {
-        return $this->belongsTo(Provinsi::class, 'provinsiID');
+        return $this->belongsTo(Provinsi::class, 'provinsi_id');
     }
 }

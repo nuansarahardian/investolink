@@ -11,7 +11,7 @@ class Sektor extends Model
 
     protected $table = 'sektor';
 
-    protected $primaryKey = 'sektorID';
+    protected $primaryKey = 'sektor_id';  // Primary key
 
     protected $fillable = [
         'nama_sektor',
@@ -19,11 +19,11 @@ class Sektor extends Model
 
     public function komoditas()
     {
-        return $this->hasMany(Komoditas::class, 'sektorID');
+        return $this->hasMany(Komoditas::class, 'sektor_id');
     }
 
-    public function pdrb_per_sektor()
-    {
-        return $this->hasMany(PDRB_per_Sektor::class, 'sektorID');
-    }
+    // public function pdrb_per_sektor()
+    // {
+    //     return $this->hasMany(PDRB_per_Sektor::class, 'sektorID');
+    // }
 }

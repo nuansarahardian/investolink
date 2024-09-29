@@ -11,46 +11,49 @@ class Provinsi extends Model
 
     protected $table = 'provinsi'; 
 
-    public $incrementing = false; // provinsiID bukan auto increment
-
-    protected $primaryKey = 'provinsiID';  // Primary key
+    protected $primaryKey = 'provinsi_id';  // Primary key
 
     protected $fillable = [
         'nama_provinsi',
-        'deskripsi',
-        'area',
+        'gambar_ikonik',
+        'luas_area',
         'website',
         'email',
-        'phone',
-        'special_economic_zone',
-        'population',
-        'gross_domestic_product',
-        'regional_income',
-        'related_links',
-        'regional_minimum_wage',
-        'number_of_industrial_estates',
-        'realization_of_foreign_direct_investment',
-        'export_value',
-        'import_value',
+        'nomor_telepon',
+        'populasi',
+        'link_terkait',
+        'upah_minimum_provinsi',
+        'nilai_ekspor',
+        'nilai_impor',
     ];
 
     public function komoditas()
     {
-        return $this->belongsToMany(Komoditas::class, 'provinsi_komoditas', 'provinsiID', 'komoditasID');
+        return $this->belongsToMany(Komoditas::class, 'provinsi_komoditas', 'provinsi_id', 'komoditas_id');
     }
 
     public function kawasan_industri()
     {
-        return $this->hasMany(kawasan_industri::class, 'provinsiID');
+        return $this->hasMany(Kawasan_Industri::class, 'provinsi_id');
     }
 
     public function pma()
     {
-        return $this->hasMany(PMA::class, 'provinsiID');
+        return $this->hasMany(PMA::class, 'provinsi_id');
     }
 
-    // public function realisasi_investasi()
-    // {
-    //     return $this->hasMany()
-    // }
+    public function pmdn()
+    {
+        return $this->hasMany(PMDN::class, 'provinsi_id');
+    }
+
+    public function pdrb()
+    {
+        return $this->hasMany(PDRB::class, 'provinsi_id');
+    }
+
+    public function realisasi_investasi()
+    {
+        return $this->hasMany(Realisasi_Investasi::class, 'provinsi_id');
+    }
 }

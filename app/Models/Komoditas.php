@@ -11,20 +11,20 @@ class Komoditas extends Model
 
     protected $table = 'komoditas';
 
-    protected $primaryKey = 'komoditasID';
+    protected $primaryKey = 'komoditas_id';  // Primary key
 
     protected $fillable = [
-        'sektorID',
+        'sektor_id',
         'nama_komoditas',
     ];
 
     public function provinsi()
     {
-        return $this->belongsToMany(Provinsi::class, 'provinsi_komoditas', 'komoditasID', 'provinsiID');
+        return $this->belongsToMany(Provinsi::class, 'provinsi_komoditas', 'komoditas_id', 'provinsi_id');
     }
 
     public function sektor()
     {
-        return $this->belongsTo(Sektor::class);
+        return $this->belongsTo(Sektor::class, 'sektor_id');
     }
 }
