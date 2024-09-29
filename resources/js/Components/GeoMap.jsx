@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import axios from "axios";
 
 const GeoMap = () => {
     const [geoData, setGeoData] = useState(null);
@@ -49,11 +50,8 @@ const GeoMap = () => {
                     <div class="font-medium text-gray-800">Sektor Unggulan:</div>
                     <div class="text-gray-600">${sektorUnggulan}</div>
                     <div class="font-medium text-gray-800">Komoditas Unggulan:</div>
-                    <div class="text-gray-600">${komoditasUnggulan}</div>
-
-           
-                    
-                 </div>`,
+                    <div class="text-gray-600">${komoditasUnggulan}</div>    
+                </div>`,
                 {
                     className: "", // This removes default Leaflet styles
                     sticky: false,

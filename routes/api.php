@@ -5,33 +5,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\KomoditasController;
 use App\Http\Controllers\SektorController;
+use App\Http\Controllers\KawasanIndustriController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
 // Route untuk Provinsi
-Route::get('/provinsi', [ProvinsiController::class, 'index']);
-// Route untuk Komoditas berdasarkan ID Provinsi
-Route::get('/provinsi/{id}/komoditas', [ProvinsiController::class, 'showKomoditasbyProvinsi']);	
-// Route untuk Kawasan_Industri berdasarkan ID Provinsi
-Route::get('/provinsi/{id}/kawasan_industri', [ProvinsiController::class, 'showKawasanIndustribyProvinsi']);
+Route::apiResource('provinsi', ProvinsiController::class);
+Route::get('/provinsi/komoditas/{id}', [ProvinsiController::class, 'showProvinsibyKomoditas']);
 
 // Route untuk Komoditas
-// Route::get('/komoditas', [KomoditasController::class, 'index']);
-// Route untuk Provinsi berdasarkan ID Komoditas
-// Route::get('/komoditas/{id}/provinsi', [KomoditasController::class, 'showKomoditasbyProvinsi']);
+Route::apiResource('komoditas', KomoditasController::class);
+Route::get('/komoditas/provinsi/{id}', [KomoditasController::class, 'showKomoditasbyProvinsi']);
+Route::get('/komoditas/sektor/{id}', [KomoditasController::class, 'showKomoditasbySektor']);
+Route::get('/komoditas/provinsi/{provinsi_id}/sektor/{sektor_id}', [KomoditasController::class, 'showKomoditasbyProvinsiandSektor']);
 
 // Route untuk Sektor
-Route::get('/sektor', [SektorController::class, 'index']);
-// Route untuk Provinsi berdasarkan ID Sektor
-Route::get('/sektor/{id}/provinsi', [SektorController::class, 'showSektorbyProvinsi']);
-// Route untuk Komoditas berdasarkan ID Sektor
-Route::get('/sektor/{id}/komoditas', [SektorController::class, 'showSektorbyKomoditas']);
+Route::apiResource('sektor', SektorController::class);
 
-
-// Route::get('/provinsi/{id}', [ProvinsiController::class, 'show']);
-
-// Route::get('/komoditas/{id}', [KomoditasController::class, 'show']);
-
-// Route::get('/sektor/{id}', [SektorController::class, 'show']);
+// Route untuk Kawasan Industri
+Route::apiResource('kawasan_industri', KawasanIndustriController::class);
+Route::get('/kawasan_industri/provinsi/{id}', [KawasanIndustriController::class, 'showKawasanIndustribyProvinsi']);
