@@ -11,16 +11,16 @@ class Realisasi_Investasi extends Model
 
     protected $table = 'realisasi_investasi';
 
-    protected $primaryKey = 'realisasiinvestasiID';
+    protected $primaryKey = 'realisasi_investasi_id';  // Primary key
 
     protected $fillable = [
-        'provinsiID',
+        'provinsi_id',
         'tahun',
         'nilai_realisasi_investasi',
     ];
 
     public function provinsi()
     {
-        return $this->belongsTo(Provinsi::class, 'provinsiID');
+        return $this->belongsTo(Provinsi::class, 'provinsi_id');
     }
 }

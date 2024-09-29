@@ -11,16 +11,16 @@ class PMA extends Model
 
     protected $table = 'pma';
 
-    protected $primaryKey = 'PMAID';
+    protected $primaryKey = 'PMA_id';  // Primary key
 
     protected $fillable = [
-        'provinsiID',
+        'provinsi_id',
         'tahun',
         'nilai_pma',
     ];
 
     public function provinsi()
     {
-        return $this->belongsTo(Provinsi::class, 'provinsiID');
+        return $this->belongsTo(Provinsi::class, 'provinsi_id');
     }
 }

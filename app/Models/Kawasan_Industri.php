@@ -11,16 +11,16 @@ class Kawasan_Industri extends Model
 
     protected $table = 'kawasan_industri';
 
-    protected $primaryKey = 'KIID';  // Primary key
+    protected $primaryKey = 'kawasan_industri_id';  // Primary key
 
     protected $fillable = [
-        'provinsiID',
-        'nama_KI',
-        'is_KEK',
+        'provinsi_id',
+        'nama_kawasan_industri',
+        'is_kawasan_ekonomi_khusus',
     ];
 
     public function provinsi()
     {
-        return $this->belongsTo(Provinsi::class, 'provinsiID');
+        return $this->belongsTo(Provinsi::class, 'provinsi_id');
     }
 }

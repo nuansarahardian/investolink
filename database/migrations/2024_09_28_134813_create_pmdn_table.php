@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pmdn', function (Blueprint $table) {
-            $table->bigIncrements('PMDNID');
-            $table->unsignedBigInteger('provinsiID');
+            $table->unsignedSmallInteger('PMDN_id')->autoIncrement();
+            $table->unsignedSmallInteger('provinsi_id');
             $table->year('tahun');
             $table->decimal('nilai_pmdn', 15, 2)->nullable();
             $table->timestamps();
 
-            $table->foreign('provinsiID')->references('provinsiID')->on('provinsi')->onDelete('cascade');
+            $table->foreign('provinsi_id')->references('provinsi_id')->on('provinsi')->onDelete('cascade');
         });
     }
 
