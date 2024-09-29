@@ -59,6 +59,7 @@ const ContactForm = () => {
           Kirim Pesan
         </button>
       </form>
+      
     </div>
   );
 };

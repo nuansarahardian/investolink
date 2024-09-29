@@ -6,7 +6,7 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 const InvestmentGallery = () => {
     return (
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-white">
             <div className="container mx-auto px-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">
                     Galeri Proyek Investasi
@@ -17,7 +17,7 @@ const InvestmentGallery = () => {
                 </p>
 
                 {/* Flexbox untuk kartu proyek investasi */}
-                <div className="flex space-x-6 overflow-x-auto hide-scroll-bar pb-4">
+                <div className="flex space-x-6 overflow-x-auto pb-4 scrollbar-hidden scrollable-container">
                     {projectsData.projects.map((project, index) => (
                         <div
                             key={index}
@@ -44,11 +44,20 @@ const InvestmentGallery = () => {
                                         </span>
                                     </div>
                                     <span
-                                        className={`text-sm font-medium rounded-md text-[12px] border px-[10px] py-[6px] ${
-                                            project.category === "Karbon Rendah"
-                                                ? "bg-[#E2FAE7] text-[#328945] border-[#85C493] border-2"
-                                                : "bg-yellow-100 text-yellow-600 border-yellow-600"
-                                        }`}
+                                        className={`text-sm font-medium rounded-md text-[12px] border px-[10px] py-[6px] ${(() => {
+                                            switch (project.category) {
+                                                case "Karbon Rendah":
+                                                    return "bg-[#E2FAE7] text-[#328945] border-[#85C493] border-1"; // Hijau
+                                                case "Pasokan Air":
+                                                    return "bg-[#E0F8F7] text-[#007D7B] border-[#6EC8C6] border-1"; // Teal
+                                                case "Energi":
+                                                    return "bg-[#E2EDFA] text-[#1E5AA3] border-[#7DADE8] border-1"; // Biru
+                                                case "Pelabuhan & Logistik":
+                                                    return "bg-[#FDF4D6] text-[#B58B12] border-[#E5C69D] border-1"; // Kuning
+                                                default:
+                                                    return "bg-[#F8F3E4] text-[#DB8412] border-[#E5C69D]"; // Warna default jika kategori tidak ditemukan
+                                            }
+                                        })()}`}
                                     >
                                         {project.category}
                                     </span>

@@ -3,11 +3,11 @@ import ContactForm from "./ContactForm"; // Impor ContactForm
 
 const ContactSection = () => {
     return (
-        <section className="py-12 bg-gray-50">
+        <section className="pt-12 bg-[#F0F3FF] mt-10">
             <div className="container mx-auto px-4 lg:px-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Kolom Kiri: Informasi Kontak */}
-                    <div className="my-auto mr">
+                    <div className=" mr">
                         <h2 className="text-3xl font-bold text-gray-800 mb-4">
                             Kami Siap Membantu Anda
                         </h2>
@@ -21,9 +21,15 @@ const ContactSection = () => {
                         </p>
                     </div>
                     {/* Kolom Kanan: Form Kontak */}
-                    <ContactForm /> {/* Memanggil komponen form */}
+                    <ContactForm className="h-full" />{" "}
+                    {/* Memanggil komponen form */}
                 </div>
             </div>
+            <img
+                src="images/tambahan.png"
+                className="static -mt-48 w-[600px]"
+                alt=""
+            />
         </section>
     );
 };

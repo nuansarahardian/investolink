@@ -3,6 +3,7 @@ import Dropdown from "@/Components/Dropdown";
 import { usePage } from "@inertiajs/react";
 import NavLink from "@/Components/NavLink";
 import {
+    Collapse,
     MobileNav,
     Typography,
     Button,
@@ -111,12 +112,12 @@ const StickyNavbar = () => {
                         </IconButton>
                     </div>
                 </div>
-                <MobileNav open={openNav}>
+                <Collapse open={openNav}>
                     {navList}
                     <Button fullWidth variant="text" size="sm">
                         Log In
                     </Button>
-                </MobileNav>
+                </Collapse>
             </div>
         </div>
     );

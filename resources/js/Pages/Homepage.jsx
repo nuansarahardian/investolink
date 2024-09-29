@@ -40,6 +40,7 @@ const Homepage = () => {
             <ContactSection />
 
             {/* Memanggil Footer di bagian bawah halaman */}
+    
             <Footer />
         </>
     );

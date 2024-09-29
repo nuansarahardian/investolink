@@ -14,9 +14,9 @@ const HeroSection = () => {
             <div className="absolute inset-0 bg-[#2d3f4f] opacity-80"></div>
 
             {/* Konten Hero */}
-            <div className="relative container mx-auto flex flex-col lg:flex-row items-center justify-between px-6 lg:px-6 gap-12 lg:gap-36">
+            <div className="relative container mx-auto flex flex-col lg:flex-row items-center justify-between px-6 lg:px-6 gap-12 lg:gap-16">
                 {/* Kolom kiri: Teks */}
-                <div className="text-center lg:text-left lg:w-1/2 mt-12">
+                <div className="text-center lg:text-left lg:w-1/2 mt-16">
                     <h1 className="text-4xl font-bold text-white mb-6">
                         Situs Pencatatan dan Pemantauan Data Investasi Indonesia
                     </h1>

@@ -196,3 +196,27 @@
     scrollbar-width: thin; /* Scrollbar lebih ramping pada Firefox */
     scrollbar-color: #596169 transparent; /* Warna thumb dan track pada Firefox */
 }
+/* Custom scrollbar styles */
+.scrollbar-hidden::-webkit-scrollbar {
+    width: 8px; /* Change the width of the scrollbar */
+}
+
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+    background-color: rgba(
+        255,
+        166,
+        0,
+        0.235
+    ); /* Set the color of the scrollbar */
+    border-radius: 10px; /* Optional: make the scrollbar thumb rounded */
+}
+
+.scrollbar-hidden::-webkit-scrollbar-track {
+    background: transparent; /* Optional: make the track transparent */
+}
+
+/* For Firefox */
+.scrollbar-hidden {
+    scrollbar-width: thin; /* Set the width to thin */
+    scrollbar-color: rgba(255, 166, 0, 0.196) transparent; /* Set thumb color to orange and track to transparent */
+}
