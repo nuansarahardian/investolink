@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('website', 50)->nullable();
             $table->string('email', 50)->nullable();
             $table->string('nomor_handphone', 20)->nullable();
-            $table->bigInteger('population')->nullable();
+            $table->bigInteger('populasi')->nullable();
             $table->string('link_terkait', 50)->nullable();
             $table->decimal('upah_minimum_provinsi', 10, 2)->nullable();
-            $table->decimal('export_value', 15, 2)->nullable();
-            $table->decimal('import_value', 15, 2)->nullable();
+            $table->decimal('nilai_ekspor', 15, 2)->nullable();
+            $table->decimal('nilai_impor', 15, 2)->nullable();
             $table->timestamps();
         });
     }
