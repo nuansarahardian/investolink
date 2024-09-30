@@ -38,8 +38,8 @@ class KomoditasRepository implements KomoditasRepositoryInterface
      */
     public function showKomoditasbyProvinsi($id)
     {
-        $komoditasIDs = Provinsi_Komoditas::where('provinsiID', $id)->pluck('komoditasID');
-        $data = Komoditas::whereIn('komoditasID', $komoditasIDs)->get();
+        $komoditasIDs = Provinsi_Komoditas::where('provinsi_id', $id)->pluck('komoditas_id');
+        $data = Komoditas::whereIn('komoditas_id', $komoditasIDs)->get();
         return $data;
     }
 
@@ -50,7 +50,7 @@ class KomoditasRepository implements KomoditasRepositoryInterface
      */
     public function showKomoditasbySektor($id)
     {
-        $data = Komoditas::where('sektorID', $id)->get();
+        $data = Komoditas::where('sektor_id', $id)->get();
         return $data;
     }
 
@@ -62,8 +62,8 @@ class KomoditasRepository implements KomoditasRepositoryInterface
      */
     public function showKomoditasbyProvinsiandSektor($provinsi_id, $sektor_id)
     {
-        $komoditasIDs = Provinsi_Komoditas::where('provinsiID', $provinsi_id)->pluck('komoditasID');
-        $data = Komoditas::whereIn('komoditasID', $komoditasIDs)->where('sektorID', $sektor_id)->get();
+        $komoditasIDs = Provinsi_Komoditas::where('provinsi_id', $provinsi_id)->pluck('komoditas_id');
+        $data = Komoditas::whereIn('komoditas_id', $komoditasIDs)->where('sektor_id', $sektor_id)->get();
         return $data;
     }
 }
