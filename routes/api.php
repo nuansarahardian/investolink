@@ -6,6 +6,10 @@ use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\KomoditasController;
 use App\Http\Controllers\SektorController;
 use App\Http\Controllers\KawasanIndustriController;
+use App\Http\Controllers\PDRBController;
+use App\Http\Controllers\PMDNController;
+use App\Http\Controllers\PMAController;
+use App\Http\Controllers\RealisasiInvestasiController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -27,3 +31,19 @@ Route::apiResource('sektor', SektorController::class);
 // Route untuk Kawasan Industri
 Route::apiResource('kawasan_industri', KawasanIndustriController::class);
 Route::get('/kawasan_industri/provinsi/{id}', [KawasanIndustriController::class, 'showKawasanIndustribyProvinsi']);
+
+// Route untuk PDRB
+Route::apiResource('pdrb', PDRBController::class);
+Route::get('/pdrb/provinsi/{id}', [PDRBController::class, 'showPDRBbyProvinsi']);
+
+// Route untuk PMDN
+Route::apiResource('pmdn', PMDNController::class);
+Route::get('/pmdn/provinsi/{id}', [PMDNController::class, 'showPMDNbyProvinsi']);
+
+// Route untuk PMA
+Route::apiResource('pma', PMAController::class);
+Route::get('/pma/provinsi/{id}', [PMAController::class, 'showPMAbyProvinsi']);
+
+// Route untuk Realisasi Investasi
+Route::apiResource('realisasi_investasi', RealisasiInvestasiController::class);
+Route::get('/realisasi_investasi/provinsi/{id}', [RealisasiInvestasiController::class, 'showRealisasiInvestasibyProvinsi']);

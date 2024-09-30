@@ -29,7 +29,7 @@ class ProvinsiRepository implements ProvinsiRepositoryInterface
      */
     public function show($id)
     {
-        $data = Provinsi::findOrFail($id); 
+        $data = Provinsi::findOrFail($id);
         return $data;
     }
 
