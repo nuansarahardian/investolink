@@ -6,6 +6,7 @@ import InvestmentGallery from "@/Components/InvestmentGallery"; // Impor kompone
 import ContactSection from "@/Components/ContactSection"; // Impor komponen ContactSection
 import Footer from "@/Components/Footer"; // Impor komponen Footer
 import BrandSlider from "@/Components/BrandSlider"; // Impor komponen Footer
+import Card from "../Components/Card";
 // Impor komponen Footer
 import { Button } from "@/Components/ui/button";
 import { Slider } from "@material-tailwind/react";
@@ -40,8 +41,9 @@ const Homepage = () => {
             <ContactSection />
 
             {/* Memanggil Footer di bagian bawah halaman */}
-    
+
             <Footer />
+            <Card></Card>
         </>
     );
 };

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller; 
 use App\Models\Provinsi;
 use App\Interfaces\ProvinsiRepositoryInterface;
 use App\Http\Resources\ProvinsiResource;

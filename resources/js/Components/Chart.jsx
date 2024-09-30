@@ -1,68 +1,77 @@
 import React from "react";
+import { Line } from "react-chartjs-2";
 import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
+    Chart as ChartJS,
+    LineElement,
+    CategoryScale,
+    LinearScale,
+    PointElement,
     Tooltip,
     Legend,
-    ResponsiveContainer,
-} from "recharts";
+} from "chart.js";
 
-const data = [
-    { year: 2019, PDB: 500, PDB_2024: 450 },
-    { year: 2020, PDB: 1500, PDB_2024: 1200 },
-    { year: 2021, PDB: 1000, PDB_2024: 950 },
-    { year: 2022, PDB: 1200, PDB_2024: 1100 },
-    { year: 2023, PDB: 1700, PDB_2024: 1150 },
-    { year: 2024, PDB: 1800, PDB_2024: 1300 },
-];
+ChartJS.register(
+    LineElement,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    Tooltip,
+    Legend
+);
 
-const Chart = () => {
+const ChartComponent = () => {
+    const data = {
+        labels: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+        datasets: [
+            {
+                label: "Pertumbuhan PDB",
+                data: [500, 1500, 1000, 1200, 1700, 1800, 1900, 2000],
+                borderColor: function (context) {
+                    const index = context.dataIndex;
+                    const year = context.chart.data.labels[index];
+                    return year <= 2023 ? "#FF0000" : "#1E90FF"; // Warna merah sebelum 2023, biru sesudahnya
+                },
+                borderWidth: 3,
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                segment: {
+                    borderColor: (ctx) =>
+                        ctx.p0DataIndex < 4 ? "#FF0000" : "#1E90FF", // Segmen sebelum 2023 merah, setelah 2023 biru
+                },
+            },
+        ],
+    };
+
+    const options = {
+        responsive: true,
+        scales: {
+            x: {
+                ticks: { font: { size: 12 } },
+            },
+            y: {
+                ticks: { font: { size: 12 } },
+            },
+        },
+        plugins: {
+            tooltip: {
+                backgroundColor: "#f5f5f5",
+                borderColor: "#ccc",
+                borderWidth: 1,
+                titleFont: { weight: "bold" },
+            },
+            legend: {
+                display: true,
+                position: "top",
+            },
+        },
+    };
+
     return (
-        <div className="w-full p-4 bg-white rounded-lg shadow-md">
-            {/* Chart Container */}
-            <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={data}>
-                    {/* Grid */}
-                    <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
-
-                    {/* Axes */}
-                    <XAxis dataKey="year" tick={{ fontSize: 12 }} />
-                    <YAxis tick={{ fontSize: 12 }} />
-
-                    {/* Tooltip */}
-                    <Tooltip
-                        contentStyle={{
-                            backgroundColor: "#f5f5f5",
-                            borderColor: "#ccc",
-                        }}
-                        labelStyle={{ fontWeight: "bold" }}
-                    />
-
-                    {/* Legend */}
-                    <Legend verticalAlign="top" height={48} iconType="circle" />
-
-                    {/* Lines */}
-                    <Line
-                        type="linear"
-                        dataKey="PDB"
-                        name="2023"
-                        stroke="#1E90FF" // blue color
-                        strokeWidth={3}
-                        dot={{
-                            r: 5,
-                            stroke: "#1E90FF",
-                            fill: "#fff",
-                            strokeWidth: 2,
-                        }}
-                        activeDot={{ r: 8 }}
-                    />
-                </LineChart>
-            </ResponsiveContainer>
+        <div className="w-1/2 p-4 bg-white rounded-lg shadow-md">
+            <Line data={data} options={options} />
         </div>
     );
 };
 
-export default Chart;
+export default ChartComponent;

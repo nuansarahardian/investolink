@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProvinsiController;
+use App\Http\Controllers\Api\ProvinsiController;
 use App\Http\Controllers\KomoditasController;
 use App\Http\Controllers\SektorController;
 use App\Http\Controllers\KawasanIndustriController;
@@ -16,7 +16,13 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Route untuk Provinsi
-Route::apiResource('provinsi', ProvinsiController::class);
+Route::apiResource('provinsi', ProvinsiController::class)->names([
+    'index' => 'api.provinsi.index',
+    'store' => 'api.provinsi.store',
+    'show' => 'api.provinsi.show',
+    'update' => 'api.provinsi.update',
+    'destroy' => 'api.provinsi.destroy',
+]);
 Route::get('/provinsi/komoditas/{id}', [ProvinsiController::class, 'showProvinsibyKomoditas']);
 
 // Route untuk Komoditas
