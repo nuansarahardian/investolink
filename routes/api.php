@@ -12,7 +12,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Route untuk Provinsi
-Route::apiResource('/provinsi', ProvinsiController::class)->names([
+Route::apiResource('provinsi', ProvinsiController::class)->names([
     'index' => 'api.provinsi.index',
     'store' => 'api.provinsi.store',
     'show' => 'api.provinsi.show',
