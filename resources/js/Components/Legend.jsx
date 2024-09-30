@@ -5,7 +5,7 @@ const Legend = () => {
         <div className="legend">
             <h3>PDRB (Per Provinsi)</h3>
             <div>
-                <i style={{ background: "#800026" }}></i> > Rp1.000 Triliun
+                <i style={{ background: "#800026" }}></i> Rp1.000 Triliun
             </div>
             <div>
                 <i style={{ background: "#BD0026" }}></i> Rp500 - Rp1.000
