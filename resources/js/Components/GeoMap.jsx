@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import axios from "axios";
+import Legend from "./Legend";
 
 const GeoMap = () => {
     const [geoData, setGeoData] = useState(null);
@@ -13,16 +13,31 @@ const GeoMap = () => {
             .catch((error) => console.error("Error fetching GeoJSON:", error));
     }, []);
 
-    // Default style for provinces
-    const defaultStyle = {
-        fillColor: "red",
+    // Fungsi untuk menghitung warna berdasarkan nilai PDRB
+    const getColor = (pdrb) => {
+        return pdrb > 1000
+            ? "#800026"
+            : pdrb > 500
+            ? "#BD0026"
+            : pdrb > 200
+            ? "#E31A1C"
+            : pdrb > 100
+            ? "#FC4E2A"
+            : pdrb > 50
+            ? "#FD8D3C"
+            : "#FEB24C";
+    };
+
+    // Style default untuk setiap provinsi
+    const defaultStyle = (feature) => ({
+        fillColor: getColor(feature.properties.pdrb), // Gunakan warna berdasarkan nilai PDRB
         weight: 2,
         opacity: 1,
         color: "white",
         fillOpacity: 0.7,
-    };
+    });
 
-    // Style when hovered
+    // Style saat di-hover
     const highlightStyle = {
         weight: 3,
         color: "yellow",
@@ -40,51 +55,49 @@ const GeoMap = () => {
             const komoditasUnggulan =
                 feature.properties.komoditas || "Lorem Ipsum, Lorem Ipsum";
 
-            // Bind tooltip with custom styling for arrow
+            // Bind tooltip dengan styling custom
             layer.bindTooltip(
                 `<div class="relative bg-white p-4 rounded-3xl  text-sm w-[250px]">
-                    <div class="font-bold text-lg text-gray-800 mb-1">${provinceName}</div>
-                    <div class="text-gray-500 text-xs mb-2">per Q4-2023</div>
-                    <div class="font-medium text-gray-800">PDRB: <span class="text-gray-600">${pdrb}</span></div>
-                    <div class="font-medium text-gray-800">PMA: <span class="text-gray-600">${pma}</span></div>
-                    <div class="font-medium text-gray-800">Sektor Unggulan:</div>
-                    <div class="text-gray-600">${sektorUnggulan}</div>
-                    <div class="font-medium text-gray-800">Komoditas Unggulan:</div>
-                    <div class="text-gray-600">${komoditasUnggulan}</div>    
-                </div>`,
+            <div class="font-bold text-lg text-gray-800 mb-1">${provinceName}</div>
+            <div class="text-gray-500 text-xs mb-2">per Q4-2023</div>
+            <div class="font-medium text-gray-800">PDRB: <span class="text-gray-600">${pdrb}</span></div>
+            <div class="font-medium text-gray-800">PMA: <span class="text-gray-600">${pma}</span></div>
+            <div class="font-medium text-gray-800">Sektor Unggulan:</div>
+            <div class="text-gray-600">${sektorUnggulan}</div>
+            <div class="font-medium text-gray-800">Komoditas Unggulan:</div>
+            <div class="text-gray-600">${komoditasUnggulan}</div>    
+        </div>`,
                 {
-                    className: "", // This removes default Leaflet styles
+                    className: "", // Ini menghilangkan style default Leaflet
                     sticky: false,
                 }
             );
 
-            // Add event listeners for hover and mouse out
+            // Tambahkan event listener untuk hover dan mouse out
             layer.on({
                 mouseover: (e) => {
                     const layer = e.target;
                     layer.setStyle(highlightStyle);
-                    layer.bringToFront(); // Bring the hovered layer to the front
+                    layer.bringToFront(); // Bawa layer yang di-hover ke depan
                 },
                 mouseout: (e) => {
                     const layer = e.target;
-                    layer.setStyle(defaultStyle);
+                    layer.setStyle(defaultStyle(feature)); // Kembalikan style default
                 },
             });
         }
     };
-
     return (
-        <div>
+        <div
+            className="map-legend-container"
+            style={{ display: "flex", alignItems: "flex-start" }}
+        >
+            {/* Tambahkan style di sini */}
             <MapContainer
-                style={{
-                    height: "600px",
-                    width: "95%",
-                    backgroundColor: "slate",
-                }}
+                style={{ height: "600px", width: "75%" }}
                 center={[-2.5, 118]}
                 zoom={5}
                 scrollWheelZoom={false}
-                className="rounded-[6px] justify-center m-auto mt-4 mb-8"
             >
                 {geoData && (
                     <GeoJSON
@@ -94,6 +107,8 @@ const GeoMap = () => {
                     />
                 )}
             </MapContainer>
+            {/* Panggil Legend di samping peta */}
+            <Legend />
         </div>
     );
 };

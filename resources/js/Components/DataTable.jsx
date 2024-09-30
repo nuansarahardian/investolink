@@ -70,7 +70,7 @@ const DataTable = () => {
                     <button
                         className={` m-auto py-1 px-1 h-[42px] w-full ml-2 rounded-md ${
                             activeSection === "provinsi"
-                                ? "bg-gray-700 text-white font-bold"
+                                ? "bg-[#384AA0] text-white font-bold"
                                 : "text-gray-600 font-bold"
                         } rounded-l-md transition`}
                         onClick={toggleSection}
@@ -80,7 +80,7 @@ const DataTable = () => {
                     <button
                         className={`m-auto py-1 px-1 h-[42px] w-full ml-2 rounded-md ${
                             activeSection === "sektor"
-                                ? "bg-gray-700 text-white font-bold"
+                                ? "bg-[#384AA0] text-white font-bold"
                                 : "text-gray-600 font-bold"
                         } rounded-r-md transition`}
                         onClick={toggleSection}

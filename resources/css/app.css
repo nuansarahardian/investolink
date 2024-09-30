@@ -220,3 +220,35 @@
     scrollbar-width: thin; /* Set the width to thin */
     scrollbar-color: rgba(255, 166, 0, 0.196) transparent; /* Set thumb color to orange and track to transparent */
 }
+.map-legend-container {
+    display: flex; /* Mengatur container agar menggunakan Flexbox */
+    justify-content: space-between; /* Atur ruang antar elemen */
+    margin: 20px;
+}
+
+.legend {
+    padding: 20px;
+    margin-left: 20px;
+    background-color: white; /* Latar belakang putih agar lebih jelas */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambahkan shadow untuk styling */
+    line-height: 1.6;
+}
+
+.legend h3 {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.legend div {
+    margin: 4px 0;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
