@@ -15,7 +15,7 @@ class SektorResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'sektorID' => $this->sektorID,
+            'sektor_id' => $this->sektor_id,
             'nama_sektor' => $this->nama_sektor,
         ];
     }

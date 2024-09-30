@@ -40,8 +40,8 @@ class ProvinsiRepository implements ProvinsiRepositoryInterface
      */
     public function showProvinsibyKomoditas($id)
     {
-        $provinsiIDs = Provinsi_Komoditas::where('komoditasID', $id)->pluck('provinsiID');
-        $data = Provinsi::whereIn('provinsiID', $provinsiIDs)->get();
+        $provinsiIDs = Provinsi_Komoditas::where('komoditas_id', $id)->pluck('provinsi_id');
+        $data = Provinsi::whereIn('provinsi_id', $provinsiIDs)->get();
         return $data;
     }
 }

@@ -37,7 +37,7 @@ class KawasanIndustriRepository implements KawasanIndustriRepositoryInterface
      */
     public function showKawasanIndustribyProvinsi($id)
     {
-        $data = Kawasan_Industri::where('provinsiID', $id)->get();
+        $data = Kawasan_Industri::where('provinsi_id', $id)->get();
         return $data;
     }
 }

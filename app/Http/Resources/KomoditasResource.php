@@ -15,8 +15,8 @@ class KomoditasResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'komoditasID' => $this->komoditasID,
-            'sektorID' => $this->sektorID,
+            'komoditas_id' => $this->komoditas_id,
+            'sektor_id' => $this->sektor_id,
             'nama_komoditas' => $this->nama_komoditas,
         ];
     }

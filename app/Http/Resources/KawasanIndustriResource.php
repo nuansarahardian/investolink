@@ -15,10 +15,10 @@ class KawasanIndustriResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'KIID' => $this->KIID,
-            'provinsiID' => $this->provinsiID,
-            'nama_KI' => $this->nama_KI,
-            'is_KEK' => $this->is_KEK,
+            'kawasan_industri' => $this->kawasan_industri,
+            'provinsi_id' => $this->provinsi_id,
+            'nama_kawasan_industri' => $this->nama_kawasan_industri,
+            'is_kawasan_ekonomi_khusus' => $this->is_kawasan_ekonomi_khusus,
         ];
     }
 }

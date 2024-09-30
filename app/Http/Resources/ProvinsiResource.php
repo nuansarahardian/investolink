@@ -15,23 +15,17 @@ class ProvinsiResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'provinsiID' => $this->provinsiID,
-            'deskripsi' => $this->deskripsi,
-            'area' => $this->area,
-            'website' => $this->website,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'special_economic_zone' => $this->special_economic_zone,
-            'population' => $this->population,
-            'gross_domestic_product' => $this->gross_domestic_product,
-            'regional_income' => $this->regional_income,
-            'related_links' => $this->related_links,
-            'regional_minimum_wage' => $this->regional_minimum_wage,
-            'number_of_industrial_estates' => $this->number_of_industrial_estates,
-            'realization_of_foreign_direct_investment' => $this->realization_of_foreign_direct_investment,
-            'export_value' => $this->export_value,
-            'import_value' => $this->import_value,
+            'provinsi_id' => $this->provinsi_id,
             'nama_provinsi' => $this->nama_provinsi,
+            'luas_area' => $this->luas_area,
+            'email' => $this->email,
+            'website' => $this->website,
+            'nomor_handphone' => $this->nomor_handphone,
+            'populasi' => $this->populasi,
+            'upah_minimum_provinsi' => $this->upah_minimum_provinsi,
+            'link_terkait' => $this->link_terkait,
+            'nilai_ekspor' => $this->nilai_ekspor,
+            'nilai_impor' => $this->nilai_impor,
         ];
     }
 }
