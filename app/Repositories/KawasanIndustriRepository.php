@@ -40,4 +40,13 @@ class KawasanIndustriRepository implements KawasanIndustriRepositoryInterface
         $data = Kawasan_Industri::where('provinsi_id', $id)->get();
         return $data;
     }
+
+    /**
+     * Menampilkan data Kawasan Ekonomi Khusus berdasarkan ID Provinsi
+     */
+    public function showKawasanEkonomiKhususbyProvinsi($id)
+    {
+        $data = Kawasan_Industri::where('provinsi_id', $id)->where('is_kawasan_ekonomi_khusus', 1)->get();
+        return $data;
+    }
 }
