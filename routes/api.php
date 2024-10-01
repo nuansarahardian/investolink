@@ -34,9 +34,10 @@ Route::get('/komoditas/provinsi/{provinsi_id}/sektor/{sektor_id}', [KomoditasCon
 // Route untuk Sektor
 Route::apiResource('sektor', SektorController::class);
 
-// Route untuk Kawasan Industri
+// Route untuk Kawasan Industri dan Kawasan Ekonomi Khusus
 Route::apiResource('kawasan_industri', KawasanIndustriController::class);
 Route::get('/kawasan_industri/provinsi/{id}', [KawasanIndustriController::class, 'showKawasanIndustribyProvinsi']);
+Route::get('/kawasan_industri/kek/provinsi/{id}', [KawasanIndustriController::class, 'showKawasanEkonomiKhususbyProvinsi']);
 
 // Route untuk PDRB
 Route::apiResource('pdrb', PDRBController::class);

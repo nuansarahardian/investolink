@@ -16,6 +16,12 @@ class Kawasan_Industri extends Model
     protected $fillable = [
         'provinsi_id',
         'nama_kawasan_industri',
+        'kabupaten_atau_kota',
+        'luas_lahan',
+        'latitude',
+        'longitude',
+        'target_investasi',
+        'industri',
         'is_kawasan_ekonomi_khusus',
     ];
 

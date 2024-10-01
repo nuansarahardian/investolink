@@ -15,6 +15,10 @@ return new class extends Migration
             $table->bigIncrements('kawasan_industri_id');
             $table->unsignedSmallInteger('provinsi_id');
             $table->string('nama_kawasan_industri', 50);
+            $table->string('kabupaten_atau_kota', 50);
+            $table->decimal('luas_lahan', 15, 2)->nullable();
+            $table->decimal('target_investasi', 15, 2)->nullable();
+            $table->string('industri', 50)->nullable();
             $table->boolean('is_kawasan_ekonomi_khusus')->default(false);
             $table->timestamps();
 
