@@ -12,24 +12,27 @@ use App\Models\Provinsi_Komoditas;
 class ProvinsiRepository implements ProvinsiRepositoryInterface
 {
     /**
-     * Menampilkan semua data Provinsi
+     * Menampilkan semua data Provinsi beserta PDRB
      *
      * @return mixed
      */
     public function index()
     {
-        $data = Provinsi::all(); 
+        // Menggunakan eager loading untuk memuat relasi 'pdrb'
+        $data = Provinsi::with('pdrb')->get(); 
         return $data;
     }
 
     /**
-     * Menampilkan data Provinsi berdasarkan ID
+     * Menampilkan data Provinsi berdasarkan ID beserta PDRB
      * 
      * @param int $id
+     * @return mixed
      */
     public function show($id)
     {
-        $data = Provinsi::findOrFail($id);
+        // Menggunakan eager loading untuk memuat relasi 'pdrb' pada provinsi tertentu
+        $data = Provinsi::with('pdrb')->findOrFail($id);
         return $data;
     }
 
@@ -37,11 +40,15 @@ class ProvinsiRepository implements ProvinsiRepositoryInterface
      * Menampilkan data Provinsi berdasarkan ID Komoditas
      * 
      * @param int $id
+     * @return mixed
      */
     public function showProvinsibyKomoditas($id)
     {
+        // Mengambil ID provinsi yang memiliki komoditas tertentu
         $provinsiIDs = Provinsi_Komoditas::where('komoditas_id', $id)->pluck('provinsi_id');
-        $data = Provinsi::whereIn('provinsi_id', $provinsiIDs)->get();
+
+        // Menggunakan eager loading untuk memuat relasi 'pdrb' pada provinsi yang terkait dengan komoditas
+        $data = Provinsi::with('pdrb')->whereIn('provinsi_id', $provinsiIDs)->get();
         return $data;
     }
 }

@@ -17,11 +17,11 @@ Route::get('/user', function (Request $request) {
 
 // Route untuk Provinsi
 Route::apiResource('provinsi', ProvinsiController::class)->names([
-    'index' => 'api.provinsi.index',
-    'store' => 'api.provinsi.store',
-    'show' => 'api.provinsi.show',
-    'update' => 'api.provinsi.update',
-    'destroy' => 'api.provinsi.destroy',
+    'index' => 'provinsi.index',
+    'store' => 'provinsi.store',
+    'show' => 'provinsi.show',
+    'update' => 'provinsi.update',
+    'destroy' => 'provinsi.destroy',
 ]);
 Route::get('/provinsi/komoditas/{id}', [ProvinsiController::class, 'showProvinsibyKomoditas']);
 

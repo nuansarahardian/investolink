@@ -35,6 +35,8 @@
         "chart.js": "^4.4.4",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
+        "jquery": "^3.7.1",
+        "jqvmap": "^1.5.1",
         "leaflet": "^1.9.4",
         "lucide-react": "^0.445.0",
         "react-chartjs-2": "^5.2.0",

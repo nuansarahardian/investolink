@@ -26,6 +26,7 @@ class ProvinsiResource extends JsonResource
             'link_terkait' => $this->link_terkait,
             'nilai_ekspor' => $this->nilai_ekspor,
             'nilai_impor' => $this->nilai_impor,
+            'pdrb' => PDRBResource::collection($this->whenLoaded('pdrb')),
         ];
     }
 }

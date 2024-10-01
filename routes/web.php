@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\petaInvestasi\ProvinsiController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -11,6 +12,10 @@ Route::get('/', function () {
 Route::get('/invesment-map', function () {
     return Inertia::render('InvesmentMap');
 });
+
+Route::get('/provinsi', [ProvinsiController::class, 'getProvinsi']);
+Route::get('/pdrb', [ProvinsiController::class, 'getPdrb']);
+Route::get('/provinsi-pdrb', [ProvinsiController::class, 'getProvinsiWithPdrb']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

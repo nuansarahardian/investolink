@@ -1,0 +1,500 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [96.9493993, 4.395135]
+            },
+            "properties": {
+                "nid": "1",
+                "parent_nid": "0",
+                "name": "Aceh",
+                "serial": "11",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [98.8450974, 2.5153547]
+            },
+            "properties": {
+                "nid": "2",
+                "parent_nid": "0",
+                "name": "Sumatera Utara",
+                "serial": "12",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [100.2000051, -0.7399397]
+            },
+            "properties": {
+                "nid": "3",
+                "parent_nid": "0",
+                "name": "Sumatera Barat",
+                "serial": "13",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [101.7068294, 0.2933469]
+            },
+            "properties": {
+                "nid": "4",
+                "parent_nid": "0",
+                "name": "Riau",
+                "serial": "14",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [102.4380581, -1.4851831]
+            },
+            "properties": {
+                "nid": "5",
+                "parent_nid": "0",
+                "name": "Jambi",
+                "serial": "15",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [103.914399, -2.9194374]
+            },
+            "properties": {
+                "nid": "6",
+                "parent_nid": "0",
+                "name": "Sumatera Selatan",
+                "serial": "16",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [101.4463875, -3.5778471]
+            },
+            "properties": {
+                "nid": "7",
+                "parent_nid": "0",
+                "name": "Bengkulu",
+                "serial": "17",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [104.7068079, -4.7585849]
+            },
+            "properties": {
+                "nid": "8",
+                "parent_nid": "0",
+                "name": "Lampung",
+                "serial": "18",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [106.4405872, -2.7410513]
+            },
+            "properties": {
+                "nid": "9",
+                "parent_nid": "0",
+                "name": "Kepulauan Bangka Belitung",
+                "serial": "19",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [108.1428669, 3.9456514]
+            },
+            "properties": {
+                "nid": "10",
+                "parent_nid": "0",
+                "name": "Kepulauan Riau",
+                "serial": "21",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [106.845172, -6.111544]
+            },
+            "properties": {
+                "nid": "11",
+                "parent_nid": "0",
+                "name": "DKI Jakarta",
+                "serial": "31",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [107.668887, -7.090911]
+            },
+            "properties": {
+                "nid": "12",
+                "parent_nid": "0",
+                "name": "Jawa Barat",
+                "serial": "32",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [109.5102594, -7.050975]
+            },
+            "properties": {
+                "nid": "13",
+                "parent_nid": "0",
+                "name": "Jawa Tengah",
+                "serial": "33",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [110.1262088, -7.8753849]
+            },
+            "properties": {
+                "nid": "14",
+                "parent_nid": "0",
+                "name": "DI Yogyakarta",
+                "serial": "34",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [112.2384017, -7.5360639]
+            },
+            "properties": {
+                "nid": "15",
+                "parent_nid": "0",
+                "name": "Jawa Timur",
+                "serial": "35",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [106.0640179, -6.4058172]
+            },
+            "properties": {
+                "nid": "16",
+                "parent_nid": "0",
+                "name": "Banten",
+                "serial": "36",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [115.188916, -8.4095178]
+            },
+            "properties": {
+                "nid": "17",
+                "parent_nid": "0",
+                "name": "Bali",
+                "serial": "51",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [117.3616476, -8.6529334]
+            },
+            "properties": {
+                "nid": "18",
+                "parent_nid": "0",
+                "name": "Nusa Tenggara Barat",
+                "serial": "52",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [121.0793705, -8.6573819]
+            },
+            "properties": {
+                "nid": "19",
+                "parent_nid": "0",
+                "name": "Nusa Tenggara Timur",
+                "serial": "53",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [110.1752851, -0.0987808]
+            },
+            "properties": {
+                "nid": "20",
+                "parent_nid": "0",
+                "name": "Kalimantan Barat",
+                "serial": "61",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [112.9823545, -1.2814878]
+            },
+            "properties": {
+                "nid": "21",
+                "parent_nid": "0",
+                "name": "Kalimantan Tengah",
+                "serial": "62",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [115.2837585, -3.0926415]
+            },
+            "properties": {
+                "nid": "22",
+                "parent_nid": "0",
+                "name": "Kalimantan Selatan",
+                "serial": "63",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [116.419389, 1.2406296]
+            },
+            "properties": {
+                "nid": "23",
+                "parent_nid": "0",
+                "name": "Kalimantan Timur",
+                "serial": "64",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [123.9750018, 0.6246932]
+            },
+            "properties": {
+                "nid": "24",
+                "parent_nid": "0",
+                "name": "Sulawesi Utara",
+                "serial": "71",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [120.4456179, -0.9300254]
+            },
+            "properties": {
+                "nid": "25",
+                "parent_nid": "0",
+                "name": "Sulawesi Tengah",
+                "serial": "72",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [119.4740534, -3.6687994]
+            },
+            "properties": {
+                "nid": "26",
+                "parent_nid": "0",
+                "name": "Sulawesi Selatan",
+                "serial": "73",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [121.874605, -3.24491]
+            },
+            "properties": {
+                "nid": "27",
+                "parent_nid": "0",
+                "name": "Sulawesi Tenggara",
+                "serial": "74",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [121.7467238, 0.6999372]
+            },
+            "properties": {
+                "nid": "28",
+                "parent_nid": "0",
+                "name": "Gorontalo",
+                "serial": "75",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [118.9320784, -2.2441371]
+            },
+            "properties": {
+                "nid": "29",
+                "parent_nid": "0",
+                "name": "Sulawesi Barat",
+                "serial": "76",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [130.1452734, -3.2384616]
+            },
+            "properties": {
+                "nid": "30",
+                "parent_nid": "0",
+                "name": "Maluku",
+                "serial": "81",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [127.8087693, 1.5709993]
+            },
+            "properties": {
+                "nid": "31",
+                "parent_nid": "0",
+                "name": "Maluku Utara",
+                "serial": "82",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [133.1747162, -1.3361154]
+            },
+            "properties": {
+                "nid": "32",
+                "parent_nid": "0",
+                "name": "Papua Barat",
+                "serial": "91",
+                "type": "1",
+                "status": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [138.0803529, -4.269928]
+            },
+            "properties": {
+                "nid": "33",
+                "parent_nid": "0",
+                "name": "Papua",
+                "serial": "94",
+                "type": "1",
+                "status": "1"
+            }
+        }
+    ]
+}
