@@ -3,14 +3,14 @@ import NavBar from "@/Components/NavBar";
 import GeoMap from "@/Components/GeoMap";
 import Chart from "@/Components/Chart";
 import Footer from "@/Components/Footer";
-import DataTable from "@/Components/DataTable";
+import ProfilInvestasi from "@/Components/ProfilInvestasi";
 import "leaflet/dist/leaflet.css";
 
 const InvesmentMap = () => {
     return (
         <>
             <NavBar></NavBar>
-            <div className="bg-[#FAFAFA] h-[2000px]">
+            <div className="bg-[#FAFAFA] h-fit mb-12">
                 <div className="flex flex-col justify-center align-middle place-content-center m-auto">
                     <div className="w-[95%] bg-white shadow h-full m-auto mt-10 rounded-[12px]">
                         <div className="w-[95%] m-auto mt-6 text-[#3F3F3F]">
@@ -40,7 +40,7 @@ const InvesmentMap = () => {
                                 Profil Investasi
                             </div>
                         </div>
-                        <DataTable></DataTable>
+                        <ProfilInvestasi />
                     </div>
                 </div>
             </div>

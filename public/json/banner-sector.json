@@ -1,0 +1,70 @@
+[
+    {
+        "sektor": "Pertanian, Kehutanan, dan Perikanan",
+        "banner": "banner/pertanian.png"
+    },
+    {
+        "sektor": "Pertambangan & Penggalian",
+        "banner": "banner/tambang.png"
+    },
+    {
+        "sektor": "Industri Pengolahan",
+        "banner": "banner/industri.png"
+    },
+    {
+        "sektor": "Pengadaan Listrik, Gas",
+        "banner": "banner/listrik.png"
+    },
+    {
+        "sektor": "Pengadaan Air, Pengelolaan Sampah, Limbah dan Daur Ulang",
+        "banner": "banner/sampah.png"
+    },
+    {
+        "sektor": "Konstruksi",
+        "banner": "banner/konstruksi.png"
+    },
+    {
+        "sektor": "Perdagangan Besar dan Eceran, Reparasi Mobil dan Sepeda Motor",
+        "banner": "banner/reparasi.png"
+    },
+    {
+        "sektor": "Transportasi dan Pergudangan",
+        "banner": "banner/transportasi.png"
+    },
+    {
+        "sektor": "Penyediaan Akomodasi dan Makan Minum",
+        "banner": "banner/akomodasi.png"
+    },
+    {
+        "sektor": "Informasi dan Komunikasi",
+        "banner": "banner/informasi.png"
+    },
+    {
+        "sektor": "Jasa Keuangan dan Asuransi",
+        "banner": "banner/keuangan.png"
+    },
+    {
+        "sektor": "Real Estat",
+        "banner": "banner/real-estate.png"
+    },
+    {
+        "sektor": "Jasa Perusahaan",
+        "banner": "banner/perusahaan.png"
+    },
+    {
+        "sektor": "Administrasi Pemerintahan, Pertahanan dan Jaminan Sosial Wajib",
+        "banner": "banner/administrasi.png"
+    },
+    {
+        "sektor": "Jasa Pendidikan",
+        "banner": "banner/pendidikan.png"
+    },
+    {
+        "sektor": "Jasa Kesehatan dan Kegiatan Sosial",
+        "banner": "banner/kesehatan.png"
+    },
+    {
+        "sektor": "Jasa lainnya",
+        "banner": "banner/lainnya.png"
+    }
+]

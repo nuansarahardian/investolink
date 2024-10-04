@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProvinceTable from "./ProvinceTable";
 import SectorCards from "./SectorCards";
 
-const DataTable = () => {
+const ProfilInvestasi = () => {
     const [activeSection, setActiveSection] = useState("provinsi");
 
     const toggleSection = () => {
@@ -27,7 +27,7 @@ const DataTable = () => {
                     <button
                         className={`m-auto py-1 px-1 h-[42px] w-full ml-2 rounded-md ${
                             activeSection === "sektor"
-                                ? "bg-[#384AA0] text-white font-bold"
+                                ? "bg-[#384AA0] text-white font-bold mr-2"
                                 : "text-gray-600 font-bold"
                         } rounded-r-md transition`}
                         onClick={toggleSection}
@@ -43,4 +43,4 @@ const DataTable = () => {
     );
 };
 
-export default DataTable;
+export default ProfilInvestasi;

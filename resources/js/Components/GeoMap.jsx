@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, GeoJSON, Marker, Tooltip } from "react-leaflet";
-import L from "leaflet"; // Leaflet untuk membuat DivIcon
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { usePage } from "@inertiajs/react"; // Import untuk menggunakan props dari Inertia
 import Legend from "./Legend";
 
 const GeoMap = () => {
+    const { provinsi } = usePage().props; // Mengambil data dari props Inertia
     const [geoData, setGeoData] = useState(null);
-    const [apiData, setApiData] = useState(null);
-    const [coordinatesData, setCoordinatesData] = useState(null); // State for coordinates
+    const [coordinatesData, setCoordinatesData] = useState(null);
 
     // Fetch GeoJSON data untuk koordinat provinsi
     useEffect(() => {
@@ -17,50 +18,40 @@ const GeoMap = () => {
             .catch((error) => console.error("Error fetching GeoJSON:", error));
     }, []);
 
-    // Fetch data atribut provinsi dari controller Laravel
-    useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/provinsi")
-            .then((response) => response.json())
-            .then((data) => setApiData(data.data))
-            .catch((error) => console.error("Error fetching API data:", error));
-    }, []);
-
     // Fetch coordinates from GeoJSON
     useEffect(() => {
         fetch("/geojson/coordinate-provinces.geojson")
             .then((response) => response.json())
-            .then((data) => setCoordinatesData(data.features)) // Save features containing coordinates
+            .then((data) => setCoordinatesData(data.features))
             .catch((error) =>
                 console.error("Error fetching coordinates:", error)
             );
     }, []);
 
-    // Menggabungkan data GeoJSON dan data dari API berdasarkan nama provinsi
     const mergeData = () => {
-        if (!geoData || !apiData) return null;
+        if (!geoData || !provinsi) return null;
 
         const mergedGeoData = {
             ...geoData,
             features: geoData.features.map((feature) => {
                 const provinceName = feature.properties.state;
 
-                const apiProvinceData = apiData.find(
+                const apiProvinceData = provinsi.find(
                     (province) =>
                         province.nama_provinsi.toLowerCase() ===
                         provinceName.toLowerCase()
                 );
-                const pdrbTahun2023 = apiProvinceData?.pdrb.find(
-                    (pdrb) => pdrb.tahun === "2023"
-                );
+
+                // Pastikan apiProvinceData tidak undefined sebelum mengaksesnya
+                if (!apiProvinceData) {
+                    return feature; // Kembalikan feature tanpa modifikasi jika tidak ditemukan
+                }
 
                 return {
                     ...feature,
                     properties: {
                         ...feature.properties,
-                        ...apiProvinceData,
-                        pdrb: pdrbTahun2023
-                            ? pdrbTahun2023.nilai_pdrb_berlaku
-                            : "N/A",
+                        ...apiProvinceData, // Gabungkan data dari API (PDRB, populasi, dll)
                     },
                 };
             }),
@@ -71,7 +62,6 @@ const GeoMap = () => {
 
     const mergedData = mergeData();
 
-    // Fungsi untuk menghitung warna berdasarkan nilai PDRB
     const getColor = (pdrb) => {
         return pdrb > 1000000
             ? "#23577E"
@@ -84,16 +74,14 @@ const GeoMap = () => {
             : "#D0E1ED";
     };
 
-    // Style default untuk setiap provinsi
     const defaultStyle = (feature) => ({
-        fillColor: getColor(feature.properties.pdrb || 0),
+        fillColor: getColor(feature.properties.nilai_pdrb_berlaku || 0),
         weight: 1,
         opacity: 1,
         color: "white",
         fillOpacity: 1,
     });
 
-    // Style saat di-hover
     const highlightStyle = {
         weight: 3,
         color: "yellow",
@@ -101,12 +89,11 @@ const GeoMap = () => {
         fillOpacity: 1,
     };
 
-    // Event handler untuk setiap fitur GeoJSON
     const onEachFeature = (feature, layer) => {
         if (feature.properties) {
             const provinceName =
                 feature.properties.nama_provinsi || feature.properties.state;
-            const pdrb = feature.properties.pdrb || "N/A";
+            const pdrb = feature.properties.nilai_pdrb_berlaku || "N/A";
             const populasi = feature.properties.populasi || "N/A";
             const luasArea = feature.properties.luas_area || "N/A";
             const upahMinProvinsi =
@@ -163,16 +150,15 @@ const GeoMap = () => {
                         {/* Tambahkan Marker untuk menampilkan nama provinsi */}
                         {coordinatesData &&
                             coordinatesData.map((feature, index) => {
-                                const provinceName = feature.properties.name; // Get province name from properties
+                                const provinceName = feature.properties.name;
                                 const coordinates =
-                                    feature.geometry.coordinates; // Get coordinates from geometry
+                                    feature.geometry.coordinates;
 
                                 const position = L.latLng(
-                                    coordinates[1], // Latitude
-                                    coordinates[0] // Longitude
+                                    coordinates[1],
+                                    coordinates[0]
                                 );
 
-                                // Ambil data provinsi dari GeoJSON yang sama
                                 const matchingFeature =
                                     mergedData.features.find(
                                         (f) =>
@@ -181,7 +167,8 @@ const GeoMap = () => {
                                     );
 
                                 const pdrb =
-                                    matchingFeature?.properties?.pdrb || "N/A";
+                                    matchingFeature?.properties
+                                        ?.nilai_pdrb_berlaku || "N/A";
                                 const populasi =
                                     matchingFeature?.properties?.populasi ||
                                     "N/A";
@@ -198,7 +185,6 @@ const GeoMap = () => {
                                     matchingFeature?.properties?.nilai_impor ||
                                     "N/A";
 
-                                // Create a divIcon for province name with stroke and hover tooltip
                                 const customIcon = L.divIcon({
                                     html: `<div style="
                                     padding: 2px 6px; 
@@ -210,13 +196,12 @@ const GeoMap = () => {
                                     text-align: center;
                                     display: flex;  
                                     transform: translateX(-10px); 
-                                    white-space: normal; /* Izinkan teks untuk terputus menjadi beberapa baris */
-                                    max-width: 50px; /* Atur lebar maksimum untuk memaksa teks menjadi dua baris */
-                                    line-height: 1;"> <!-- Atur line-height ke nilai yang lebih kecil -->
+                                    white-space: normal;
+                                    max-width: 50px;
+                                    line-height: 1;">
                                     ${provinceName}
                                     </div>`,
-
-                                    className: "", // Optional: Add your own class for more styling
+                                    className: "",
                                 });
 
                                 return (
@@ -225,49 +210,26 @@ const GeoMap = () => {
                                         position={position}
                                         icon={customIcon}
                                     >
-                                        <Tooltip>
-                                            <div className="relative bg-white p-4 rounded-3xl text-sm w-[250px]">
-                                                <div className="font-bold text-lg text-gray-800 mb-1">
+                                        <Tooltip
+                                            direction="right"
+                                            offset={[10, 0]}
+                                        >
+                                            <div className="bg-white p-2 rounded">
+                                                <div className="font-bold">
                                                     {provinceName}
                                                 </div>
-                                                <div className="text-gray-500 text-xs mb-2">
-                                                    per Q4-2023
-                                                </div>
-                                                <div className="font-medium text-gray-800">
-                                                    PDRB:{" "}
-                                                    <span className="text-gray-600">
-                                                        {pdrb}
-                                                    </span>
-                                                </div>
-                                                <div className="font-medium text-gray-800">
-                                                    Populasi:{" "}
-                                                    <span className="text-gray-600">
-                                                        {populasi}
-                                                    </span>
-                                                </div>
-                                                <div className="font-medium text-gray-800">
-                                                    Luas Area:{" "}
-                                                    <span className="text-gray-600">
-                                                        {luasArea}
-                                                    </span>
-                                                </div>
-                                                <div className="font-medium text-gray-800">
+                                                <div>PDRB: {pdrb}</div>
+                                                <div>Populasi: {populasi}</div>
+                                                <div>Luas Area: {luasArea}</div>
+                                                <div>
                                                     Upah Minimum:{" "}
-                                                    <span className="text-gray-600">
-                                                        {upahMinProvinsi}
-                                                    </span>
+                                                    {upahMinProvinsi}
                                                 </div>
-                                                <div className="font-medium text-gray-800">
-                                                    Nilai Ekspor:{" "}
-                                                    <span className="text-gray-600">
-                                                        {nilaiEkspor}
-                                                    </span>
+                                                <div>
+                                                    Nilai Ekspor: {nilaiEkspor}
                                                 </div>
-                                                <div className="font-medium text-gray-800">
-                                                    Nilai Impor:{" "}
-                                                    <span className="text-gray-600">
-                                                        {nilaiImpor}
-                                                    </span>
+                                                <div>
+                                                    Nilai Impor: {nilaiImpor}
                                                 </div>
                                             </div>
                                         </Tooltip>

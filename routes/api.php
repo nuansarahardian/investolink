@@ -11,6 +11,7 @@ use App\Http\Controllers\PMDNController;
 use App\Http\Controllers\PMAController;
 use App\Http\Controllers\RealisasiInvestasiController;
 
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
