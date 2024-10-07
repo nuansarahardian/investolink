@@ -16,6 +16,7 @@ class Provinsi_Komoditas extends Model
     protected $fillable = [
         'provinsi_id',
         'komoditas_id',
+        'jumlah_komoditas'
     ];
 
     public function provinsi()

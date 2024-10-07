@@ -15,16 +15,15 @@ class Provinsi extends Model
 
     protected $fillable = [
         'nama_provinsi',
-        'gambar_ikonik',
         'luas_area',
         'website',
         'email',
-        'nomor_telepon',
+        'nomor_handphone',
         'populasi',
         'link_terkait',
         'upah_minimum_provinsi',
         'nilai_ekspor',
-        'nilai_impor',
+        'nilai_impor'
     ];
 
     public function komoditas()
