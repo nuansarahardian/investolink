@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ProvinceTable from "./ProvinceTable";
 import SectorCards from "./SectorCards";
+import { withTranslation } from "react-google-multi-lang";
 
 const ProfilInvestasi = () => {
     const [activeSection, setActiveSection] = useState("provinsi");
@@ -43,4 +44,4 @@ const ProfilInvestasi = () => {
     );
 };
 
-export default ProfilInvestasi;
+export default withTranslation(ProfilInvestasi);

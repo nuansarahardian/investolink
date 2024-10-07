@@ -1,5 +1,6 @@
 import React from "react";
-import ContactForm from "./ContactForm"; // Impor ContactForm
+import ContactForm from "../../../Components/ContactForm"; // Impor ContactForm
+import { withTranslation } from "react-google-multi-lang";
 
 const ContactSection = () => {
     return (
@@ -34,4 +35,4 @@ const ContactSection = () => {
     );
 };
 
-export default ContactSection;
+export default withTranslation(ContactSection);

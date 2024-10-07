@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\KomoditasController;
-use App\Http\Controllers\SektorController;
+
 use App\Http\Controllers\KawasanIndustriController;
 use App\Http\Controllers\PDRBController;
 use App\Http\Controllers\PMDNController;

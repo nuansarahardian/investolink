@@ -1,8 +1,9 @@
 import React from "react";
 // Import file JSON
-import projectsData from "../../../public/json/projects.json";
+import projectsData from "../../../../../public/json/projects.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { withTranslation } from "react-google-multi-lang";
 
 const InvestmentGallery = () => {
     return (
@@ -81,4 +82,4 @@ const InvestmentGallery = () => {
     );
 };
 
-export default InvestmentGallery;
+export default withTranslation(InvestmentGallery);

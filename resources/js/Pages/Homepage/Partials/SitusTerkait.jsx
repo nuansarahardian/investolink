@@ -30,7 +30,7 @@ function NextArrow(props) {
     );
 }
 
-function BrandSlider() {
+function SitusTerkait() {
     const [logos, setLogos] = useState([]);
 
     useEffect(() => {
@@ -116,4 +116,4 @@ function BrandSlider() {
     );
 }
 
-export default BrandSlider;
+export default SitusTerkait;

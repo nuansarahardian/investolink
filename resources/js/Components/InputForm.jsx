@@ -1,5 +1,5 @@
 import { Input } from "@shadcn/ui";
-
+import { withTranslation } from "react-google-multi-lang";
 const InputForm = () => {
     return (
         <div className="flex flex-col gap-4 max-w-sm mx-auto mt-10">
@@ -14,4 +14,4 @@ const InputForm = () => {
     );
 };
 
-export default InputForm;
+export default withTranslation(InputForm);

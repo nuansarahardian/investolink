@@ -1,11 +1,8 @@
 import { Link } from "@inertiajs/react";
+// Tidak perlu `withTranslation` karena tidak ada terjemahan di sini
+import { withTranslation } from "react-google-multi-lang";
 
-export default function NavLink({
-    active = false,
-    className = "",
-    children,
-    ...props
-}) {
+const NavLink = ({ active = false, className = "", children, ...props }) => {
     const baseClass =
         "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-normal leading-5 transition duration-150 ease-in-out focus:outline-none";
     const activeClass = "border-yellow-400 text-white focus:border-indigo-700";
@@ -22,4 +19,6 @@ export default function NavLink({
             {children}
         </Link>
     );
-}
+};
+
+export default withTranslation(NavLink);

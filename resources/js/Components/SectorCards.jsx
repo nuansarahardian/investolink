@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { usePage } from "@inertiajs/react";
+import { Inertia } from "@inertiajs/inertia";
+
 import provinces from "../../../public/json/provinces.json"; // Adjust the import path as necessary
 import sectors from "../../../public/json/banner-sector.json";
 
@@ -10,6 +12,9 @@ const SectorCards = () => {
 
     const handleCardClick = (card) => {
         setSelectedCard(card);
+    };
+    const handleProvinsiClick = (provinsiId) => {
+        Inertia.get(`/provinsi/${provinsiId}`);
     };
 
     // Filter sektor berdasarkan pencarian
@@ -60,7 +65,7 @@ const SectorCards = () => {
                                     selectedCard &&
                                     selectedCard.nama_sektor ===
                                         card.nama_sektor
-                                        ? "bg-blue-100/ border-[#A5B1E8]" // Ganti warna latar belakang dan border untuk card yang aktif
+                                        ? "bg-blue-100/50 border-[#A5B1E8]" // Ganti warna latar belakang dan border untuk card yang aktif
                                         : "border-[#D1D0D7] hover:bg-[#eff2fa] active:bg-[#F0F3FF]"
                                 }`}
                             >
@@ -78,7 +83,7 @@ const SectorCards = () => {
 
                                 <div className="flex flex-col justify-between h-full py-[12px] ">
                                     <div>
-                                        <h3 className="font-bold text-[14px] text-clip ">
+                                        <h3 className="font-medium text-[14px] text-clip ">
                                             {card.nama_sektor}
                                         </h3>
                                     </div>
@@ -160,37 +165,69 @@ const SectorCards = () => {
                                             new Set(
                                                 selectedCard.komoditas.flatMap(
                                                     (komoditas) =>
-                                                        komoditas.provinsi
+                                                        komoditas.provinsi.map(
+                                                            (provinsi) =>
+                                                                provinsi.nama
+                                                        ) // Ambil nama sebagai string
                                                 )
                                             )
-                                        ).map((uniqueProvinsi, index) => (
-                                            <div
-                                                key={index}
-                                                className="card col-span-1 flex flex-col justify-between p-4 rounded-lg border min-w-[116px] max-w-full bg-[#ffffff] border-[#D1D0D7] text-[#86858D] h-[96px] cursor-pointer"
-                                            >
-                                                <div className="flex justify-between">
-                                                    <img
-                                                        src={
-                                                            provinceLogos[
-                                                                uniqueProvinsi
-                                                            ] ||
-                                                            "https://via.placeholder.com/150"
-                                                        } // Mapping logo provinsi
-                                                        className="w-6 mb-2"
-                                                        alt={uniqueProvinsi}
-                                                    />
-                                                    <img
-                                                        src="icon/Vector.png"
-                                                        alt="icon"
-                                                        className="w-4 h-4"
-                                                    />
-                                                </div>
+                                        ).map((uniqueProvinsiName, index) => {
+                                            const provinsi =
+                                                selectedCard.komoditas
+                                                    .flatMap(
+                                                        (komoditas) =>
+                                                            komoditas.provinsi
+                                                    )
+                                                    .find(
+                                                        (prov) =>
+                                                            prov.nama ===
+                                                            uniqueProvinsiName
+                                                    );
 
-                                                <p className="text-[12px] leading-tight">
-                                                    {uniqueProvinsi}
-                                                </p>
-                                            </div>
-                                        ))}
+                                            if (!provinsi || !provinsi.id) {
+                                                console.error(
+                                                    "Provinsi ID tidak ditemukan untuk:",
+                                                    uniqueProvinsiName
+                                                );
+                                                return null; // Skip rendering jika provinsi_id tidak ditemukan
+                                            }
+
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className="card col-span-1 flex flex-col justify-between p-4 rounded-lg border min-w-[116px] max-w-full bg-[#ffffff] border-[#D1D0D7] text-[#86858D] h-[96px] cursor-pointer"
+                                                    onClick={() =>
+                                                        handleProvinsiClick(
+                                                            provinsi.id
+                                                        )
+                                                    } // Menggunakan provinsi_id yang baru ditambahkan
+                                                >
+                                                    <div className="flex justify-between">
+                                                        <img
+                                                            src={
+                                                                provinceLogos[
+                                                                    uniqueProvinsiName
+                                                                ] ||
+                                                                "https://via.placeholder.com/150"
+                                                            }
+                                                            className="w-6 mb-2"
+                                                            alt={
+                                                                uniqueProvinsiName
+                                                            }
+                                                        />
+                                                        <img
+                                                            src="icon/Vector.png"
+                                                            alt="icon"
+                                                            className="w-4 h-4"
+                                                        />
+                                                    </div>
+                                                    <p className="text-[12px] leading-tight">
+                                                        {uniqueProvinsiName}
+                                                    </p>{" "}
+                                                    {/* Pastikan ini adalah string */}
+                                                </div>
+                                            );
+                                        })}
                                     </div>
 
                                     <div className="mt-6  ">
@@ -247,7 +284,7 @@ const SectorCards = () => {
                                                                             </td>
                                                                             <td className="p-4">
                                                                                 {
-                                                                                    provinsi
+                                                                                    provinsi.nama
                                                                                 }
                                                                             </td>
                                                                         </tr>

@@ -10,10 +10,18 @@ use App\Http\Controllers\GeoMapController;
 use App\Http\Controllers\ProfilInvestasiController;
 use App\Http\Controllers\PetaInvestasiController;
 
-
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\App;
+use Illuminate\Http\Request;
+use App\Http\Controllers\ProfilDaerahController;
 // Route::get('/geomap', [GeoMapController::class, 'index']);
+use App\Http\Controllers\TranslationController;
 
 
+Route::get('/check-api-key', function () {
+    return env('GOOGLE_TRANSLATE_API_KEY');
+});
+Route::post('/translate', [TranslationController::class, 'translate']);
 
 // Route::get('/provinsi-kawasan', [TabelProvinsiController::class, 'index']);
 // Route::get('/provinsi-kawasan/{id}', [TabelProvinsiController::class, 'showKawasanIndustribyProvinsi']);
@@ -22,14 +30,24 @@ use App\Http\Controllers\PetaInvestasiController;
 
 
 Route::get('/', function () {
-    return Inertia::render('Homepage');
+    return Inertia::render('Homepage/Homepage');
+});
+
+Route::get('/guest', function () {
+    return Inertia::render('Welcome');
 });
 Route::get('/profildaerah', function () {
     return Inertia::render('ProfilDaerah');
 });
 
 
-Route::get('/invesment-map', [PetaInvestasiController::class, 'index']);
+
+
+Route::get('/provinsi/{provinsi_id}', [ProfilDaerahController::class, 'show'])->name('provinsi.show');
+
+
+
+Route::get('/peta-investasi', [PetaInvestasiController::class, 'index']);
 
 // Route::get('/provinsi', [ProvinsiController::class, 'getProvinsi']);
 // Route::get('/pdrb', [ProvinsiController::class, 'getPdrb']);
@@ -37,7 +55,12 @@ Route::get('/invesment-map', [PetaInvestasiController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
+
+    
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

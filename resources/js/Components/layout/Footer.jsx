@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import iconData from "../../../public/json/icon.json";
-
+import iconData from "../../../../public/json/icon.json";
+import { withTranslation } from "react-google-multi-lang";
 const Footer = () => {
     const [icons, setIcons] = useState([]);
 
@@ -17,7 +17,7 @@ const Footer = () => {
                     {/* Logo dan Nama */}
                     <div className="flex items-center mb-4">
                         <img
-                            src="images/KEMLU RI.png"
+                            src="/images/KEMLU RI.png"
                             alt="Logo Kemlu"
                             className="h-12 w-12 mr-3"
                         />
@@ -32,7 +32,7 @@ const Footer = () => {
                         <span className="mr-2 text-lg">
                             <img
                                 className="w-5 mt-1"
-                                src="icon/location.png"
+                                src="/icon/location.png"
                                 alt="Location"
                             />
                         </span>
@@ -54,7 +54,7 @@ const Footer = () => {
                         <span className="mr-2 text-lg">
                             <img
                                 className="w-5 "
-                                src="icon/clock.png"
+                                src="/icon/clock.png"
                                 alt="Clock"
                             />
                         </span>
@@ -68,7 +68,7 @@ const Footer = () => {
                         <span className="mr-2 text-lg">
                             <img
                                 className="w-5 "
-                                src="icon/phone.png"
+                                src="/icon/phone.png"
                                 alt="Phone"
                             />
                         </span>
@@ -144,4 +144,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default withTranslation(Footer);

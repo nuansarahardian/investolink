@@ -39,33 +39,35 @@ class PetaInvestasiController extends Controller
             });
 
 
-          $sektorData = Sektor::with(['komoditas.provinsi'])->get()
-    ->map(function ($sektor) {
-        // Menghitung jumlah provinsi di mana setiap sektor ada melalui komoditas
-        $provinsiIds = $sektor->komoditas->flatMap(function ($komoditas) {
-            return $komoditas->provinsi->pluck('provinsi_id');
-        })->unique();
-
-        // Membentuk struktur data yang akan dikirim ke view
-        return [
-            'nama_sektor' => $sektor->nama_sektor,
-            'jumlah_provinsi' => $provinsiIds->count(),
-            'komoditas' => $sektor->komoditas->map(function ($komoditas) {
+            $sektorData = Sektor::with(['komoditas.provinsi'])->get()
+            ->map(function ($sektor) {
+                $provinsiIds = $sektor->komoditas->flatMap(function ($komoditas) {
+                    return $komoditas->provinsi->pluck('provinsi_id');
+                })->unique();
+        
                 return [
-                    'nama_komoditas' => $komoditas->nama_komoditas,
-                    'provinsi' => $komoditas->provinsi->map(function ($provinsi) {
-                        return $provinsi->nama_provinsi;
+                    'nama_sektor' => $sektor->nama_sektor,
+                    'jumlah_provinsi' => $provinsiIds->count(),
+                    'komoditas' => $sektor->komoditas->map(function ($komoditas) {
+                        return [
+                            'nama_komoditas' => $komoditas->nama_komoditas,
+                            'provinsi' => $komoditas->provinsi->map(function ($provinsi) {
+                                return [
+                                    'nama' => $provinsi->nama_provinsi,
+                                    'id' => $provinsi->provinsi_id // Menambahkan provinsi_id
+                                ];
+                            }),
+                        ];
                     }),
                 ];
-            }),
-        ];
-    });
+            });
+        
 
-// // Debug setelah data sektor terbentuk
+// // // Debug setelah data sektor terbentuk
 // dd($sektorData);
 
         // Render halaman InvesmentMap dengan data provinsi
-        return Inertia::render('InvesmentMap', [
+        return Inertia::render('PetaInvestasi/PetaInvestasi', [
             'provinsi' => $provinsi,
             'sektorData' => $sektorData,
         ]);

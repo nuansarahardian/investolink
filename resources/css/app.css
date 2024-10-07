@@ -221,9 +221,6 @@
     scrollbar-color: rgba(255, 166, 0, 0.196) transparent; /* Set thumb color to orange and track to transparent */
 }
 .map-legend-container {
-    display: flex; /* Mengatur container agar menggunakan Flexbox */
-    justify-content: space-between; /* Atur ruang antar elemen */
-    margin: 20px;
 }
 
 .legend {
@@ -260,4 +257,7 @@
 }
 .leaflet-container {
     background-color: #f0f3ff !important; /* Ganti dengan warna yang Anda inginkan */
+}
+.leaflet-control-attribution {
+    display: none !important;
 }

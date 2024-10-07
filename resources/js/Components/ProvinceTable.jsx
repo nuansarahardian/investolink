@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { usePage } from "@inertiajs/react";
+import { Inertia } from "@inertiajs/inertia";
 
+import { withTranslation } from "react-google-multi-lang";
 const ProvinceTable = () => {
     const { provinsi } = usePage().props;
 
@@ -41,22 +43,25 @@ const ProvinceTable = () => {
             setIsAscending(false); // Urutan descending
         }
     };
+    const handleProvinsiClick = (provinsiId) => {
+        Inertia.get(`/provinsi/${provinsiId}`);
+    };
 
     return (
         <div>
             {/* Header tabel (sorting, search, dan total count) */}
             <div className="flex justify-between items-center mb-4 flex-wrap space-y-2 sm:space-y-0">
                 <div>
-                    <label className="font-medium text-slate-800 text-lg">
+                    <p className="font-medium text-slate-800 text-lg">
                         Menampilkan {filteredData.length} Provinsi
-                    </label>
+                    </p>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:space-x-4 w-full sm:w-auto">
                     {/* Sorting dropdown */}
                     <div className="flex items-center space-x-2">
-                        <label className="text-sm font-medium">
+                        <p className="text-sm font-medium">
                             Urutkan Berdasarkan
-                        </label>
+                        </p>
                         <select
                             className="border pr-10 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400"
                             value={sortColumn}
@@ -204,7 +209,7 @@ const ProvinceTable = () => {
                                     <button
                                         className="bg-slate-800 text-white border m-auto py-2 px-4 rounded-lg hover:bg-blue-500 transition duration-300 ease-in-out flex items-center"
                                         onClick={() =>
-                                            handleDetailClick(row.nama_provinsi)
+                                            handleProvinsiClick(row.provinsi_id)
                                         }
                                     >
                                         Lihat Detail
@@ -219,4 +224,4 @@ const ProvinceTable = () => {
     );
 };
 
-export default ProvinceTable;
+export default withTranslation(ProvinceTable);

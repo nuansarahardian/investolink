@@ -1,4 +1,12 @@
 import React from "react";
+import {
+    Collapse,
+    Typography,
+    Button,
+    IconButton,
+    Card,
+} from "@material-tailwind/react";
+import { withTranslation } from "react-google-multi-lang";
 
 const HeroSection = () => {
     return (
@@ -25,14 +33,15 @@ const HeroSection = () => {
                         dan monitoring data investasi masuk (inbound investment)
                         dan investasi keluar (outbound investment)
                     </p>
-                    <button className="bg-gray-800 text-white px-6 py-3 rounded-lg flex items-center justify-center">
+
+                    <Button className="bg-gray-800 text-white font-normal px-6 py-3 rounded-lg flex items-center justify-center">
                         Unduh Panduan
                         <img
                             className="ml-2 w-5"
                             src="icon/download.png"
                             alt=""
                         />
-                    </button>
+                    </Button>
                 </div>
 
                 {/* Kolom kanan: Embed YouTube Video */}
@@ -53,4 +62,4 @@ const HeroSection = () => {
     );
 };
 
-export default HeroSection;
+export default withTranslation(HeroSection);
