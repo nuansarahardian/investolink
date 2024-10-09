@@ -21,7 +21,10 @@ class Sektor extends Model
     {
         return $this->hasMany(Komoditas::class, 'sektor_id');
     }
-
+    public function pdrbPerSektor()
+    {
+        return $this->hasMany(PDRBPerSektor::class, 'sektor_id');
+    }
     // public function pdrb_per_sektor()
     // {
     //     return $this->hasMany(PDRB_per_Sektor::class, 'sektorID');

@@ -261,3 +261,16 @@
 .leaflet-control-attribution {
     display: none !important;
 }
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap; /* Mengatur item agar tidak tersusun horizontal */
+    flex-direction: column; /* Mengatur agar item legenda tersusun vertikal */
+    align-items: start; /* Mengatur agar item mulai dari kiri */
+    margin: 0 auto; /* Mengatur legenda agar berada di tengah bawah */
+}
+
+.chart-legend-item {
+    display: flex;
+    align-items: center; /* Agar kotak warna dan teks legend selaras */
+    margin-bottom: 10px; /* Jarak antar item */
+}

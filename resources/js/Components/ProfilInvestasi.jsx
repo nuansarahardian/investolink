@@ -13,7 +13,7 @@ const ProfilInvestasi = () => {
     return (
         <div className="w-full px-9 pb-8 bg-white shadow-md rounded-lg -mt-2">
             {/* Toggle Button */}
-            <div className="flex justify-center mb-8 mt-6">
+            <div className="flex justify-center mb-8 ">
                 <div className="flex bg-gray-200 rounded-md w-full h-[60px] ">
                     <button
                         className={` m-auto py-1 px-1 h-[42px] w-full ml-2 rounded-md ${

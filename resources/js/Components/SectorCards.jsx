@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { usePage } from "@inertiajs/react";
-import { Inertia } from "@inertiajs/inertia";
-
+import { Inertia } from "@inertiajs/inertia"; // Tambahkan ini
 import provinces from "../../../public/json/provinces.json"; // Adjust the import path as necessary
 import sectors from "../../../public/json/banner-sector.json";
 
@@ -9,12 +8,23 @@ const SectorCards = () => {
     const { sektorData } = usePage().props; // Data sektor dari database
     const [selectedCard, setSelectedCard] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const [selectedProvinces, setSelectedProvinces] = useState([]); // Ubah menjadi array untuk menyimpan provinsi yang dipilih
+    // Tambahkan state untuk menyimpan provinsi yang dipilih
 
     const handleCardClick = (card) => {
         setSelectedCard(card);
+        setSelectedProvince(null); // Reset filter provinsi saat sektor baru dipilih
     };
-    const handleProvinsiClick = (provinsiId) => {
-        Inertia.get(`/provinsi/${provinsiId}`);
+    const handleProvinsiClick = (provinsiName) => {
+        if (selectedProvinces.includes(provinsiName)) {
+            // Jika provinsi sudah dipilih, hapus dari array
+            setSelectedProvinces(
+                selectedProvinces.filter((name) => name !== provinsiName)
+            );
+        } else {
+            // Jika belum dipilih, tambahkan ke array
+            setSelectedProvinces([...selectedProvinces, provinsiName]);
+        }
     };
 
     // Filter sektor berdasarkan pencarian
@@ -33,6 +43,25 @@ const SectorCards = () => {
         acc[sector.sektor] = sector.banner;
         return acc;
     }, {});
+
+    // Filter komoditas berdasarkan provinsi yang dipilih
+    const filteredKomoditas = selectedCard
+        ? selectedCard.komoditas
+              .flatMap((komoditas) =>
+                  komoditas.provinsi
+                      .filter((provinsi) =>
+                          selectedProvinces.length > 0
+                              ? selectedProvinces.includes(provinsi.nama)
+                              : true
+                      )
+                      .map((provinsi) => ({
+                          nama_komoditas: komoditas.nama_komoditas,
+                          provinsi: provinsi.nama,
+                      }))
+              )
+              // Urutkan komoditas berdasarkan provinsi
+              .sort((a, b) => a.provinsi.localeCompare(b.provinsi))
+        : [];
 
     return (
         <div className="">
@@ -65,7 +94,7 @@ const SectorCards = () => {
                                     selectedCard &&
                                     selectedCard.nama_sektor ===
                                         card.nama_sektor
-                                        ? "bg-blue-100/50 border-[#A5B1E8]" // Ganti warna latar belakang dan border untuk card yang aktif
+                                        ? "bg-blue-100 border-[#A5B1E8]"
                                         : "border-[#D1D0D7] hover:bg-[#eff2fa] active:bg-[#F0F3FF]"
                                 }`}
                             >
@@ -168,7 +197,7 @@ const SectorCards = () => {
                                                         komoditas.provinsi.map(
                                                             (provinsi) =>
                                                                 provinsi.nama
-                                                        ) // Ambil nama sebagai string
+                                                        )
                                                 )
                                             )
                                         ).map((uniqueProvinsiName, index) => {
@@ -184,23 +213,22 @@ const SectorCards = () => {
                                                             uniqueProvinsiName
                                                     );
 
-                                            if (!provinsi || !provinsi.id) {
-                                                console.error(
-                                                    "Provinsi ID tidak ditemukan untuk:",
-                                                    uniqueProvinsiName
-                                                );
-                                                return null; // Skip rendering jika provinsi_id tidak ditemukan
-                                            }
-
                                             return (
                                                 <div
                                                     key={index}
-                                                    className="card col-span-1 flex flex-col justify-between p-4 rounded-lg border min-w-[116px] max-w-full bg-[#ffffff] border-[#D1D0D7] text-[#86858D] h-[96px] cursor-pointer"
+                                                    className={`card col-span-1 flex flex-col justify-between p-4 rounded-lg border min-w-[116px] max-w-full bg-[#ffffff] border-[#D1D0D7] text-[#86858D] h-[96px] cursor-pointer 
+                                                    ${
+                                                        selectedProvinces.includes(
+                                                            uniqueProvinsiName
+                                                        )
+                                                            ? "bg-blue-100 border-blue-400" // Ganti warna jika dipilih
+                                                            : ""
+                                                    }`}
                                                     onClick={() =>
                                                         handleProvinsiClick(
-                                                            provinsi.id
+                                                            uniqueProvinsiName
                                                         )
-                                                    } // Menggunakan provinsi_id yang baru ditambahkan
+                                                    }
                                                 >
                                                     <div className="flex justify-between">
                                                         <img
@@ -215,30 +243,55 @@ const SectorCards = () => {
                                                                 uniqueProvinsiName
                                                             }
                                                         />
+                                                        {/* Tambahkan onClick di sini */}
                                                         <img
                                                             src="icon/Vector.png"
                                                             alt="icon"
-                                                            className="w-4 h-4"
+                                                            className="w-4 h-4 cursor-pointer"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation(); // Mencegah event bubbling agar tidak meng-trigger click pada card
+                                                                const provinsi =
+                                                                    selectedCard.komoditas
+                                                                        .flatMap(
+                                                                            (
+                                                                                komoditas
+                                                                            ) =>
+                                                                                komoditas.provinsi
+                                                                        )
+                                                                        .find(
+                                                                            (
+                                                                                prov
+                                                                            ) =>
+                                                                                prov.nama ===
+                                                                                uniqueProvinsiName
+                                                                        );
+                                                                if (
+                                                                    provinsi &&
+                                                                    provinsi.id
+                                                                ) {
+                                                                    Inertia.get(
+                                                                        `/provinsi/${provinsi.id}`
+                                                                    ); // Navigasi ke halaman detail provinsi berdasarkan ID
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                     <p className="text-[12px] leading-tight">
                                                         {uniqueProvinsiName}
-                                                    </p>{" "}
-                                                    {/* Pastikan ini adalah string */}
+                                                    </p>
                                                 </div>
                                             );
                                         })}
                                     </div>
 
-                                    <div className="mt-6  ">
+                                    <div className="mt-6">
                                         <p className="font-bold mb-4">
-                                            {" "}
                                             Komoditas
                                         </p>
                                         {/* tabel komoditas tiap provinsi */}
                                         <div className="border border-gray-300 mr-[24px] shadow-sm mb-60 rounded-[4px] overflow-hidden">
-                                            <table className="min-w-full table-auto border-collapse bg-white ">
-                                                <thead className="bg-gray-200 sticky top-0 z-10 h-12 ">
+                                            <table className="min-w-full table-auto border-collapse bg-white">
+                                                <thead className="bg-gray-200 sticky top-0 z-10 h-12">
                                                     <tr className="text-center border-b border-gray-300">
                                                         <th className="p-4 text-sm font-bold text-gray-700">
                                                             No
@@ -251,47 +304,35 @@ const SectorCards = () => {
                                                         </th>
                                                     </tr>
                                                 </thead>
-                                                <tbody className="">
-                                                    {(() => {
-                                                        let rowIndex = 1;
-                                                        return selectedCard.komoditas.flatMap(
-                                                            (komoditas) =>
-                                                                komoditas.provinsi.map(
-                                                                    (
-                                                                        provinsi
-                                                                    ) => (
-                                                                        <tr
-                                                                            key={
-                                                                                rowIndex
-                                                                            }
-                                                                            className={`text-center border-b 
-                                            ${
-                                                rowIndex % 2 === 0
-                                                    ? "bg-gray-100"
-                                                    : "bg-white"
-                                            } 
-                                            hover:bg-gray-300 transition-colors duration-200`}
-                                                                        >
-                                                                            <td className="p-4">
-                                                                                {
-                                                                                    rowIndex++
-                                                                                }
-                                                                            </td>
-                                                                            <td className="p-4">
-                                                                                {
-                                                                                    komoditas.nama_komoditas
-                                                                                }
-                                                                            </td>
-                                                                            <td className="p-4">
-                                                                                {
-                                                                                    provinsi.nama
-                                                                                }
-                                                                            </td>
-                                                                        </tr>
-                                                                    )
-                                                                )
-                                                        );
-                                                    })()}
+                                                <tbody>
+                                                    {filteredKomoditas.map(
+                                                        (komoditas, index) => (
+                                                            <tr
+                                                                key={index}
+                                                                className={`text-center border-b ${
+                                                                    index %
+                                                                        2 ===
+                                                                    0
+                                                                        ? "bg-gray-100"
+                                                                        : "bg-white"
+                                                                } hover:bg-gray-300 transition-colors duration-200`}
+                                                            >
+                                                                <td className="p-4">
+                                                                    {index + 1}
+                                                                </td>
+                                                                <td className="p-4">
+                                                                    {
+                                                                        komoditas.nama_komoditas
+                                                                    }
+                                                                </td>
+                                                                <td className="p-4">
+                                                                    {
+                                                                        komoditas.provinsi
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    )}
                                                 </tbody>
                                             </table>
                                         </div>

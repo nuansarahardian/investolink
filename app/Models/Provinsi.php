@@ -19,7 +19,7 @@ class Provinsi extends Model
         'luas_area',
         'website',
         'email',
-        'nomor_telepon',
+        'nomor_handphone',
         'populasi',
         'link_terkait',
         'upah_minimum_provinsi',
@@ -55,5 +55,9 @@ class Provinsi extends Model
     public function realisasi_investasi()
     {
         return $this->hasMany(Realisasi_Investasi::class, 'provinsi_id');
+    }
+    public function pdrbPerSektor()
+    {
+        return $this->hasMany(PDRBPerSektor::class, 'provinsi_id');
     }
 }

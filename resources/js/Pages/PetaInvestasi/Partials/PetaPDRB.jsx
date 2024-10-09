@@ -4,8 +4,9 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { usePage } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
+import provinces from "../../../../../public/json/provinces.json"; // Menggunakan data yang diimpor
 
-const GeoMap = ({ hoveredColor, className }) => {
+const PetaPDRB = ({ hoveredColor, className }) => {
     const { provinsi } = usePage().props;
     const [geoData, setGeoData] = useState(null);
     const [coordinatesData, setCoordinatesData] = useState(null);
@@ -88,17 +89,44 @@ const GeoMap = ({ hoveredColor, className }) => {
             nilai_impor = "N/A",
         } = properties;
 
+        // Temukan logo berdasarkan nama provinsi dari data impor
+        const matchingProvinceLogo = provinces.find(
+            (prov) =>
+                prov.provinsi.toLowerCase() === nama_provinsi.toLowerCase()
+        );
+        const logoUrl = matchingProvinceLogo
+            ? matchingProvinceLogo.url_image
+            : "/default-logo.png"; // default image if not found
+
         return `
             <div class="relative bg-white p-4 rounded-3xl text-sm w-[250px]">
-                <div class="font-bold text-lg text-gray-800 mb-1">${nama_provinsi}</div>
-                <div class="text-gray-500 text-xs mb-2">per Q4-2023</div>
-                <div class="font-medium text-gray-800">PDRB: <span class="text-gray-600">${nilai_pdrb_berlaku}</span></div>
-                <div class="font-medium text-gray-800">Populasi: <span class="text-gray-600">${populasi}</span></div>
-                <div class="font-medium text-gray-800">Luas Area: <span class="text-gray-600">${luas_area}</span></div>
-                <div class="font-medium text-gray-800">Upah Minimum: <span class="text-gray-600">${upah_minimum_provinsi}</span></div>
-                <div class="font-medium text-gray-800">Nilai Ekspor: <span class="text-gray-600">${nilai_ekspor}</span></div>
-                <div class="font-medium text-gray-800">Nilai Impor: <span class="text-gray-600">${nilai_impor}</span></div>
-            </div>`;
+                <div class="flex">
+                    <img src="${logoUrl}" class="w-10 h-10 mr-2">
+                    <div>
+                        <div class="font-bold text-xl text-gray-800">${nama_provinsi}</div>
+                        <div class="text-gray-500 text-xs mb-2">per Q4-2023</div>
+                    </div>
+                </div>
+                <div class="flex text-sm"> 
+                    <div class="mr-2 text-gray-400 flex text-[12px] gap-1 flex-col">
+                        <div class="font-medium">PDRB <span class="text-gray-600"></span></div>
+                        <div class="font-medium">Populasi <span class="text-gray-600"></span></div>
+                        <div class="font-medium">Luas Area <span class="text-gray-600"></span></div>
+                        <div class="font-medium">Upah Minimum <span class="text-gray-600"></span></div>
+                        <div class="font-medium">Nilai Ekspor <span class="text-gray-600"></span></div>
+                        <div class="font-medium">Nilai Impor <span class="text-gray-600"></span></div>
+                    </div>
+                    <div class="flex gap-1 flex-col text-[12px]">
+                        <div class="font-medium text-gray-800">${nilai_pdrb_berlaku}</div>
+                        <div class="font-medium text-gray-800">${populasi}</div>
+                        <div class="font-medium text-gray-800">${luas_area}</div>
+                        <div class="font-medium text-gray-800">${upah_minimum_provinsi}</div>
+                        <div class="font-medium text-gray-800">${nilai_ekspor}</div>
+                        <div class="font-medium text-gray-800">${nilai_impor}</div>
+                    </div>
+                </div>
+            </div>
+        `;
     };
 
     const onEachFeature = (feature, layer) => {
@@ -136,7 +164,7 @@ const GeoMap = ({ hoveredColor, className }) => {
                 center={[-2.5, 118]}
                 zoom={4.5}
                 scrollWheelZoom={false}
-                className={"rounded-r-lg"}
+                className={"rounded-r-lg z-0"}
             >
                 {mergedData && (
                     <>
@@ -174,6 +202,7 @@ const GeoMap = ({ hoveredColor, className }) => {
             padding: 2px 6px; 
             border-radius: 4px; 
             font-size: 10px; 
+            z-0
             font-weight: normal;
             color: #5B5A68; 
             text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF; 
@@ -227,4 +256,4 @@ const GeoMap = ({ hoveredColor, className }) => {
     );
 };
 
-export default GeoMap;
+export default PetaPDRB;
