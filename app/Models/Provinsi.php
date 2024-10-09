@@ -23,7 +23,8 @@ class Provinsi extends Model
         'link_terkait',
         'upah_minimum_provinsi',
         'nilai_ekspor',
-        'nilai_impor'
+        'nilai_impor',
+        'realisasi_pendapatan_daerah'
     ];
 
     public function komoditas()
@@ -54,5 +55,15 @@ class Provinsi extends Model
     public function realisasi_investasi()
     {
         return $this->hasMany(Realisasi_Investasi::class, 'provinsi_id');
+    }
+
+    public function peluang_investasi()
+    {
+        return $this->hasMany(Peluang_Investasi::class, 'provinsi_id');
+    }
+
+    public function pdrb_per_sektor()
+    {
+        return $this->hasMany(PDRB_Per_Sektor::class, 'provinsi_id');
     }
 }

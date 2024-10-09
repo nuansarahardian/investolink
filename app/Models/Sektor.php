@@ -22,8 +22,13 @@ class Sektor extends Model
         return $this->hasMany(Komoditas::class, 'sektor_id');
     }
 
-    // public function pdrb_per_sektor()
-    // {
-    //     return $this->hasMany(PDRB_per_Sektor::class, 'sektorID');
-    // }
+    public function peluang_investasi()
+    {
+        return $this->hasMany(Peluang_Investasi::class, 'sektor_id');
+    }
+
+    public function pdrb_per_sektor()
+    {
+        return $this->hasMany(PDRB_Per_Sektor::class, 'provinsi_id');
+    }
 }
