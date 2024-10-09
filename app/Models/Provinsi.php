@@ -15,7 +15,6 @@ class Provinsi extends Model
 
     protected $fillable = [
         'nama_provinsi',
-        'gambar_ikonik',
         'luas_area',
         'website',
         'email',
@@ -25,6 +24,7 @@ class Provinsi extends Model
         'upah_minimum_provinsi',
         'nilai_ekspor',
         'nilai_impor',
+        'realisasi_pendapatan_daerah'
     ];
 
     public function komoditas()

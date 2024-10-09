@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Provinsi_Komoditas extends Model
+class PDRB_per_Sektor extends Model
 {
     use HasFactory;
 
-    protected $table = 'provinsi_komoditas';
-
-    protected $primaryKey = 'provinsi_komoditas_id';
-
     protected $fillable = [
         'provinsi_id',
-        'komoditas_id',
-        'jumlah_komoditas'
+        'sektor_id',
+        'nilai_pdrb_per_sektor'
     ];
 
     public function provinsi()
@@ -24,8 +20,8 @@ class Provinsi_Komoditas extends Model
         return $this->belongsTo(Provinsi::class, 'provinsi_id');
     }
 
-    public function komoditas()
+    public function sektor()
     {
-        return $this->belongsTo(Komoditas::class, 'komoditas_id');
+        return $this->belongsTo(Sektor::class, 'sektor_id');
     }
 }

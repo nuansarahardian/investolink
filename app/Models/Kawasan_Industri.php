@@ -18,11 +18,12 @@ class Kawasan_Industri extends Model
         'nama_kawasan_industri',
         'kabupaten_atau_kota',
         'luas_lahan',
-        'latitude',
-        'longitude',
         'target_investasi',
         'industri',
         'is_kawasan_ekonomi_khusus',
+        'latitude',
+        'longitude',
+        'link_terkait'
     ];
 
     public function provinsi()
