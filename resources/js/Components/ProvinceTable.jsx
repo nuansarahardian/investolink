@@ -59,11 +59,11 @@ const ProvinceTable = () => {
                 <div className="flex flex-col sm:flex-row sm:space-x-4 w-full sm:w-auto">
                     {/* Sorting dropdown */}
                     <div className="flex items-center space-x-2">
-                        <p className="text-sm font-medium">
+                        <p className="text-[14px] font-normal text-[#86858D]">
                             Urutkan Berdasarkan
                         </p>
                         <select
-                            className="border pr-10 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="border pr-10 rounded-[6px] text-[#86858D] bg-[#F7F6F8] focus:outline-none focus:ring-2 focus:ring-blue-400"
                             value={sortColumn}
                             onChange={(e) => handleSort(e.target.value)}
                         >
@@ -81,7 +81,7 @@ const ProvinceTable = () => {
                         <div className="mt-2 sm:mt-0">
                             <input
                                 type="text"
-                                className="border p-2 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-auto"
+                                className="border p-2 rounded-[6px] text-[#86858D] bg-[#F7F6F8] focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-auto"
                                 placeholder="Cari Nama Provinsi"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -94,7 +94,7 @@ const ProvinceTable = () => {
             {/* Tabel scrollable */}
             <div className="overflow-y-auto max-h-96 rounded-xl border border-gray-300 shadow-sm custom-scrollbar">
                 <table className="min-w-full table-auto border-collapse bg-white">
-                    <thead className="bg-gray-200 sticky top-0 z-10 h-12">
+                    <thead className="bg-[#DFE3F6] sticky top-0 z-10 h-12">
                         <tr className="text-center border-b border-gray-300">
                             <th className="p-4 text-sm font-bold text-gray-700">
                                 No
@@ -207,12 +207,21 @@ const ProvinceTable = () => {
                                 </td>
                                 <td className="p-4 text-sm text-gray-600 text-center">
                                     <button
-                                        className="bg-slate-800 text-white border m-auto py-2 px-4 rounded-lg hover:bg-blue-500 transition duration-300 ease-in-out flex items-center"
+                                        className=" border border-[#A5B1E8] bg-[#F0F3FF] text-[#2D3985] m-auto py-1 px-4 rounded-lg hover:bg-[#a7b9ff] transition duration-300 ease-in-out flex items-center"
                                         onClick={() =>
                                             handleProvinsiClick(row.provinsi_id)
                                         }
                                     >
-                                        Lihat Detail
+                                        <div className="flex ">
+                                            <p className="font-bold mr-2">
+                                                Lihat Detail
+                                            </p>
+                                            <img
+                                                src="/icon/Vector.png"
+                                                alt=""
+                                                className="w-4 h-4 my-auto"
+                                            />
+                                        </div>
                                     </button>
                                 </td>
                             </tr>

@@ -70,8 +70,8 @@ const SectorCards = () => {
             </h2>
 
             <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-1 ">
-                    <div className="relative bg-white rounded-lg shadow-md h-[624px] overflow-y-auto ">
+                <div className="col-span-1">
+                    <div className="relative bg-white rounded-lg shadow-md h-[624px] overflow-y-auto border-2 border-[#DFE3F6]/50">
                         <div className="sticky top-0 bg-white py-6 px-4 z-10 mb-4 border-b-2 border-slate-200 drop-shadow-sm ">
                             {/* fitur pencarian sektor */}
                             <input
@@ -94,8 +94,8 @@ const SectorCards = () => {
                                     selectedCard &&
                                     selectedCard.nama_sektor ===
                                         card.nama_sektor
-                                        ? "bg-blue-100 border-[#A5B1E8]"
-                                        : "border-[#D1D0D7] hover:bg-[#eff2fa] active:bg-[#F0F3FF]"
+                                        ? "bg-blue-200/50 border-[#A5B1E8] active:bg-[#e3e7fa]"
+                                        : "border-[#D1D0D7] hover:bg-[#eff2fa] "
                                 }`}
                             >
                                 {/* Ambil banner sektor dari JSON, fallback jika tidak ada */}
@@ -148,7 +148,7 @@ const SectorCards = () => {
 
                 {/* bagian kanan card */}
                 <div className="col-span-2">
-                    <div className="relative bg-white rounded-lg shadow-md h-[624px] overflow-y-auto">
+                    <div className="h-fit bg-white rounded-lg shadow-md border-2 border-[#DFE3F6]/50">
                         {selectedCard ? (
                             <div>
                                 <div className="relative ">
@@ -245,7 +245,7 @@ const SectorCards = () => {
                                                         />
                                                         {/* Tambahkan onClick di sini */}
                                                         <img
-                                                            src="icon/Vector.png"
+                                                            src="/icon/Vector.png"
                                                             alt="icon"
                                                             className="w-4 h-4 cursor-pointer"
                                                             onClick={(e) => {
@@ -289,9 +289,9 @@ const SectorCards = () => {
                                             Komoditas
                                         </p>
                                         {/* tabel komoditas tiap provinsi */}
-                                        <div className="border border-gray-300 mr-[24px] shadow-sm mb-60 rounded-[4px] overflow-hidden">
+                                        <div className="border border-gray-300 mr-[24px] shadow-sm mb-12 rounded-[4px] overflow-hidden">
                                             <table className="min-w-full table-auto border-collapse bg-white">
-                                                <thead className="bg-gray-200 sticky top-0 z-10 h-12">
+                                                <thead className="bg-[#DFE3F6] sticky top-0 z-10 h-12">
                                                     <tr className="text-center border-b border-gray-300">
                                                         <th className="p-4 text-sm font-bold text-gray-700">
                                                             No
@@ -305,33 +305,50 @@ const SectorCards = () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {filteredKomoditas.map(
-                                                        (komoditas, index) => (
-                                                            <tr
-                                                                key={index}
-                                                                className={`text-center border-b ${
-                                                                    index %
-                                                                        2 ===
-                                                                    0
-                                                                        ? "bg-gray-100"
-                                                                        : "bg-white"
-                                                                } hover:bg-gray-300 transition-colors duration-200`}
-                                                            >
-                                                                <td className="p-4">
-                                                                    {index + 1}
-                                                                </td>
-                                                                <td className="p-4">
-                                                                    {
-                                                                        komoditas.nama_komoditas
-                                                                    }
-                                                                </td>
-                                                                <td className="p-4">
-                                                                    {
-                                                                        komoditas.provinsi
-                                                                    }
-                                                                </td>
-                                                            </tr>
+                                                    {filteredKomoditas.length >
+                                                    0 ? (
+                                                        filteredKomoditas.map(
+                                                            (
+                                                                komoditas,
+                                                                index
+                                                            ) => (
+                                                                <tr
+                                                                    key={index}
+                                                                    className={`border-b ${
+                                                                        index %
+                                                                            2 ===
+                                                                        0
+                                                                            ? "bg-white"
+                                                                            : "bg-gray-100/50"
+                                                                    } hover:bg-gray-300 transition-colors duration-200`}
+                                                                >
+                                                                    <td className="p-4">
+                                                                        {index +
+                                                                            1}
+                                                                    </td>
+                                                                    <td className="pl-16">
+                                                                        {
+                                                                            komoditas.nama_komoditas
+                                                                        }
+                                                                    </td>
+                                                                    <td className="pl-48">
+                                                                        {
+                                                                            komoditas.provinsi
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                            )
                                                         )
+                                                    ) : (
+                                                        <tr>
+                                                            <td
+                                                                colSpan="3"
+                                                                className="p-4 text-center text-gray-500"
+                                                            >
+                                                                Data komoditas
+                                                                tidak tersedia
+                                                            </td>
+                                                        </tr>
                                                     )}
                                                 </tbody>
                                             </table>

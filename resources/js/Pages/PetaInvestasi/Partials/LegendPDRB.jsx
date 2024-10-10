@@ -49,7 +49,7 @@ const LegendPDRB = ({ setHoveredColor, className }) => {
                         )}
                     </div>
                 </div>
-                <p className="text-[14px] text-[#86858D] font-normal mb-2">
+                <p className="text-[14px] text-[#86858D] font-normal mb-3 mt-1">
                     Sumber: BPS (2024)
                 </p>
 

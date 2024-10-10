@@ -53,13 +53,13 @@ const PetaPDRB = ({ hoveredColor, className }) => {
     }, [geoData, provinsi]);
 
     const getColor = (pdrb) => {
-        return pdrb > 1000000
+        return pdrb > 1000
             ? "#23577E"
-            : pdrb > 600000
+            : pdrb > 600
             ? "#3E7AA6"
-            : pdrb > 250000
+            : pdrb > 250
             ? "#5899C8"
-            : pdrb > 150000
+            : pdrb > 150
             ? "#8CBBDD"
             : "#D0E1ED";
     };
@@ -82,6 +82,10 @@ const PetaPDRB = ({ hoveredColor, className }) => {
         const {
             nama_provinsi,
             nilai_pdrb_berlaku = "N/A",
+            nilai_pma,
+            nilai_pmdn,
+            sektor_terbesar,
+            tahun_pdrb,
             populasi = "N/A",
             luas_area = "N/A",
             upah_minimum_provinsi = "N/A",
@@ -97,32 +101,29 @@ const PetaPDRB = ({ hoveredColor, className }) => {
         const logoUrl = matchingProvinceLogo
             ? matchingProvinceLogo.url_image
             : "/default-logo.png"; // default image if not found
-
         return `
-            <div class="relative bg-white p-4 rounded-3xl text-sm w-[250px]">
-                <div class="flex">
-                    <img src="${logoUrl}" class="w-10 h-10 mr-2">
+            <div class="tooltip-container">
+                <div class="flex mb-2">
+                    <img src="${logoUrl}" class="w-10 h-10 mr-2 my-auto ">
                     <div>
                         <div class="font-bold text-xl text-gray-800">${nama_provinsi}</div>
-                        <div class="text-gray-500 text-xs mb-2">per Q4-2023</div>
+                        <div class="text-gray-500 text-xs mb-2">Sumber: BPS BKPM (${tahun_pdrb})</div>
                     </div>
                 </div>
                 <div class="flex text-sm"> 
                     <div class="mr-2 text-gray-400 flex text-[12px] gap-1 flex-col">
                         <div class="font-medium">PDRB <span class="text-gray-600"></span></div>
-                        <div class="font-medium">Populasi <span class="text-gray-600"></span></div>
-                        <div class="font-medium">Luas Area <span class="text-gray-600"></span></div>
-                        <div class="font-medium">Upah Minimum <span class="text-gray-600"></span></div>
-                        <div class="font-medium">Nilai Ekspor <span class="text-gray-600"></span></div>
-                        <div class="font-medium">Nilai Impor <span class="text-gray-600"></span></div>
+                        <div class="font-medium">PMA <span class="text-gray-600"></span></div>
+                        <div class="font-medium">PMDN <span class="text-gray-600"></span></div>
+                        <div class="font-medium">Sektor Unggulan <span class="text-gray-600"></span></div>
+                        
                     </div>
                     <div class="flex gap-1 flex-col text-[12px]">
-                        <div class="font-medium text-gray-800">${nilai_pdrb_berlaku}</div>
-                        <div class="font-medium text-gray-800">${populasi}</div>
-                        <div class="font-medium text-gray-800">${luas_area}</div>
-                        <div class="font-medium text-gray-800">${upah_minimum_provinsi}</div>
-                        <div class="font-medium text-gray-800">${nilai_ekspor}</div>
-                        <div class="font-medium text-gray-800">${nilai_impor}</div>
+                        <div class="font-medium text-gray-800">Rp${nilai_pdrb_berlaku} Triliun</div>
+                        <div class="font-medium text-gray-800">$${nilai_pma}  </div>
+                        <div class="font-medium text-gray-800">Rp${nilai_pmdn} Juta </div>
+                        <div class="font-medium text-gray-800">${sektor_terbesar.nama_sektor} </div>
+               
                     </div>
                 </div>
             </div>

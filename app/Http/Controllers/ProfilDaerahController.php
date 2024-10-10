@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,6 +8,7 @@ use App\Models\PMA;
 use App\Models\PMDN;
 use App\Models\Realisasi_Investasi;
 use App\Models\PDRBPerSektor; // Tambahkan model PDRBPerSektor
+use App\Models\Peluang_Investasi; // Tambahkan model Peluang_Investasi
 use Inertia\Inertia;
 
 class ProfilDaerahController extends Controller
@@ -38,6 +40,10 @@ class ProfilDaerahController extends Controller
         // Mengambil data PDRB per sektor berdasarkan provinsi_id
         $pdrbPerSektor = PDRBPerSektor::with('sektor')
             ->where('provinsi_id', $provinsi_id)
+            ->get();
+
+        // Mengambil data peluang investasi berdasarkan provinsi_id
+        $peluangInvestasi = Peluang_Investasi::where('provinsi_id', $provinsi_id) // Pastikan data berdasarkan provinsi_id
             ->get();
 
         // Menyusun data PDRB per sektor menjadi array
@@ -80,6 +86,16 @@ class ProfilDaerahController extends Controller
             ];
         });
 
+        // Menyusun data peluang investasi menjadi array
+        $peluangInvestasiData = $peluangInvestasi->map(function ($investasi) {
+            return [
+                'judul_projek' => $investasi->judul_projek,
+                'daerah' => $investasi->daerah,
+                'link_menuju_page' => $investasi->link_menuju_page,
+                'link_gambar' => $investasi->link_gambar,
+            ];
+        });
+
         // Menyusun data provinsi dari properti yang ada di model
         $provinsiData = [
             'provinsi_id' => $provinsi->provinsi_id,
@@ -101,6 +117,7 @@ class ProfilDaerahController extends Controller
             'pma' => $pmaData, // Data PMA yang sudah diformat
             'pmdn' => $pmdnData, // Data PMDN yang sudah diformat
             'realisasi_investasi' => $realisasiInvestasiData, // Data realisasi investasi untuk setiap tahun
+            'peluang_investasi' => $peluangInvestasiData, // Data peluang investasi yang baru ditambahkan
         ];
 // dd($provinsiData);
         // Merender halaman 'ProfilDaerah' dengan data provinsi yang telah disusun

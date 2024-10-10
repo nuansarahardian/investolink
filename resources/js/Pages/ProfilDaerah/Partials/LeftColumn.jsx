@@ -10,12 +10,11 @@ const LeftColumn = ({ formatNumber, provinsi }) => {
         }
     };
 
-    // Fungsi untuk mencari gambar KEK berdasarkan nama
     const findKekImage = (kekName) => {
         const kek = kekImages.find((item) => item.KEK === kekName);
+        console.log(`Mencari gambar untuk KEK: ${kekName}`, kek); // Tambahkan log ini
         return kek ? kek.Image : "https://via.placeholder.com/150";
     };
-
     return (
         <div className="col-span-1 bg-white p-4 shadow-lg rounded-lg">
             <h1 className="text-2xl font-bold text-[#384AA0]">Profil Daerah</h1>

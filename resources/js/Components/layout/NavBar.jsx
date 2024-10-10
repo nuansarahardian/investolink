@@ -121,7 +121,7 @@ const StickyNavbar = () => {
                                 <Button
                                     variant="gradient"
                                     size="md"
-                                    className="hidden lg:inline-block text-slate-100 bg-slate-800 font-medium rounded-md"
+                                    className="hidden lg:inline-block text-[#384AA0] bg-white font-medium rounded-md"
                                 >
                                     MASUK
                                 </Button>
