@@ -4,8 +4,9 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { usePage } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
+import provinces from "../../../../../public/json/provinces.json"; // Menggunakan data yang diimpor
 
-const GeoMap = ({ hoveredColor, className }) => {
+const PetaPDRB = ({ hoveredColor, className }) => {
     const { provinsi } = usePage().props;
     const [geoData, setGeoData] = useState(null);
     const [coordinatesData, setCoordinatesData] = useState(null);
@@ -52,13 +53,13 @@ const GeoMap = ({ hoveredColor, className }) => {
     }, [geoData, provinsi]);
 
     const getColor = (pdrb) => {
-        return pdrb > 1000000
+        return pdrb > 1000
             ? "#23577E"
-            : pdrb > 600000
+            : pdrb > 600
             ? "#3E7AA6"
-            : pdrb > 250000
+            : pdrb > 250
             ? "#5899C8"
-            : pdrb > 150000
+            : pdrb > 150
             ? "#8CBBDD"
             : "#D0E1ED";
     };
@@ -81,6 +82,10 @@ const GeoMap = ({ hoveredColor, className }) => {
         const {
             nama_provinsi,
             nilai_pdrb_berlaku = "N/A",
+            nilai_pma,
+            nilai_pmdn,
+            sektor_terbesar,
+            tahun_pdrb,
             populasi = "N/A",
             luas_area = "N/A",
             upah_minimum_provinsi = "N/A",
@@ -88,17 +93,41 @@ const GeoMap = ({ hoveredColor, className }) => {
             nilai_impor = "N/A",
         } = properties;
 
+        // Temukan logo berdasarkan nama provinsi dari data impor
+        const matchingProvinceLogo = provinces.find(
+            (prov) =>
+                prov.provinsi.toLowerCase() === nama_provinsi.toLowerCase()
+        );
+        const logoUrl = matchingProvinceLogo
+            ? matchingProvinceLogo.url_image
+            : "/default-logo.png"; // default image if not found
         return `
-            <div class="relative bg-white p-4 rounded-3xl text-sm w-[250px]">
-                <div class="font-bold text-lg text-gray-800 mb-1">${nama_provinsi}</div>
-                <div class="text-gray-500 text-xs mb-2">per Q4-2023</div>
-                <div class="font-medium text-gray-800">PDRB: <span class="text-gray-600">${nilai_pdrb_berlaku}</span></div>
-                <div class="font-medium text-gray-800">Populasi: <span class="text-gray-600">${populasi}</span></div>
-                <div class="font-medium text-gray-800">Luas Area: <span class="text-gray-600">${luas_area}</span></div>
-                <div class="font-medium text-gray-800">Upah Minimum: <span class="text-gray-600">${upah_minimum_provinsi}</span></div>
-                <div class="font-medium text-gray-800">Nilai Ekspor: <span class="text-gray-600">${nilai_ekspor}</span></div>
-                <div class="font-medium text-gray-800">Nilai Impor: <span class="text-gray-600">${nilai_impor}</span></div>
-            </div>`;
+            <div class="tooltip-container">
+                <div class="flex mb-2">
+                    <img src="${logoUrl}" class="w-10 h-10 mr-2 my-auto ">
+                    <div>
+                        <div class="font-bold text-xl text-gray-800">${nama_provinsi}</div>
+                        <div class="text-gray-500 text-xs mb-2">Sumber: BPS BKPM (${tahun_pdrb})</div>
+                    </div>
+                </div>
+                <div class="flex text-sm"> 
+                    <div class="mr-2 text-gray-400 flex text-[12px] gap-1 flex-col">
+                        <div class="font-medium">PDRB <span class="text-gray-600"></span></div>
+                        <div class="font-medium">PMA <span class="text-gray-600"></span></div>
+                        <div class="font-medium">PMDN <span class="text-gray-600"></span></div>
+                        <div class="font-medium">Sektor Unggulan <span class="text-gray-600"></span></div>
+                        
+                    </div>
+                    <div class="flex gap-1 flex-col text-[12px]">
+                        <div class="font-medium text-gray-800">Rp${nilai_pdrb_berlaku} Triliun</div>
+                        <div class="font-medium text-gray-800">$${nilai_pma}  </div>
+                        <div class="font-medium text-gray-800">Rp${nilai_pmdn} Juta </div>
+                        <div class="font-medium text-gray-800">${sektor_terbesar.nama_sektor} </div>
+               
+                    </div>
+                </div>
+            </div>
+        `;
     };
 
     const onEachFeature = (feature, layer) => {
@@ -136,7 +165,7 @@ const GeoMap = ({ hoveredColor, className }) => {
                 center={[-2.5, 118]}
                 zoom={4.5}
                 scrollWheelZoom={false}
-                className={"rounded-r-lg"}
+                className={"rounded-r-lg z-0"}
             >
                 {mergedData && (
                     <>
@@ -174,6 +203,7 @@ const GeoMap = ({ hoveredColor, className }) => {
             padding: 2px 6px; 
             border-radius: 4px; 
             font-size: 10px; 
+            z-0
             font-weight: normal;
             color: #5B5A68; 
             text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF; 
@@ -227,4 +257,4 @@ const GeoMap = ({ hoveredColor, className }) => {
     );
 };
 
-export default GeoMap;
+export default PetaPDRB;

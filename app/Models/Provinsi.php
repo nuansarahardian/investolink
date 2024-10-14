@@ -56,14 +56,8 @@ class Provinsi extends Model
     {
         return $this->hasMany(Realisasi_Investasi::class, 'provinsi_id');
     }
-
-    public function peluang_investasi()
+    public function pdrbPerSektor()
     {
-        return $this->hasMany(Peluang_Investasi::class, 'provinsi_id');
-    }
-
-    public function pdrb_per_sektor()
-    {
-        return $this->hasMany(PDRB_Per_Sektor::class, 'provinsi_id');
+        return $this->hasMany(PDRBPerSektor::class, 'provinsi_id');
     }
 }
