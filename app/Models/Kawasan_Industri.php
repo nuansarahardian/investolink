@@ -23,7 +23,8 @@ class Kawasan_Industri extends Model
         'is_kawasan_ekonomi_khusus',
         'latitude',
         'longitude',
-        'link_terkait'
+        'link_terkait',
+        'foto'
     ];
 
     public function provinsi()
