@@ -118,5 +118,33 @@
     {
         "Province": "Sumatera Utara",
         "Image": "/foto_ikonik_provinsi/Sumatera Utara.jpg"
+    },
+    {
+        "Province": "Aceh",
+        "Image": "/foto_ikonik_provinsi/Aceh.jpg"
+    },
+    {
+        "Province": "Jawa Barat",
+        "Image": "/foto_ikonik_provinsi/jawabarat.jpeg"
+    },
+    {
+        "Province": "Jawa Tengah",
+        "Image": "/foto_ikonik_provinsi/jawatengah.jpg"
+    },
+    {
+        "Province": "Jawa Timur",
+        "Image": "/foto_ikonik_provinsi/jawatimur.jpg"
+    },
+    {
+        "Province": "DI Yogyakarta",
+        "Image": "/foto_ikonik_provinsi/yogyakarta.jpg"
+    },
+    {
+        "Province": "Banten",
+        "Image": "/foto_ikonik_provinsi/banten.jpg"
+    },
+    {
+        "Province": "DKI Jakarta",
+        "Image": "/foto_ikonik_provinsi/dkijakarta.jpg"
     }
 ]

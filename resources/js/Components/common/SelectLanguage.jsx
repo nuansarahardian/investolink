@@ -9,18 +9,18 @@ export default function Dropdown() {
 
     // Mengambil data dari localStorage saat komponen dimuat
     useEffect(() => {
-        const savedLanguage = localStorage.getItem("language"); // Ambil bahasa yang tersimpan
+        const savedLanguage = localStorage.getItem("language");
         if (savedLanguage) {
-            setCurrentLanguage(savedLanguage); // Set bahasa dari localStorage jika ada
-            setLanguage(savedLanguage); // Ubah bahasa menggunakan setLanguage dari react-google-multi-lang
+            setCurrentLanguage(savedLanguage);
+            setLanguage(savedLanguage);
         }
     }, [setLanguage]);
 
     // Fungsi untuk mengubah bahasa dan memperbarui state bahasa aktif
     const changeLanguage = (lang) => {
-        setLanguage(lang); // Ubah bahasa menggunakan setLanguage dari react-google-multi-lang
-        setCurrentLanguage(lang); // Perbarui state bahasa aktif
-        localStorage.setItem("language", lang); // Simpan bahasa ke localStorage
+        setLanguage(lang);
+        setCurrentLanguage(lang);
+        localStorage.setItem("language", lang);
     };
 
     // Fungsi untuk menentukan label dan ikon berdasarkan bahasa yang aktif
@@ -37,23 +37,21 @@ export default function Dropdown() {
         }
     };
 
-    const { label, icon } = getLanguageDetails(currentLanguage); // Tentukan label dan ikon bahasa aktif
+    const { label, icon } = getLanguageDetails(currentLanguage);
 
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
-                <MenuButton className="inline-flex w-full place-items-center justify-center gap-x-1.5 rounded-md bg-[#384AA0] px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-[#283579]">
-                    <div className="flex align-middle drop-shadow-md rounded-xl mr-1">
-                        <div className="">
-                            <img
-                                src={icon} // Tampilkan ikon sesuai bahasa aktif
-                                className="w-6 h-6 rounded-full"
-                                alt={label}
-                            />
-                        </div>
+                <MenuButton className="inline-flex w-full items-center justify-center gap-x-1.5 rounded-md bg-[#384AA0] px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-[#283579]">
+                    <div className="flex items-center mr-1">
+                        <img
+                            src={icon}
+                            className="w-6 h-6 rounded-full"
+                            alt={label}
+                        />
                     </div>
-                    <div className="sm:text-sm font-medium sm:block hidden text-white">
-                        {label} {/* Tampilkan label sesuai bahasa aktif */}
+                    <div className="text-sm font-medium text-white hidden sm:block">
+                        {label}
                     </div>
                     <ChevronDownIcon
                         aria-hidden="true"
@@ -62,65 +60,63 @@ export default function Dropdown() {
                 </MenuButton>
             </div>
 
-            <MenuItems
-                transition
-                className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none"
-            >
+            <Menu.Items className="absolute right-0 z-10 mt-2 min-w-max origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="py-1">
-                    <MenuItem>
-                        <button
-                            onClick={() => changeLanguage("id")} // Ubah bahasa ke Indonesia
-                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-                        >
-                            <div className="flex place-items-center">
-                                <div className="w-10 my-auto rounded-full drop-shadow-lg">
-                                    <img
-                                        className="w-6 h-6 rounded-full"
-                                        src="/images/indo.png"
-                                        alt="Bahasa Indonesia"
-                                    />
-                                </div>
-                                Bahasa Indonesia
-                            </div>
-                        </button>
-                    </MenuItem>
+                    <Menu.Item>
+                        {({ active }) => (
+                            <button
+                                onClick={() => changeLanguage("id")}
+                                className={`flex items-center w-full px-4 py-2 text-sm ${
+                                    active ? "bg-gray-100" : ""
+                                } text-gray-700 hover:bg-gray-100`}
+                            >
+                                <img
+                                    src="/images/indo.png"
+                                    alt="Bahasa Indonesia"
+                                    className="w-5 h-5 mr-3 rounded-full"
+                                />
+                                <span>Bahasa Indonesia</span>
+                            </button>
+                        )}
+                    </Menu.Item>
 
-                    <MenuItem>
-                        <button
-                            onClick={() => changeLanguage("en")} // Ubah bahasa ke Inggris
-                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-                        >
-                            <div className="flex">
-                                <div className="w-10 rounded-full drop-shadow-lg">
-                                    <img
-                                        className="w-6 h-6 rounded-full"
-                                        src="/images/UK.png"
-                                        alt="English"
-                                    />
-                                </div>
-                                English
-                            </div>
-                        </button>
-                    </MenuItem>
-                    <MenuItem>
-                        <button
-                            onClick={() => changeLanguage("ar")} // Ubah bahasa ke Arab
-                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-                        >
-                            <div className="flex">
-                                <div className="w-10 rounded-full drop-shadow-lg">
-                                    <img
-                                        className="w-6 h-6 rounded-full"
-                                        src="/images/arab.jpg"
-                                        alt="Arabic"
-                                    />
-                                </div>
-                                Arab
-                            </div>
-                        </button>
-                    </MenuItem>
+                    <Menu.Item>
+                        {({ active }) => (
+                            <button
+                                onClick={() => changeLanguage("en")}
+                                className={`flex items-center w-full px-4 py-2 text-sm ${
+                                    active ? "bg-gray-100" : ""
+                                } text-gray-700 hover:bg-gray-100`}
+                            >
+                                <img
+                                    src="/images/UK.png"
+                                    alt="English"
+                                    className="w-5 h-5 mr-3 rounded-full"
+                                />
+                                <span>English</span>
+                            </button>
+                        )}
+                    </Menu.Item>
+
+                    <Menu.Item>
+                        {({ active }) => (
+                            <button
+                                onClick={() => changeLanguage("ar")}
+                                className={`flex items-center w-full px-4 py-2 text-sm ${
+                                    active ? "bg-gray-100" : ""
+                                } text-gray-700 hover:bg-gray-100`}
+                            >
+                                <img
+                                    src="/images/arab.jpg"
+                                    alt="Arabic"
+                                    className="w-5 h-5 mr-3 rounded-full"
+                                />
+                                <span>Arabic</span>
+                            </button>
+                        )}
+                    </Menu.Item>
                 </div>
-            </MenuItems>
+            </Menu.Items>
         </Menu>
     );
 }

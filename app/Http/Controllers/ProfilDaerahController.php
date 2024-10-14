@@ -37,11 +37,20 @@ class ProfilDaerahController extends Controller
             ->orderBy('tahun', 'asc')  // Urutkan berdasarkan tahun dari yang terkecil ke terbesar
             ->get();
 
+      
         // Mengambil data PDRB per sektor berdasarkan provinsi_id
         $pdrbPerSektor = PDRBPerSektor::with('sektor')
             ->where('provinsi_id', $provinsi_id)
             ->get();
 
+               // Mengambil kawasan industri yang merupakan kawasan ekonomi khusus
+         $kawasanEkonomiKhusus = $provinsi->kawasan_industri()
+         ->where('is_kawasan_ekonomi_khusus', true)
+        ->get();
+
+// Mengambil kawasan industri yang bukan kawasan ekonomi khusus
+        $kawasanIndustri = $provinsi->kawasan_industri()
+        ->get();
         // Mengambil data peluang investasi berdasarkan provinsi_id
         $peluangInvestasi = Peluang_Investasi::where('provinsi_id', $provinsi_id) // Pastikan data berdasarkan provinsi_id
             ->get();
@@ -62,14 +71,13 @@ class ProfilDaerahController extends Controller
                 'nilai_pdrb_konstan' => $pdrb->nilai_pdrb_konstan,
             ];
         });
-
-        // Menyusun data realisasi investasi menjadi array per tahun
-        $realisasiInvestasiData = $realisasiInvestasi->map(function ($investasi) {
+        $realisasiInvestasiData = $realisasiInvestasi->sortBy('tahun')->map(function ($investasi) {
             return [
                 'tahun' => $investasi->tahun,
                 'nilai_realisasi_investasi' => $investasi->nilai_realisasi_investasi,
             ];
         });
+        
 
         // Menyusun data PMA dan PMDN menjadi array per tahun
         $pmaData = $pma->map(function ($dataPMA) {
@@ -101,7 +109,8 @@ class ProfilDaerahController extends Controller
             'provinsi_id' => $provinsi->provinsi_id,
             'nama_provinsi' => $provinsi->nama_provinsi,
             'gambar_ikonik' => $provinsi->gambar_ikonik,
-            'luas_area' => $provinsi->luas_area,
+            'luas_area' => number_format($provinsi->luas_area, 2, ',', '.'),
+
             'website' => $provinsi->website,
             'email' => $provinsi->email,
             'nomor_handphone' => $provinsi->nomor_handphone,
@@ -113,7 +122,8 @@ class ProfilDaerahController extends Controller
             'nilai_impor' => $provinsi->nilai_impor,
             'pdrb' => $pdrbData, // Data PDRB yang sudah diformat
             'pdrb_per_sektor' => $pdrbPerSektorData, // Data PDRB per sektor yang baru ditambahkan
-            'kawasan_industri' => $provinsi->kawasan_industri, // Hanya kawasan ekonomi khusus
+            'kawasan_ekonomi_khusus' => $kawasanEkonomiKhusus, // Kawasan ekonomi khusus
+            'kawasan_industri' => $kawasanIndustri, // Kawasan non-ekonomi khusus
             'pma' => $pmaData, // Data PMA yang sudah diformat
             'pmdn' => $pmdnData, // Data PMDN yang sudah diformat
             'realisasi_investasi' => $realisasiInvestasiData, // Data realisasi investasi untuk setiap tahun

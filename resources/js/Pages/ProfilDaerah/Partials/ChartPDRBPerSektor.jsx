@@ -123,7 +123,7 @@ const ChartPDRBPerSektor = () => {
     }
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-6xl mx-auto mt-8 border-2 border-[#DFE3F6]">
+        <div className="bg-white p-6 rounded-[12px] w-full max-w-6xl mx-auto border-2 border-[#DFE3F6] mb-6">
             <div className="text-left pb-4">
                 <h3 className="text-xl font-bold">
                     Kontribusi 5 Sektor Unggulan Regional terhadap PDRB

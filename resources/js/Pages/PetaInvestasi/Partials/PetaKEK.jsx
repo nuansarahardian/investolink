@@ -2,12 +2,23 @@ import React, { useEffect, useState, useMemo } from "react";
 import { MapContainer, GeoJSON, Marker, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { usePage } from "@inertiajs/react";
+import L from "leaflet";
+import KEKImage from "../../../../../public/json/kek_image.json"; // Import file JSON dengan gambar KEK
 
 const PetaKEK = ({ hoveredColor, className }) => {
-    const { provinsi } = usePage().props; // Ambil data provinsi dari Inertia
+    const { provinsi } = usePage().props;
     const [geoData, setGeoData] = useState(null);
 
-    // Fetch GeoJSON data untuk peta
+    const redIcon = new L.Icon({
+        iconUrl: "/icon/loc.png",
+        iconSize: [40, 40],
+        iconAnchor: [20, 36],
+        popupAnchor: [0, -40],
+        shadowUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
+        shadowSize: [41, 41],
+    });
+
     useEffect(() => {
         fetch("/geojson/indonesia-provinces.geojson")
             .then((res) => res.json())
@@ -15,7 +26,6 @@ const PetaKEK = ({ hoveredColor, className }) => {
             .catch((error) => console.error("Error fetching data:", error));
     }, []);
 
-    // Gabungkan GeoJSON data dengan data provinsi dari server
     const mergedData = useMemo(() => {
         if (!geoData || !provinsi) return null;
 
@@ -41,20 +51,18 @@ const PetaKEK = ({ hoveredColor, className }) => {
         };
     }, [geoData, provinsi]);
 
-    // Fungsi untuk memberikan warna berdasarkan nilai PDRB
     const getColor = (pdrb) => {
-        return pdrb > 1000000
+        return pdrb > 1000
             ? "#23577E"
-            : pdrb > 600000
+            : pdrb > 600
             ? "#3E7AA6"
-            : pdrb > 250000
+            : pdrb > 250
             ? "#5899C8"
-            : pdrb > 150000
+            : pdrb > 150
             ? "#8CBBDD"
             : "#D0E1ED";
     };
 
-    // Default style untuk setiap provinsi di peta
     const defaultStyle = (feature) => ({
         fillColor: getColor(feature.properties.nilai_pdrb_berlaku || 0),
         weight: 1,
@@ -62,7 +70,6 @@ const PetaKEK = ({ hoveredColor, className }) => {
         fillOpacity: 1,
     });
 
-    // Style ketika provinsi di-hover
     const highlightStyle = {
         weight: 3,
         color: "yellow",
@@ -70,7 +77,39 @@ const PetaKEK = ({ hoveredColor, className }) => {
         fillOpacity: 1,
     };
 
-    // Tidak perlu lagi tooltip untuk setiap provinsi, hanya style ketika di-hover
+    // Fungsi untuk mencari gambar KEK berdasarkan nama KEK
+    const getKEKImage = (namaKEK) => {
+        const kekData = KEKImage.find((kek) => kek.KEK === namaKEK);
+        return kekData ? kekData.Image : "/default-image.jpg"; // Gambar default jika tidak ada kecocokan
+    };
+
+    // Fungsi untuk membuat konten tooltip
+    const createTooltipContent = (kawasan, provinsiName) => {
+        const kekImageUrl = getKEKImage(kawasan.nama_kawasan_industri); // Cari gambar KEK yang sesuai
+
+        return `
+            <div class="tooltip-container ">
+                <div class="flex mb-2 items-center">
+                    <img src="${kekImageUrl}" class="w-14 h-14 rounded-md mr-2 my-auto">
+                    <div>
+                        <div class="font-bold text-xl text-gray-800">${kawasan.nama_kawasan_industri}</div>
+                        <div class="text-gray-500 text-xs mb-2">Provinsi: ${provinsiName}</div>
+                    </div>
+                </div>
+                <div class="flex text-sm">
+                    <div class="mr-2 text-gray-400 flex text-[12px] gap-1 flex-col">
+                        <div class="font-medium">Luas</div>
+                        <div class="font-medium">Target Investasi</div>
+                    </div>
+                    <div class="flex gap-1 flex-col text-[12px]">
+                        <div class="font-medium text-gray-800">${kawasan.luas_lahan}    </div>
+                        <div class="font-medium text-gray-800">${kawasan.target_investasi}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    };
+
     const onEachFeature = (feature, layer) => {
         layer.on({
             mouseover: (e) => {
@@ -85,24 +124,12 @@ const PetaKEK = ({ hoveredColor, className }) => {
         });
     };
 
-    // Fungsi untuk menentukan style pada setiap provinsi
     const style = (feature) => {
         const color = getColor(feature.properties.nilai_pdrb_berlaku || 0);
         if (hoveredColor && color === hoveredColor) {
             return { ...highlightStyle, fillColor: color };
         }
         return defaultStyle(feature);
-    };
-
-    // Fungsi untuk membuat konten tooltip berdasarkan data kawasan industri
-    const createTooltipContent = (kawasan, provinsiName) => {
-        return `
-            <div class="relative bg-white p-4 rounded-3xl text-sm w-[250px]">
-                <div class="font-bold text-lg text-gray-800 mb-1">${kawasan.nama_kawasan_industri}</div>
-                <div class="font-medium text-gray-800">Provinsi: <span class="text-gray-600">${provinsiName}</span></div> <!-- Tambahkan Nama Provinsi -->
-                <div class="font-medium text-gray-800">Luas: <span class="text-gray-600">${kawasan.luas_lahan} ha</span></div>
-                <div class="font-medium text-gray-800">Target Investasi: <span class="text-gray-600">Rp${kawasan.target_investasi}</span></div>
-            </div>`;
     };
 
     return (
@@ -114,25 +141,35 @@ const PetaKEK = ({ hoveredColor, className }) => {
                 scrollWheelZoom={false}
                 className={"rounded-r-lg"}
             >
-                {/* Tampilkan GeoJSON data yang sudah digabung dengan data provinsi */}
                 {mergedData && (
                     <GeoJSON
                         data={mergedData}
                         style={style}
-                        onEachFeature={onEachFeature} // Hanya untuk mengubah style, tanpa tooltip untuk provinsi
+                        onEachFeature={onEachFeature}
                     />
                 )}
-                {/* Tampilkan marker dan tooltip hanya untuk kawasan industri */}
                 {provinsi.map((provinsiItem) =>
                     provinsiItem.kawasan_industri.map((kawasan, index) => {
-                        // Hanya tampilkan marker jika kawasan industri memiliki latitude dan longitude
                         if (kawasan.latitude && kawasan.longitude) {
                             const position = [
                                 kawasan.latitude,
                                 kawasan.longitude,
                             ];
                             return (
-                                <Marker key={index} position={position}>
+                                <Marker
+                                    key={index}
+                                    position={position}
+                                    icon={redIcon}
+                                    eventHandlers={{
+                                        click: () => {
+                                            // Arahkan ke link_terkait ketika marker diklik
+                                            window.open(
+                                                kawasan.link_terkait,
+                                                "_blank"
+                                            );
+                                        },
+                                    }}
+                                >
                                     <Tooltip direction="right" offset={[10, 0]}>
                                         <div
                                             dangerouslySetInnerHTML={{

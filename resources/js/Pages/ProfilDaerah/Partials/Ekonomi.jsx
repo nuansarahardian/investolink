@@ -38,30 +38,32 @@ const Ekonomi = ({ provinsi, formatNumber }) => {
     // Ambil data PMDN dan PMA untuk tahun 2023 atau 2022
     const pmaData = getSpecificYearData(provinsi.pma || [], 2023, 2022);
     const pmdnData = getSpecificYearData(provinsi.pmdn || [], 2023, 2022);
+    const pdrbData = getSpecificYearData(provinsi.pdrb || [], 2023, 2022);
 
     return (
         <div className="gap-4 mt-8">
-            <div className="flex flex-row gap-x-4 mt-4">
-                <div className="text-[#86858D] flex flex-col gap-y-2">
+            {/* Bagian pertama: PDRB, Pendapatan, UMR, Profil Investasi */}
+            <div className="grid grid-cols-3 gap-x-4 gap-y-2 mt-4">
+                <div className="text-[#86858D]">
                     <p>PDRB</p>
                     <p>Pendapatan Daerah</p>
                     <p>Upah Minimum Regional (UMR)</p>
                     <p>Profil Investasi Regional</p>
                 </div>
-                <div className="flex flex-col gap-y-2">
+                <div>
                     <p>
                         Rp
                         {formatNumberWithCommas(
-                            provinsi.pdrb
-                                ? provinsi.pdrb[0]?.nilai_pdrb_berlaku
-                                : 0
-                        )}
+                            pdrbData ? pdrbData.nilai_pdrb_berlaku : 0
+                        )}{" "}
+                        Triliun
                     </p>
                     <p>
                         Rp
                         {formatNumberWithCommas(
                             provinsi.realisasi_pendapatan_daerah
-                        )}
+                        )}{" "}
+                        Miliar
                     </p>
                     <p>
                         Rp
@@ -80,48 +82,52 @@ const Ekonomi = ({ provinsi, formatNumber }) => {
                 </div>
             </div>
 
+            {/* Bagian kedua: Realisasi Penanaman Modal */}
             <div className="mt-8 mb-6">
                 <h2 className="text-lg font-bold">Realisasi Penanaman Modal</h2>
-                <div className="flex flex-row gap-x-4 mt-4">
-                    <div className="text-[#86858D] flex flex-col gap-y-2">
+                <div className="grid grid-cols-3 gap-x-4 gap-y-2 mt-4">
+                    <div className="text-[#86858D]">
                         <p>Penanaman Modal Dalam Negeri (PMDN)</p>
                         <p>Penanaman Modal Asing (PMA)</p>
                     </div>
-                    <div className="flex flex-col gap-y-2">
+                    <div>
                         <p>
                             Rp
                             {formatNumberWithCommas(
                                 pmdnData ? pmdnData.nilai_pmdn : 0
-                            )}
+                            )}{" "}
+                            Juta
                         </p>
                         <p>
                             Rp
                             {formatNumberWithCommas(
                                 pmaData ? pmaData.nilai_pma : 0
-                            )}
+                            )}{" "}
+                            Juta
                         </p>
                     </div>
                 </div>
             </div>
 
+            {/* Bagian ketiga: Nilai Perdagangan Luar Negeri */}
             <div className="mb-6 col-span-2">
                 <h2 className="text-lg font-bold">
                     Nilai Perdagangan Luar Negeri
                 </h2>
 
-                <div className="flex flex-row gap-x-40 mt-4">
-                    <div className="text-[#86858D] flex flex-col gap-y-2">
+                <div className="grid grid-cols-3 gap-x-4 gap-y-2 mt-4">
+                    <div className="text-[#86858D]">
                         <p>Nilai Ekspor</p>
                         <p>Nilai Impor</p>
                     </div>
-                    <div className="flex flex-col gap-y-2">
+                    <div>
                         <p>
                             Rp
-                            {formatNumberWithCommas(provinsi.nilai_ekspor)}
+                            {formatNumberWithCommas(provinsi.nilai_ekspor)} Juta
                         </p>
                         <p>
                             Rp
-                            {formatNumberWithCommas(provinsi.nilai_impor)}
+                            {formatNumberWithCommas(provinsi.nilai_impor)} Juta
                         </p>
                     </div>
                 </div>

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { usePage } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
-
+import { Link } from "@inertiajs/react";
 import { withTranslation } from "react-google-multi-lang";
+
 const ProvinceTable = () => {
     const { provinsi } = usePage().props;
 
@@ -35,35 +36,31 @@ const ProvinceTable = () => {
 
     const handleSort = (column) => {
         if (sortColumn === column) {
-            // Jika kolom yang sama dipilih, toggle urutan sort (asc/desc)
             setIsAscending(!isAscending);
         } else {
-            // Jika kolom baru dipilih, default ke descending (terbesar ke terkecil)
             setSortColumn(column);
-            setIsAscending(false); // Urutan descending
+            setIsAscending(true);
         }
-    };
-    const handleProvinsiClick = (provinsiId) => {
-        Inertia.get(`/provinsi/${provinsiId}`);
     };
 
     return (
-        <div>
+        <div className="w-full p-4">
             {/* Header tabel (sorting, search, dan total count) */}
-            <div className="flex justify-between items-center mb-4 flex-wrap space-y-2 sm:space-y-0">
-                <div>
+            <div className="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0">
+                <div className="w-full md:w-auto">
                     <p className="font-medium text-slate-800 text-lg">
                         Menampilkan {filteredData.length} Provinsi
                     </p>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:space-x-4 w-full sm:w-auto">
+
+                <div className="flex flex-col sm:flex-row sm:space-x-2 w-full lg:w-[60%] md:w-[70%] space-y-4 sm:space-y-0">
                     {/* Sorting dropdown */}
-                    <div className="flex items-center space-x-2">
-                        <p className="text-[14px] font-normal text-[#86858D]">
+                    <div className="w-full md:w-[50%] lg:w-[40%] flex flex-row items-center">
+                        <p className="text-[14px] font-normal text-[#86858D] min-w-max mr-4">
                             Urutkan Berdasarkan
                         </p>
                         <select
-                            className="border pr-10 rounded-[6px] text-[#86858D] bg-[#F7F6F8] focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="flex flex-col sm:flex-row border p-2 rounded-[6px] text-[#86858D] bg-[#F7F6F8] focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
                             value={sortColumn}
                             onChange={(e) => handleSort(e.target.value)}
                         >
@@ -76,23 +73,22 @@ const ProvinceTable = () => {
                             </option>
                         </select>
                     </div>
-                    <div className="flex flex-col sm:flex-row sm:space-x-4 w-full sm:w-auto">
-                        {/* Input pencarian */}
-                        <div className="mt-2 sm:mt-0">
-                            <input
-                                type="text"
-                                className="border p-2 rounded-[6px] text-[#86858D] bg-[#F7F6F8] focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-auto"
-                                placeholder="Cari Nama Provinsi"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                        </div>
+
+                    {/* Input pencarian */}
+                    <div className="w-full md:w-[50%] lg:w-[60%] items-center flex flex-col sm:flex-row">
+                        <input
+                            type="text"
+                            className="border p-2 rounded-[6px] text-[#86858D] bg-[#F7F6F8] focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
+                            placeholder="Cari Nama Provinsi"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
                     </div>
                 </div>
             </div>
 
             {/* Tabel scrollable */}
-            <div className="overflow-y-auto max-h-96 rounded-xl border border-gray-300 shadow-sm custom-scrollbar">
+            <div className="overflow-x-auto overflow-y-auto max-h-96 rounded-xl border border-gray-300 shadow-sm custom-scrollbar">
                 <table className="min-w-full table-auto border-collapse bg-white">
                     <thead className="bg-[#DFE3F6] sticky top-0 z-10 h-12">
                         <tr className="text-center border-b border-gray-300">
@@ -206,23 +202,21 @@ const ProvinceTable = () => {
                                     {row.jumlah_kawasan_ekonomi_khusus}
                                 </td>
                                 <td className="p-4 text-sm text-gray-600 text-center">
-                                    <button
-                                        className=" border border-[#A5B1E8] bg-[#F0F3FF] text-[#2D3985] m-auto py-1 px-4 rounded-lg hover:bg-[#a7b9ff] transition duration-300 ease-in-out flex items-center"
-                                        onClick={() =>
-                                            handleProvinsiClick(row.provinsi_id)
-                                        }
+                                    <Link
+                                        className="border border-[#A5B1E8] bg-[#F0F3FF] text-[#2D3985] m-auto w-fit py-1 px-4 rounded-lg hover:bg-[#a7b9ff] transition duration-300 ease-in-out flex items-center"
+                                        href={`/provinsi/${row.provinsi_id}`}
                                     >
-                                        <div className="flex ">
+                                        <div className="flex">
                                             <p className="font-bold mr-2">
                                                 Lihat Detail
                                             </p>
                                             <img
                                                 src="/icon/Vector.png"
-                                                alt=""
-                                                className="w-4 h-4 my-auto"
+                                                alt="icon"
+                                                className="w-4 h-4 my-auto mr-2"
                                             />
                                         </div>
-                                    </button>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}

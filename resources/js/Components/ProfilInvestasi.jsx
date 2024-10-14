@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import ProvinceTable from "./ProvinceTable";
 import SectorCards from "./SectorCards";
 import { withTranslation } from "react-google-multi-lang";
+import { useRemember } from "@inertiajs/react"; // Tambahkan ini untuk remember state
 
 const ProfilInvestasi = () => {
-    const [activeSection, setActiveSection] = useState("provinsi");
+    // Gunakan useRemember untuk menyimpan state aktif section
+    const [activeSection, setActiveSection] = useRemember(
+        "provinsi",
+        "activeSection"
+    );
 
     const toggleSection = () => {
         setActiveSection(activeSection === "provinsi" ? "sektor" : "provinsi");
@@ -23,7 +28,7 @@ const ProfilInvestasi = () => {
                         } rounded-l-md transition`}
                         onClick={toggleSection}
                     >
-                        Provinsi
+                        Sektor dan Komoditas
                     </button>
                     <button
                         className={`m-auto py-1 px-1 h-[42px] w-full ml-2 rounded-md ${
@@ -33,7 +38,7 @@ const ProfilInvestasi = () => {
                         } rounded-r-md transition`}
                         onClick={toggleSection}
                     >
-                        Sektor dan Komoditas
+                        Peluang Investasi Prioritas
                     </button>
                 </div>
             </div>

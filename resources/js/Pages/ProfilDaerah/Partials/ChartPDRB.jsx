@@ -93,7 +93,7 @@ const ChartPDRB = () => {
     };
 
     return (
-        <div className="w-full p-6  bg-white rounded-2xl border-2 border-[#DFE3F6] mt-4">
+        <div className="w-full p-6  bg-white rounded-[12px] border-2 border-[#DFE3F6] ">
             <div className="mb-4">
                 <p className="text-black font-bold">
                     PDRB Berlaku dan Konstan - {provinsi.nama_provinsi}

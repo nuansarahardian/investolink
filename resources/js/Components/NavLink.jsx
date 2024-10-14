@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 // Tidak perlu `withTranslation` karena tidak ada terjemahan di sini
-import { withTranslation } from "react-google-multi-lang";
+// import { withTranslation } from "react-google-multi-lang";
 
 const NavLink = ({ active = false, className = "", children, ...props }) => {
     const baseClass =
@@ -21,4 +21,4 @@ const NavLink = ({ active = false, className = "", children, ...props }) => {
     );
 };
 
-export default withTranslation(NavLink);
+export default NavLink;

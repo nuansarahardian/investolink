@@ -16,7 +16,7 @@ const Statistik = () => {
 
                         <div className="my-auto gap-1 flex flex-col">
                             <div className="font-bold text-xl text-[#2D3985]">
-                                Pertumbuhan PDB
+                                Statistik
                             </div>
                             <div className="text-sm text-[#86858D]">
                                 Pantau data pertumbuhan PDRB dan realisasi
@@ -26,7 +26,7 @@ const Statistik = () => {
                     </div>
 
                     {/* Memastikan grid berfungsi */}
-                    <div className="grid grid-cols-2 gap-4 mt-6">
+                    <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-1">
                             <ChartPDB />
                         </div>

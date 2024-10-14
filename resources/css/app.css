@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    overflow: auto !important; /* Izinkan overflow default */
+    padding-right: 0 !important; /* Hapus padding tambahan */
+}
+
 @font-face {
     font-family: "MADE TOMMY";
     src: url("/fonts/MADE TOMMY Thin_PERSONAL USE.otf") format("opentype");
@@ -276,12 +281,24 @@
 }
 .tooltip-container {
     width: 360px !important;
-    max-width: 900px !important; /* Atur lebar maksimum sesuai kebutuhan */
+    max-width: fit-content !important; /* Atur lebar maksimum sesuai kebutuhan */
     overflow: hidden; /* Sembunyikan bagian yang melampaui batas */
     white-space: normal; /* Izinkan teks untuk membungkus */
     word-wrap: break-word;
     padding-left: 20px;
+    padding-right: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
     /* Memungkinkan pemecahan kata untuk membungkus */
+}
+.p-0 {
+    padding: 0 !important;
+}
+
+.dropdown-menu {
+    width: 160px; /* Sesuaikan lebar dropdown */
+    padding: 5px; /* Beri jarak agar tidak terlalu rapat */
+    background-color: white; /* Pastikan background jelas */
+    border-radius: 8px; /* Tambah radius untuk tampilan yang lebih halus */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
 }

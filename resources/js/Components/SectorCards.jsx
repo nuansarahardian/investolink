@@ -3,6 +3,7 @@ import { usePage } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia"; // Tambahkan ini
 import provinces from "../../../public/json/provinces.json"; // Adjust the import path as necessary
 import sectors from "../../../public/json/banner-sector.json";
+import { Link } from "@inertiajs/react";
 
 const SectorCards = () => {
     const { sektorData } = usePage().props; // Data sektor dari database
@@ -94,7 +95,7 @@ const SectorCards = () => {
                                     selectedCard &&
                                     selectedCard.nama_sektor ===
                                         card.nama_sektor
-                                        ? "bg-blue-200/50 border-[#A5B1E8] active:bg-[#e3e7fa]"
+                                        ? "bg-blue-200/60 border-blue-400 active:bg-blue-400"
                                         : "border-[#D1D0D7] hover:bg-[#eff2fa] "
                                 }`}
                             >
@@ -148,7 +149,7 @@ const SectorCards = () => {
 
                 {/* bagian kanan card */}
                 <div className="col-span-2">
-                    <div className="h-fit bg-white rounded-lg shadow-md border-2 border-[#DFE3F6]/50">
+                    <div className="h-full bg-white rounded-lg shadow-md border-2 border-[#DFE3F6]/50">
                         {selectedCard ? (
                             <div>
                                 <div className="relative ">
@@ -179,7 +180,7 @@ const SectorCards = () => {
                                         Provinsi Pemilik Sektor
                                     </p>
 
-                                    <div className="flex m-auto mt-4 rounded-lg border bg-[#F7F6F8] border-[#D1D0D7] text-[#86858D] h-[40px] overflow-y-auto mr-[24px]">
+                                    <div className="flex m-auto mt-4 rounded-lg border bg-blue-200/60 border-blue-400 text-[#384AA0] h-[40px] overflow-y-auto mr-[24px]">
                                         <p className="m-auto">
                                             <b>PRO TIP :</b> Anda dapat
                                             menyaring data komoditas berdasarkan
@@ -244,37 +245,15 @@ const SectorCards = () => {
                                                             }
                                                         />
                                                         {/* Tambahkan onClick di sini */}
-                                                        <img
-                                                            src="/icon/Vector.png"
-                                                            alt="icon"
-                                                            className="w-4 h-4 cursor-pointer"
-                                                            onClick={(e) => {
-                                                                e.stopPropagation(); // Mencegah event bubbling agar tidak meng-trigger click pada card
-                                                                const provinsi =
-                                                                    selectedCard.komoditas
-                                                                        .flatMap(
-                                                                            (
-                                                                                komoditas
-                                                                            ) =>
-                                                                                komoditas.provinsi
-                                                                        )
-                                                                        .find(
-                                                                            (
-                                                                                prov
-                                                                            ) =>
-                                                                                prov.nama ===
-                                                                                uniqueProvinsiName
-                                                                        );
-                                                                if (
-                                                                    provinsi &&
-                                                                    provinsi.id
-                                                                ) {
-                                                                    Inertia.get(
-                                                                        `/provinsi/${provinsi.id}`
-                                                                    ); // Navigasi ke halaman detail provinsi berdasarkan ID
-                                                                }
-                                                            }}
-                                                        />
+                                                        <Link
+                                                            href={`/provinsi/${provinsi.id}`}
+                                                        >
+                                                            <img
+                                                                src="/icon/Vector.png"
+                                                                alt="icon"
+                                                                className="w-4 h-4 cursor-pointer"
+                                                            />
+                                                        </Link>
                                                     </div>
                                                     <p className="text-[12px] leading-tight">
                                                         {uniqueProvinsiName}

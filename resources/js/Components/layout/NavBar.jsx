@@ -49,7 +49,7 @@ const StickyNavbar = () => {
     return (
         <div className="max-h-[768px] max-w-screen">
             <div className="shadow-sm bg-gradient-to-r from-[#5E7ADD] to-[#2D3985] sticky top-0 z-10 rounded-none px-4 py-4 lg:px-8 lg:py-4">
-                <div className="flex items-center justify-between text-blue-gray-900 sm:mx-20 mx-2">
+                <div className="flex items-center justify-between text-blue-gray-900 sm:mx-2 mx-2">
                     <div className="flex items-center">
                         <img
                             src="/images/KEMLU RI.png"
@@ -88,7 +88,7 @@ const StickyNavbar = () => {
                                                     className="ml-2 -mr-0.5 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 20 20"
-                                                    fill="currentColor"
+                                                    fill="qhite"
                                                 >
                                                     <path
                                                         fillRule="evenodd"
@@ -121,9 +121,10 @@ const StickyNavbar = () => {
                                 <Button
                                     variant="gradient"
                                     size="md"
-                                    className="hidden lg:inline-block text-[#384AA0] bg-white font-medium rounded-md"
+                                    className="hidden lg:inline-block text-[#384AA0] bg-white font-bold rounded-md"
+                                    style={{ textTransform: "none" }}
                                 >
-                                    MASUK
+                                    Masuk
                                 </Button>
                             </Link>
                         )}
@@ -136,7 +137,7 @@ const StickyNavbar = () => {
                             {openNav ? (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-slate-700"
+                                    className="h-6 w-6 text-white"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -151,7 +152,7 @@ const StickyNavbar = () => {
                             ) : (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-slate-700"
+                                    className="h-6 w-6 text-white"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -185,7 +186,12 @@ const StickyNavbar = () => {
                             </Button>
                         </div>
                     ) : (
-                        <Button fullWidth variant="text" size="sm">
+                        <Button
+                            fullWidth
+                            variant="text"
+                            size="sm"
+                            className="text-white"
+                        >
                             Log In
                         </Button>
                     )}

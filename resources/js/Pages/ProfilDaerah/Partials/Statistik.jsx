@@ -7,10 +7,12 @@ const Statistik = () => {
     return (
         <>
             <div className="mt-4">
-                <h2 className="text-xl font-bold">Statistik</h2>
-                <ChartPDRB></ChartPDRB>
-                <ChartRealisasiInvestasi></ChartRealisasiInvestasi>
-                <ChartPDRBPerSektor className="w-full" />
+                <h2 className="text-xl font-bold ">Statistik</h2>
+                <div className="flex flex-col gap-y-4">
+                    <ChartPDRB></ChartPDRB>
+                    <ChartRealisasiInvestasi></ChartRealisasiInvestasi>
+                    <ChartPDRBPerSektor className="w-full" />
+                </div>
             </div>
         </>
     );

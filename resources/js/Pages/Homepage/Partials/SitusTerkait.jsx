@@ -62,8 +62,8 @@ function SitusTerkait() {
                             <div
                                 className={`w-full rounded-full transition-all ${
                                     dot.props.className.includes("slick-active")
-                                        ? "gap-16 bg-[#A5B1E8] w-[81px] h-[8px]" // Active color
-                                        : "gap-16 bg-gray-300 w-[16px] h-[8px]" // Inactive color
+                                        ? "gap-16 bg-[#A5B1E8] w-[76px] h-[8px] mt-6" // Active color
+                                        : "gap-16 bg-gray-300 w-[18px] h-[8px] mt-6" // Inactive color
                                 }`}
                             ></div>
                         </li>
@@ -100,18 +100,20 @@ function SitusTerkait() {
     };
 
     return (
-        <div className="slider-container pb-10 w-[85%] m-auto relative bg-[#F0F3FF] pt-10 rounded-md">
-            <Slider {...settings}>
-                {logos.map((logo) => (
-                    <div key={logo.id} className="text-center">
-                        <img
-                            src={logo.url}
-                            alt={logo.name}
-                            className="mx-auto h-24 w-56 object-contain"
-                        />
-                    </div>
-                ))}
-            </Slider>
+        <div className="px-[48px] mb-16 ">
+            <div className="slider-container pb-16 w-[100%] m-auto relative bg-[#F0F3FF] pt-10 rounded-md ">
+                <Slider {...settings}>
+                    {logos.map((logo) => (
+                        <div key={logo.id} className="text-center">
+                            <img
+                                src={logo.url}
+                                alt={logo.name}
+                                className="mx-auto h-24 w-56 object-contain"
+                            />
+                        </div>
+                    ))}
+                </Slider>
+            </div>
         </div>
     );
 }

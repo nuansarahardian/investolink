@@ -16,6 +16,10 @@
         "url_image": "/logo/lambang provinsi-sulawesi selatan.png"
     },
     {
+        "provinsi": "Sulawesi Tengah",
+        "url_image": "/logo/sulteng.png"
+    },
+    {
         "provinsi": "Gorontalo",
         "url_image": "/logo/lambang provinsi-gorontalo.png"
     },
@@ -112,11 +116,11 @@
         "url_image": "/logo/lambang provinsi-riau.png"
     },
     {
-        "provinsi": "Yogyakarta",
+        "provinsi": "DI Yogyakarta",
         "url_image": "/logo/lambang provinsi-yogyakarta.png"
     },
     {
-        "provinsi": "Jakarta",
+        "provinsi": "DKI Jakarta",
         "url_image": "/logo/lambang provinsi-jakarta.png"
     },
     {

@@ -1,48 +1,40 @@
 import React from "react";
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    LineElement,
-    PointElement,
-    Legend,
-    Tooltip,
-} from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { usePage } from "@inertiajs/react"; // Import usePage dari Inertia.js
-
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    LineElement,
-    PointElement,
-    Legend,
-    Tooltip
-);
+import { Chart } from "chart.js/auto";
+import { usePage } from "@inertiajs/react";
 
 const ChartRealisasiInvestasi = () => {
-    // Mengambil data dari Inertia melalui usePage
     const { props } = usePage();
-    const { dataNasional } = props; // Ekstrak data yang dikirim oleh Laravel melalui props
+    const { dataNasional } = props;
 
     // Memetakan data yang didapatkan dari backend ke dalam format chart
     const labels = dataNasional.map((item) => item.tahun);
-    const pmdnData = dataNasional.map((item) => item.nilai_pmdn_nasional);
-    const pmaData = dataNasional.map((item) => item.nilai_pma_nasional);
-    const realisasiData = dataNasional.map(
-        (item) => item.nilai_realisasi_investasi_nasional
+
+    // Memproses data dengan menghapus titik pemisah ribuan dan mengganti koma dengan titik untuk desimal
+    const pmdnData = dataNasional.map((item) =>
+        parseFloat(
+            item.nilai_pmdn_nasional.replace(/\./g, "").replace(",", ".")
+        )
+    );
+    const pmaData = dataNasional.map((item) =>
+        parseFloat(item.nilai_pma_nasional.replace(/\./g, "").replace(",", "."))
+    );
+    const realisasiData = dataNasional.map((item) =>
+        parseFloat(
+            item.nilai_realisasi_investasi_nasional
+                .replace(/\./g, "")
+                .replace(",", ".")
+        )
     );
 
     const data = {
         labels: labels,
         datasets: [
             {
-                type: "line", // Dataset untuk garis (line chart)
+                type: "line",
                 label: "Data Historis Realisasi Investasi",
-                data: realisasiData, // Data dari backend
-                borderColor: "#F7F6F8",
+                data: realisasiData,
+                borderColor: "#FFFFFF",
                 fill: false,
                 pointRadius: 5,
                 borderWidth: 2,
@@ -51,23 +43,23 @@ const ChartRealisasiInvestasi = () => {
                 yAxisID: "y",
                 tension: 0.0,
                 spanGaps: true,
-                segment: { borderColor: "#B50000" },
-                pointBorderWidth: 2,
-                tension: 0.0,
+                segment: { borderColor: "#DF7B7B" },
             },
             {
                 type: "bar",
                 label: "Data Historis PMA",
-                data: pmaData, // Data dari backend
-                backgroundColor: "#9E47FF",
+                data: pmaData,
+                backgroundColor: "#B82AA1",
                 yAxisID: "y",
+                borderRadius: 2,
             },
             {
                 type: "bar",
                 label: "Data Historis PMDN",
-                data: pmdnData, // Data dari backend
-                backgroundColor: "#3853A4",
+                data: pmdnData,
+                backgroundColor: "#3B7BAC",
                 yAxisID: "y",
+                borderRadius: 2,
             },
         ],
     };
@@ -79,7 +71,7 @@ const ChartRealisasiInvestasi = () => {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: "Miliar (Rp)",
+                    text: "Triliun (Rp)",
                 },
             },
             x: {
@@ -98,13 +90,9 @@ const ChartRealisasiInvestasi = () => {
                 titleColor: "#000",
                 bodyColor: "#000",
                 callbacks: {
-                    title: (tooltipItems) => {
-                        const year = tooltipItems[0].label;
-                        return `Tahun: ${year}`;
-                    },
-                    label: (tooltipItem) => {
-                        return `Nilai: ${tooltipItem.raw}`;
-                    },
+                    title: (tooltipItems) => `Tahun: ${tooltipItems[0].label}`,
+                    label: (tooltipItem) =>
+                        `Nilai: Rp${tooltipItem.raw} Triliun`,
                 },
             },
             legend: {
@@ -115,28 +103,26 @@ const ChartRealisasiInvestasi = () => {
                     boxWidth: 7,
                     boxHeight: 7,
                     padding: 20,
-                    generateLabels: function (chart) {
-                        return [
-                            {
-                                text: "Data Historis Realisasi Investasi",
-                                fillStyle: "#B50000",
-                                strokeStyle: "#B50000",
-                                pointStyle: "rect",
-                            },
-                            {
-                                text: "Data Historis PMA",
-                                fillStyle: "#9E47FF",
-                                strokeStyle: "#9E47FF",
-                                pointStyle: "rect",
-                            },
-                            {
-                                text: "Data Historis PMDN",
-                                fillStyle: "#3853A4",
-                                strokeStyle: "#3853A4",
-                                pointStyle: "rect",
-                            },
-                        ];
-                    },
+                    generateLabels: (chart) => [
+                        {
+                            text: "Data Realisasi Investasi",
+                            fillStyle: "#B50000",
+                            strokeStyle: "#DF7B7B",
+                            pointStyle: "rect",
+                        },
+                        {
+                            text: "Data PMA",
+                            fillStyle: "#B82AA1",
+                            strokeStyle: "#B82AA1",
+                            pointStyle: "rect",
+                        },
+                        {
+                            text: "Data PMDN",
+                            fillStyle: "#3B7BAC",
+                            strokeStyle: "#3B7BAC",
+                            pointStyle: "rect",
+                        },
+                    ],
                 },
             },
         },
@@ -148,9 +134,7 @@ const ChartRealisasiInvestasi = () => {
                 <p className="text-black font-bold">
                     Realisasi Investasi Nasional
                 </p>
-                <p className="text-[#86858D] text-[14px]">
-                    Sumber: Lorem Ipsum (2024)
-                </p>
+                <p className="text-[#86858D] text-[14px]">Sumber: BPS (2024)</p>
             </div>
             <Bar data={data} options={options} />
         </div>

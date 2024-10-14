@@ -45,38 +45,47 @@ const ProfilDaerah = () => {
                     />
 
                     {/* Right Column - Tabs for Ekonomi, Statistik, Peluang Investasi Prioritas */}
-                    <div className="col-span-2 bg-white px-8 py-2 shadow-lg rounded-lg">
+                    <div className="col-span-2 bg-white px-8 py-2 shadow-lg rounded-lg border-2 border-slate-100">
                         {/* Tab Buttons */}
-                        <div className="flex border-b">
+                        <div className="flex border-b-2 border-gray-200">
                             <button
-                                className={`px-4 py-2 ${
+                                className={`px-4 py-2 font-semibold relative ${
                                     activeTab === "Ekonomi"
-                                        ? "border-b-4 border-[#384AA0] text-[#384AA0]"
+                                        ? "text-[#384AA0]"
                                         : "text-gray-500"
                                 }`}
                                 onClick={() => setActiveTab("Ekonomi")}
                             >
                                 Ekonomi
+                                {activeTab === "Ekonomi" && (
+                                    <span className="absolute left-0 right-0 bottom-[-1px] h-1 bg-[#384AA0] rounded-t-full"></span>
+                                )}
                             </button>
                             <button
-                                className={`px-4 py-2 ${
+                                className={`px-4 py-2 font-semibold relative ${
                                     activeTab === "Statistik"
-                                        ? "border-b-4 border-[#384AA0] text-[#384AA0]"
+                                        ? "text-[#384AA0]"
                                         : "text-gray-500"
                                 }`}
                                 onClick={() => setActiveTab("Statistik")}
                             >
                                 Statistik
+                                {activeTab === "Statistik" && (
+                                    <span className="absolute left-0 right-0 bottom-[-1px] h-1 bg-[#384AA0] rounded-t-full"></span>
+                                )}
                             </button>
                             <button
-                                className={`px-4 py-2 ${
+                                className={`px-4 py-2 font-semibold relative ${
                                     activeTab === "Peluang"
-                                        ? "border-b-4 border-[#384AA0] text-[#384AA0]"
+                                        ? "text-[#384AA0]"
                                         : "text-gray-500"
                                 }`}
                                 onClick={() => setActiveTab("Peluang")}
                             >
                                 Peluang Investasi Prioritas
+                                {activeTab === "Peluang" && (
+                                    <span className="absolute left-0 right-0 bottom-[-1px] h-1 bg-[#384AA0] rounded-t-full"></span>
+                                )}
                             </button>
                         </div>
 

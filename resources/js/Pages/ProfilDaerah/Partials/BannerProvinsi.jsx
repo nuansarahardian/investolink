@@ -1,26 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { usePage } from "@inertiajs/react";
-// Mengimpor file JSON yang berisi gambar provinsi ikonik
+// Mengimpor file JSON yang berisi gambar provinsi ikonik dan logo
 import ikonProvinsi from "../../../../../public/json/foto_ikonik_provinsi.json";
+import LogoProvinsi from "../../../../../public/json/provinces.json";
 
 const BannerProvinsi = () => {
-    const { provinsi } = usePage().props || {}; // Mengambil nama provinsi dari props, tambahkan fallback jika tidak tersedia
-    const [bgImageUrl, setBgImageUrl] = useState("");
+    const { provinsi } = usePage().props || {}; // Mengambil nama provinsi dari props
+    const [bgImageUrl, setBgImageUrl] = useState("/default-background.jpg"); // Fallback default background image
+    const [logoUrl, setLogoUrl] = useState("/default-logo.png"); // Fallback default logo
 
     useEffect(() => {
-        // Hanya fetch data jika provinsi ada
+        // Hanya fetch data jika provinsi ada dan nama_provinsi tidak undefined atau null
         if (provinsi?.nama_provinsi) {
-            // Mencari provinsi yang sesuai di JSON
-            const matchingProvince = ikonProvinsi.find(
+            // Mencari provinsi yang sesuai di ikonProvinsi JSON
+            const matchingProvinceIcon = ikonProvinsi.find(
                 (p) =>
+                    p?.Province &&
+                    provinsi?.nama_provinsi &&
                     p.Province.toLowerCase() ===
-                    provinsi.nama_provinsi.toLowerCase()
+                        provinsi.nama_provinsi.toLowerCase()
             );
-            if (matchingProvince) {
-                setBgImageUrl(matchingProvince.Image); // Menyimpan URL gambar jika ditemukan
+            if (matchingProvinceIcon) {
+                setBgImageUrl(matchingProvinceIcon.Image); // Menyimpan URL gambar ikonik jika ditemukan
             } else {
-                console.warn("Provinsi tidak ditemukan di JSON");
+                console.warn("Provinsi tidak ditemukan di JSON ikonProvinsi");
             }
+
+            // Mencari provinsi yang sesuai di LogoProvinsi JSON
+            const matchingProvinceLogo = LogoProvinsi.find(
+                (p) =>
+                    p?.provinsi &&
+                    provinsi?.nama_provinsi &&
+                    p.provinsi.toLowerCase() ===
+                        provinsi.nama_provinsi.toLowerCase()
+            );
+            if (matchingProvinceLogo) {
+                setLogoUrl(matchingProvinceLogo.url_image); // Menyimpan URL logo jika ditemukan
+            } else {
+                console.warn(
+                    "Logo provinsi tidak ditemukan di JSON LogoProvinsi"
+                );
+            }
+        } else {
+            console.warn("Nama provinsi tidak tersedia");
         }
     }, [provinsi]);
 
@@ -34,8 +56,8 @@ const BannerProvinsi = () => {
             className="flex w-screen h-[320px] relative bg-cover"
             style={{
                 backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.6)), url('${bgImageUrl}')`,
-                backgroundPosition: "center", // Atur posisi gambar di bagian bawah
-                backgroundSize: "cover", // Gambar akan menutupi seluruh div
+                backgroundPosition: "center",
+                backgroundSize: "cover",
             }}
         >
             <div className="absolute inset-0 z-10 flex flex-col h-full justify-between pt-[32px] pl-[48px] pb-[24px]">
@@ -49,7 +71,14 @@ const BannerProvinsi = () => {
                 </button>
 
                 <div className="flex flex-col text-white/50">
-                    <div>
+                    <img
+                        src={logoUrl}
+                        alt={`${provinsi?.nama_provinsi || "Logo"} Logo`}
+                        className="w-[80px] h-[80px] object-contain"
+                    />
+                    <div className="flex items-center gap-4">
+                        {/* Menampilkan logo provinsi */}
+
                         <p className="text-white font-bold text-[40px]">
                             {provinsi?.nama_provinsi ||
                                 "Provinsi Tidak Ditemukan"}

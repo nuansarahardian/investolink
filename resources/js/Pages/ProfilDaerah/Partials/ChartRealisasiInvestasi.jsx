@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import { Line } from "react-chartjs-2"; // Menggunakan Line chart untuk data historis
 import {
     Chart as ChartJS,
@@ -37,8 +36,15 @@ const ChartRealisasiInvestasi = () => {
     const realisasiInvestasiData = provinsi.realisasi_investasi.map(
         (item) => item.nilai_realisasi_investasi
     ); // Ambil nilai realisasi investasi
-    const pmaData = provinsi.pma.map((item) => item.nilai_pma); // Ambil nilai PMA
-    const pmdnData = provinsi.pmdn.map((item) => item.nilai_pmdn); // Ambil nilai PMDN
+    const pmaData = provinsi.pma
+        .slice() // Buat salinan array agar tidak memodifikasi array asli
+        .reverse() // Membalik urutan array
+        .map((item) => item.nilai_pma); // Ambil nilai PMA setelah dibalik urutannya
+
+    const pmdnData = provinsi.pmdn
+        .slice() // Buat salinan array agar tidak memodifikasi array asli
+        .reverse() // Membalik urutan array
+        .map((item) => item.nilai_pmdn); // Ambil nilai PMDN setelah dibalik urutannya
 
     // Membuat data untuk chart
     const data = {
@@ -78,7 +84,6 @@ const ChartRealisasiInvestasi = () => {
         ],
     };
 
-    // Opsi untuk chart
     const options = {
         responsive: true,
         scales: {
@@ -89,6 +94,12 @@ const ChartRealisasiInvestasi = () => {
                     display: true,
                     text: "Realisasi Investasi (Triliun Rp)",
                 },
+                suggestedMin: 0, // Mulai dari 0
+                suggestedMax: Math.max(
+                    ...realisasiInvestasiData,
+                    ...pmaData,
+                    ...pmdnData
+                ), // Maksimal dari seluruh data
             },
             y1: {
                 beginAtZero: true,
@@ -100,6 +111,12 @@ const ChartRealisasiInvestasi = () => {
                     display: true,
                     text: "PMA & PMDN (Triliun Rp)",
                 },
+                suggestedMin: 0, // Mulai dari 0
+                suggestedMax: Math.max(
+                    ...realisasiInvestasiData,
+                    ...pmaData,
+                    ...pmdnData
+                ), // Maksimal dari seluruh data
             },
             x: {
                 title: {
@@ -117,7 +134,7 @@ const ChartRealisasiInvestasi = () => {
     };
 
     return (
-        <div className="w-full p-6 bg-white rounded-2xl border-2 border-[#DFE3F6] mt-4">
+        <div className="w-full p-6 bg-white rounded-[12px] border-2 border-[#DFE3F6] ">
             <div className="mb-4">
                 <p className="text-black font-bold">
                     Realisasi Investasi, PMA, dan PMDN -{" "}

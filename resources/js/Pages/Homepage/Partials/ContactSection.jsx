@@ -5,11 +5,11 @@ import { withTranslation } from "react-google-multi-lang";
 const ContactSection = () => {
     return (
         <section className="pt-12 bg-[#F0F3FF] mt-10">
-            <div className="container mx-auto px-4 lg:px-20">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="mx-auto px-4 lg:px-[48px]">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Kolom Kiri: Informasi Kontak */}
-                    <div className=" mr">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                    <div className="lg:col-span-2 pr-24">
+                        <h2 className="text-3xl font-bold text-[#2D3985] mb-4">
                             Kami Siap Membantu Anda
                         </h2>
                         <p className="text-gray-600 mb-6">
@@ -22,13 +22,14 @@ const ContactSection = () => {
                         </p>
                     </div>
                     {/* Kolom Kanan: Form Kontak */}
-                    <ContactForm className="h-full" />{" "}
-                    {/* Memanggil komponen form */}
+                    <div className="lg:col-span-1">
+                        <ContactForm /> {/* Memanggil komponen form */}
+                    </div>
                 </div>
             </div>
             <img
                 src="images/tambahan.png"
-                className="static -mt-48 w-[600px]"
+                className="static -mt-48 w-[600px] mx-auto lg:mx-0"
                 alt=""
             />
         </section>

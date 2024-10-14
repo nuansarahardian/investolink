@@ -3,7 +3,7 @@ import { MapContainer, GeoJSON, Marker, Tooltip } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { usePage } from "@inertiajs/react";
-import { Inertia } from "@inertiajs/inertia";
+import { Link } from "@inertiajs/react"; // Menggunakan Link dari Inertia.js
 import provinces from "../../../../../public/json/provinces.json"; // Menggunakan data yang diimpor
 
 const PetaPDRB = ({ hoveredColor, className }) => {
@@ -102,8 +102,8 @@ const PetaPDRB = ({ hoveredColor, className }) => {
             ? matchingProvinceLogo.url_image
             : "/default-logo.png"; // default image if not found
         return `
-            <div class="tooltip-container">
-                <div class="flex mb-2">
+            <div class="tooltip-container rounded-md ">
+                <div class="flex mb-2 rounded-md">
                     <img src="${logoUrl}" class="w-10 h-10 mr-2 my-auto ">
                     <div>
                         <div class="font-bold text-xl text-gray-800">${nama_provinsi}</div>
@@ -120,8 +120,8 @@ const PetaPDRB = ({ hoveredColor, className }) => {
                     </div>
                     <div class="flex gap-1 flex-col text-[12px]">
                         <div class="font-medium text-gray-800">Rp${nilai_pdrb_berlaku} Triliun</div>
-                        <div class="font-medium text-gray-800">$${nilai_pma}  </div>
-                        <div class="font-medium text-gray-800">Rp${nilai_pmdn} Juta </div>
+                        <div class="font-medium text-gray-800">Rp${nilai_pma}  Triliun</div>
+                        <div class="font-medium text-gray-800">Rp${nilai_pmdn} Triliun </div>
                         <div class="font-medium text-gray-800">${sektor_terbesar.nama_sektor} </div>
                
                     </div>
@@ -219,35 +219,41 @@ const PetaPDRB = ({ hoveredColor, className }) => {
                                 });
 
                                 return (
-                                    <Marker
-                                        key={index}
-                                        position={position}
-                                        icon={customIcon}
-                                        eventHandlers={{
-                                            click: () => {
-                                                if (matchingFeature) {
-                                                    const provinsiId =
-                                                        matchingFeature
-                                                            .properties
-                                                            .provinsi_id;
-                                                    Inertia.visit(
-                                                        `/provinsi/${provinsiId}`
-                                                    );
-                                                }
-                                            },
-                                        }}
-                                    >
-                                        <Tooltip
-                                            direction="right"
-                                            offset={[10, 0]}
+                                    <div key={index}>
+                                        {/* Hidden Link used for navigation */}
+                                        <Link
+                                            id={`link-${matchingFeature.properties.provinsi_id}`}
+                                            href={`/provinsi/${matchingFeature.properties.provinsi_id}`}
+                                            className="hidden"
                                         >
-                                            <div
-                                                dangerouslySetInnerHTML={{
-                                                    __html: tooltipContent,
-                                                }}
-                                            />
-                                        </Tooltip>
-                                    </Marker>
+                                            Link
+                                        </Link>
+                                        <Marker
+                                            position={position}
+                                            icon={customIcon}
+                                            eventHandlers={{
+                                                click: () => {
+                                                    // Trigger click on the hidden Link element
+                                                    document
+                                                        .getElementById(
+                                                            `link-${matchingFeature.properties.provinsi_id}`
+                                                        )
+                                                        .click();
+                                                },
+                                            }}
+                                        >
+                                            <Tooltip
+                                                direction="right"
+                                                offset={[10, 0]}
+                                            >
+                                                <div
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: tooltipContent,
+                                                    }}
+                                                />
+                                            </Tooltip>
+                                        </Marker>
+                                    </div>
                                 );
                             })}
                     </>
