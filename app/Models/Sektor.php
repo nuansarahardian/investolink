@@ -29,4 +29,8 @@ class Sektor extends Model
     // {
     //     return $this->hasMany(PDRB_per_Sektor::class, 'sektorID');
     // }
+    public function peluang_investasi()
+    {
+        return $this->hasMany(PeluangInvestasi::class, 'sektor_id');
+    }
 }

@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { usePage } from "@inertiajs/react";
-// Mengimpor file JSON yang berisi gambar provinsi ikonik dan logo
 import ikonProvinsi from "../../../../../public/json/foto_ikonik_provinsi.json";
 import LogoProvinsi from "../../../../../public/json/provinces.json";
 
 const BannerProvinsi = () => {
-    const { provinsi } = usePage().props || {}; // Mengambil nama provinsi dari props
-    const [bgImageUrl, setBgImageUrl] = useState("/default-background.jpg"); // Fallback default background image
-    const [logoUrl, setLogoUrl] = useState("/default-logo.png"); // Fallback default logo
+    const { provinsi } = usePage().props || {};
+    const [bgImageUrl, setBgImageUrl] = useState("/default-background.jpg");
+    const [logoUrl, setLogoUrl] = useState("/default-logo.png");
 
     useEffect(() => {
-        // Hanya fetch data jika provinsi ada dan nama_provinsi tidak undefined atau null
         if (provinsi?.nama_provinsi) {
-            // Mencari provinsi yang sesuai di ikonProvinsi JSON
             const matchingProvinceIcon = ikonProvinsi.find(
                 (p) =>
                     p?.Province &&
@@ -21,12 +18,11 @@ const BannerProvinsi = () => {
                         provinsi.nama_provinsi.toLowerCase()
             );
             if (matchingProvinceIcon) {
-                setBgImageUrl(matchingProvinceIcon.Image); // Menyimpan URL gambar ikonik jika ditemukan
+                setBgImageUrl(matchingProvinceIcon.Image);
             } else {
                 console.warn("Provinsi tidak ditemukan di JSON ikonProvinsi");
             }
 
-            // Mencari provinsi yang sesuai di LogoProvinsi JSON
             const matchingProvinceLogo = LogoProvinsi.find(
                 (p) =>
                     p?.provinsi &&
@@ -35,7 +31,7 @@ const BannerProvinsi = () => {
                         provinsi.nama_provinsi.toLowerCase()
             );
             if (matchingProvinceLogo) {
-                setLogoUrl(matchingProvinceLogo.url_image); // Menyimpan URL logo jika ditemukan
+                setLogoUrl(matchingProvinceLogo.url_image);
             } else {
                 console.warn(
                     "Logo provinsi tidak ditemukan di JSON LogoProvinsi"
@@ -46,50 +42,47 @@ const BannerProvinsi = () => {
         }
     }, [provinsi]);
 
-    // Fungsi untuk navigasi kembali
     const handleBack = () => {
         window.history.back();
     };
 
     return (
         <div
-            className="flex w-screen h-[320px] relative bg-cover"
+            className="w-full h-[320px] md:h-[400px] relative bg-cover"
             style={{
                 backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.6)), url('${bgImageUrl}')`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
             }}
         >
-            <div className="absolute inset-0 z-10 flex flex-col h-full justify-between pt-[32px] pl-[48px] pb-[24px]">
-                {/* Tombol Back */}
-                <button onClick={handleBack} className="flex items-center">
+            <div className="absolute inset-0 z-10 flex flex-col h-full justify-between pt-4 md:pt-[32px] px-4 md:pl-[48px] pb-4 md:pb-[24px]">
+                {/* Back Button */}
+                <button
+                    onClick={handleBack}
+                    className="flex items-center mb-4 md:mb-0"
+                >
                     <img
                         src="/icon/back.png"
                         alt="Back"
-                        className="w-[24px] cursor-pointer"
+                        className="w-[20px] h-[20px] md:w-[24px] md:h-[24px] cursor-pointer"
                     />
                 </button>
 
-                <div className="flex flex-col text-white/50">
+                <div className="flex flex-col text-white/80 md:text-white">
                     <img
                         src={logoUrl}
                         alt={`${provinsi?.nama_provinsi || "Logo"} Logo`}
-                        className="w-[80px] h-[80px] object-contain"
+                        className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] object-contain mb-4"
                     />
-                    <div className="flex items-center gap-4">
-                        {/* Menampilkan logo provinsi */}
-
-                        <p className="text-white font-bold text-[40px]">
-                            {provinsi?.nama_provinsi ||
-                                "Provinsi Tidak Ditemukan"}
-                        </p>
-                    </div>
-                    <div className="flex flex-row gap-6">
-                        {/* Informasi Kontak */}
-                        <div className="flex flex-row my-auto">
+                    <p className="text-lg md:text-[40px] font-bold">
+                        {provinsi?.nama_provinsi || "Provinsi Tidak Ditemukan"}
+                    </p>
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-6 mt-4">
+                        {/* Contact Information */}
+                        <div className="flex items-center text-sm md:text-base">
                             <img
                                 src="/icon/telepon.png"
-                                className="w-[24px] h-[24px] mr-2"
+                                className="w-[18px] h-[18px] md:w-[24px] md:h-[24px] mr-2"
                                 alt="Telephone"
                             />
                             <p>
@@ -97,20 +90,20 @@ const BannerProvinsi = () => {
                                     "Nomor telepon tidak tersedia"}
                             </p>
                         </div>
-                        <div className="flex flex-row my-auto">
+                        <div className="flex items-center text-sm md:text-base">
                             <img
                                 src="/icon/web.png"
-                                className="w-[24px] h-[24px] mr-2"
+                                className="w-[18px] h-[18px] md:w-[24px] md:h-[24px] mr-2"
                                 alt="Website"
                             />
                             <p>
                                 {provinsi?.website || "Website tidak tersedia"}
                             </p>
                         </div>
-                        <div className="flex flex-row my-auto">
+                        <div className="flex items-center text-sm md:text-base">
                             <img
                                 src="/icon/mail.png"
-                                className="w-[24px] h-[20px] mr-2"
+                                className="w-[18px] h-[18px] md:w-[24px] md:h-[24px] mr-2"
                                 alt="Email"
                             />
                             <p>{provinsi?.email || "Email tidak tersedia"}</p>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-const LegendPDRB = ({ setHoveredColor, className }) => {
+const LegendPeluangInvestasi = ({ setHoveredColor, className }) => {
     const [showTooltip, setShowTooltip] = useState(false); // State untuk mengontrol tooltip
 
     return (
         <div className={`w-full bg-white rounded-l-lg ${className}`}>
-            <div className="w-full h-[178px] bg-gradient-to-r from-[#5E7ADD] to-[#384AA0] rounded-tl-lg text-white font-bold p-4 flex justify-between items-end relative">
+            <div className="w-full h-[178px] bg-gradient-to-r from-[#5E7ADD] to-[#384AA0] sm:rounded-tl-lg rounded-t-lg text-white font-bold p-4 flex justify-between items-end relative">
                 <div className="text-xl z-[1000]">Peta Peluang Investasi</div>
                 <img
                     src="icon/PetaInvestasi.png"
@@ -63,7 +63,7 @@ const LegendPDRB = ({ setHoveredColor, className }) => {
                             className="w-4 h-4 rounded-[4px]"
                             style={{ backgroundColor: "#23577E" }}
                         ></div>
-                        <span>Lebih dari Rp1.000 Triliun</span>
+                        <span>Lebih dari Rp20 Triliun</span>
                     </div>
 
                     <div
@@ -75,7 +75,7 @@ const LegendPDRB = ({ setHoveredColor, className }) => {
                             className="w-4 h-4 rounded-[4px]"
                             style={{ backgroundColor: "#3E7AA6" }}
                         ></div>
-                        <span>Rp600 - Rp1.000 Triliun</span>
+                        <span>Rp10-Rp20 Triliun</span>
                     </div>
 
                     <div
@@ -87,7 +87,7 @@ const LegendPDRB = ({ setHoveredColor, className }) => {
                             className="w-4 h-4 rounded-[4px]"
                             style={{ backgroundColor: "#5899C8" }}
                         ></div>
-                        <span>Rp250 - Rp600 Triliun</span>
+                        <span>Rp5-Rp10 Triliun</span>
                     </div>
 
                     <div
@@ -99,7 +99,7 @@ const LegendPDRB = ({ setHoveredColor, className }) => {
                             className="w-4 h-4 rounded-[4px]"
                             style={{ backgroundColor: "#8CBBDD" }}
                         ></div>
-                        <span>Rp150 - Rp250 Triliun</span>
+                        <span>Rp1-Rp5 Triliun</span>
                     </div>
 
                     <div
@@ -111,7 +111,7 @@ const LegendPDRB = ({ setHoveredColor, className }) => {
                             className="w-4 h-4 rounded-[4px]"
                             style={{ backgroundColor: "#D0E1ED" }}
                         ></div>
-                        <span>Kurang dari Rp150 Triliun</span>
+                        <span>Kurang dari Rp1 Triliun</span>
                     </div>
                 </div>
             </div>
@@ -119,4 +119,4 @@ const LegendPDRB = ({ setHoveredColor, className }) => {
     );
 };
 
-export default LegendPDRB;
+export default LegendPeluangInvestasi;

@@ -5,14 +5,16 @@
             "category": "Karbon Rendah",
             "title": "Power & Steam Generation, Water Desalination Plant GRR Tuban Project",
             "company": "PT Pertamina Power Indonesia",
-            "images": "images/gpi-tuban.png"
+            "images": "images/gpi-tuban.png",
+            "popup": "images/investment book-tuban.png"
         },
         {
             "location": "Sumatera Utara",
             "category": "Energi",
             "title": "PLTM Lau Gunung 2 x 7,5 MW",
             "company": "PT Inpola Meka Energi",
-            "images": "images/gpi-lau gunung.png"
+            "images": "images/gpi-lau gunung.png",
+            "popup": "images/investment book-lau gunung.png"
         },
 
         {
@@ -20,21 +22,24 @@
             "category": "Pelabuhan & Logistik",
             "title": "Makassar New Port",
             "company": "PT Pelabuhan Indonesia (Persero)",
-            "images": "images/gpi-makassar.png"
+            "images": "images/gpi-makassar.png",
+            "popup": "images/investment book-makassar.png"
         },
         {
             "location": "Dumai",
             "category": "Pasokan Air",
             "title": "Dumai Water Supply System",
             "company": "PT Adhi Karya (Persero) Tbk",
-            "images": "images/gpi-dumai.png"
+            "images": "images/gpi-dumai.png",
+            "popup": "images/investment book-dumai.png"
         },
         {
             "location": "Surakarta",
             "category": "Pasokan Air",
             "title": "PLTSa Surakarta 5 MW",
             "company": "PT Solo Citra Metro Plasma Tower",
-            "images": "images/gpi-surakarta.png"
+            "images": "images/gpi-surakarta.png",
+            "popup": "images/investment book-surakarta.png"
         }
     ]
 }

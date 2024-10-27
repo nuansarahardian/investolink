@@ -12,6 +12,10 @@
         "alamat_gambar": "/peluang_investasi/Budidaya Kedelai.jpg"
     },
     {
+        "nama_peluang": "Budidaya Udang Terintegrasi",
+        "alamat_gambar": "/peluang_investasi/Udang Terintegrasi.png"
+    },
+    {
         "nama_peluang": "Industri Pengolahan Cocoa Butter & Cocoa Powder",
         "alamat_gambar": "/peluang_investasi/Cocoa Butter Powder.jpeg"
     },
@@ -81,7 +85,7 @@
     },
     {
         "nama_peluang": "Industri Pengolahan Pati Sagu Terintegrasi",
-        "alamat_gambar": "/peluang_investasi/Pati Sagu.jpg"
+        "alamat_gambar": "/peluang_investasi/Pati Sagu.jpeg"
     },
     {
         "nama_peluang": "Industri Mono-Ethylene Glycol (MEG) Berbasis Batu Bara",
@@ -116,6 +120,10 @@
         "alamat_gambar": "/peluang_investasi/Smelter Nikel Cobalt.webp"
     },
     {
+        "nama_peluang": "Smelter Steel Billet",
+        "alamat_gambar": "/peluang_investasi/Steel Billet.jpg"
+    },
+    {
         "nama_peluang": "Smelter Slab Billet Steel",
         "alamat_gambar": "/peluang_investasi/Slab Billet.jpg"
     },
@@ -126,6 +134,30 @@
     {
         "nama_peluang": "Tumpak Sewu Leisure Park",
         "alamat_gambar": "/peluang_investasi/Tumpak Sewu.jpg"
+    },
+    {
+        "nama_peluang": "Industri Wing in Ground",
+        "alamat_gambar": "/peluang_investasi/Wing Ground.png"
+    },
+    {
+        "nama_peluang": "Industri Daur Ulang Tembaga Dengan Proses Elektrolisis",
+        "alamat_gambar": "/peluang_investasi/Recycle Tembaga.png"
+    },
+    {
+        "nama_peluang": "Breda Pala Resort",
+        "alamat_gambar": "/peluang_investasi/Breda Pala.jpg"
+    },
+    {
+        "nama_peluang": "Mandalika Convention Hotel and Resort",
+        "alamat_gambar": "/peluang_investasi/Mandalika.jpg"
+    },
+    {
+        "nama_peluang": "Industri Alat Kesehatan dari Karet Alam",
+        "alamat_gambar": "/peluang_investasi/Kesehatan Karet Alam.jpg"
+    },
+    {
+        "nama_peluang": "Smelter Alumina Refinery",
+        "alamat_gambar": "/peluang_investasi/Alumina Refinery.jpeg"
     },
     {
         "nama_peluang": "Manufaktur Alumunium Wire Rod",
@@ -183,6 +215,30 @@
         "nama_peluang": "Hortikultura Komoditas Jeruk Siam Madu",
         "alamat_gambar": "/peluang_investasi/Jeruk Siam Madu.jpg"
     },
+    {
+        "nama_peluang": "Pengembangan Hortikultura Terintegrasi",
+        "alamat_gambar": "/peluang_investasi/Hortikultura Terintegrasi.webp"
+    },
+    {
+        "nama_peluang": "Peternakan Unggas Terintegrasi",
+        "alamat_gambar": "/peluang_investasi/Unggas Terintegrasi.jpg"
+    },
+    {
+        "nama_peluang": "Perikanan Budi Daya Komoditas Udang Nusa Tenggara Barat",
+        "alamat_gambar": "/peluang_investasi/Budidaya Udang NTB.jpeg"
+    },
+    {
+        "nama_peluang": "Agrobisnis Peternakan Sapi Potong Terintegrasi Provinsi Nusa Tenggara Timur",
+        "alamat_gambar": "/peluang_investasi/Sapi Potong NTB.jpg"
+    },
+    {
+        "nama_peluang": "Pengembangan Perkebunan Pala Terintegrasi dengan Industri Pengolahan",
+        "alamat_gambar": "/peluang_investasi/Pengembangan Perkebunan Pala.jpeg"
+    },
+    {
+        "nama_peluang": "Perkebunan Tebu Terintegrasi Industri Pengolahannya",
+        "alamat_gambar": "/peluang_investasi/Perkebunan & Industri Tebu.jpg"
+    },
 
     {
         "nama_peluang": "Pembangkit Listrik Tenaga Surya di Provinsi Kalimantan Timur",
@@ -206,7 +262,7 @@
     },
     {
         "nama_peluang": "Industri Pengolahan Jagung untuk Pakan Ternak",
-        "alamat_gambar": "/peluang_investasi/Jagung Pakan Ternak.jpg"
+        "alamat_gambar": "/peluang_investasi/Jagung Pakan Ternak.jpeg"
     },
     {
         "nama_peluang": "Industri Hijau Pengolahan Kelapa Terintegrasi",

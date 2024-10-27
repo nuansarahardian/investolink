@@ -74,7 +74,9 @@ const LeftColumn = ({ formatNumber, provinsi }) => {
                         <div
                             key={index}
                             className="flex flex-none items-center h-[132px] mb-4 bg-white rounded-lg border cursor-pointer hover:drop-shadow-sm transition-colors duration-200 w-full"
-                            onClick={() => openModal(kek)} // Buka modal dengan data kawasan yang dipilih
+                            onClick={() =>
+                                window.open(kek.link_terkait, "_blank")
+                            }
                         >
                             <div className="w-[132px] flex-none h-full flex mr-4">
                                 <img
@@ -86,7 +88,7 @@ const LeftColumn = ({ formatNumber, provinsi }) => {
                                 />
                             </div>
 
-                            <div className="flex flex-col justify-between h-full py-[12px] ">
+                            <div className="flex flex-col justify-between h-full py-[8px] ">
                                 <div className="my-auto">
                                     <h3 className="font-bold text-[16px]">
                                         {kek.nama_kawasan_industri}
@@ -95,19 +97,19 @@ const LeftColumn = ({ formatNumber, provinsi }) => {
                                         {kek.kabupaten_atau_kota}
                                     </h3>
                                     <div className="flex flex-row gap-2 mt-3">
-                                        <div className="">
-                                            <p className="text-[#86858D] text-[14px] text-clip">
+                                        <div className="sm:text-[14px] text-[12px] ">
+                                            <p className="text-[#86858D]  text-clip">
                                                 Luas
                                             </p>
-                                            <p className="text-[#86858D] text-[14px] mt-[1.5px]">
+                                            <p className="text-[#86858D] mt-[1.5px]">
                                                 Target Investasi
                                             </p>
                                         </div>
-                                        <div>
-                                            <p className="font-medium text-[14px] text-clip">
+                                        <div className="sm:text-[14px] text-[12px] ">
+                                            <p className="font-medium  text-clip">
                                                 {formatNumber(kek.luas_lahan)}{" "}
                                             </p>
-                                            <p className="font-medium text-[14px] mt-[1.5px]">
+                                            <p className="font-medium  mt-[1.5px]">
                                                 {formatNumber(
                                                     kek.target_investasi
                                                 )}{" "}

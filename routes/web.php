@@ -1,11 +1,11 @@
 <?php
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\DashboardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\GeoMapController;
 use App\Http\Controllers\ProfilInvestasiController;
 use App\Http\Controllers\PetaInvestasiController;
@@ -29,9 +29,11 @@ Route::post('/translate', [TranslationController::class, 'translate']);
 
 
 
-Route::get('/', function () {
-    return Inertia::render('Homepage/Homepage');
-});
+// Route untuk Homepage yang hanya menampilkan form input aduan
+Route::get('/', [BerandaController::class, 'showForm']);
+
+// Route untuk mengirim data form dan membuat aduan baru
+Route::post('/aduan/create', [BerandaController::class, 'create']);
 
 Route::get('/guest', function () {
     return Inertia::render('Welcome');
@@ -53,12 +55,10 @@ Route::get('/peta-investasi', [PetaInvestasiController::class, 'index']);
 // Route::get('/pdrb', [ProvinsiController::class, 'getPdrb']);
 // Route::get('/provinsi-pdrb', [ProvinsiController::class, 'getProvinsiWithPdrb']);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-
-    
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+    Route::post('/aduan/{id}/toggle-solved', [DashboardController::class, 'toggleSolved']);
 
 
 

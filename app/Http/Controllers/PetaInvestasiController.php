@@ -8,6 +8,7 @@ use App\Models\PMA;
 use App\Models\PMDN;
 use App\Models\DataNasional; 
 use App\Models\PDRBPerSektor; 
+use App\Models\PeluangInvestasi;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -21,7 +22,7 @@ class PetaInvestasiController extends Controller
             }, 'kawasan_industri' => function ($query) {
                 // Ambil kolom latitude, longitude, dan informasi lainnya
                 $query->select('kawasan_industri_id', 'luas_lahan', 'target_investasi', 'nama_kawasan_industri', 'provinsi_id', 'is_kawasan_ekonomi_khusus', 'latitude', 'longitude', 'link_terkait');
-            }])
+            }, 'peluang_investasi'])
             ->get() // Ambil semua data provinsi
             ->map(function ($province) {
                 // Ambil data PDRB tahun terkini
@@ -46,9 +47,23 @@ class PetaInvestasiController extends Controller
                         'latitude' => $kawasan->latitude,
                         'longitude' => $kawasan->longitude,
                         'is_kawasan_ekonomi_khusus' => $kawasan->is_kawasan_ekonomi_khusus,
-                        'link_terkait'=> $kawasan ->link_terkait
+                        'link_terkait'=> $kawasan->link_terkait
                     ];
                 });
+
+                // Map peluang investasi
+                $peluangInvestasiData = $province->peluang_investasi->map(function ($peluang) {
+                    return [
+                        'judul_projek' => $peluang->judul_projek,
+                        'daerah' => $peluang->daerah,
+                        'link_menuju_page' => $peluang->link_menuju_page,
+                        'link_gambar' => $peluang->link_gambar,
+                        'sektor_BKPMN' => $peluang->sektor_BKPMN,
+                        'nilai_investasi_numerik' => $peluang->nilai_investasi_numerik,
+                        'nilai_investasi' => $peluang->nilai_investasi
+                    ];
+                });
+                $totalPeluangInvestasi = $province->peluang_investasi->sum('nilai_investasi_numerik');
 
                 return [
                     'provinsi_id' => $province->provinsi_id,
@@ -62,35 +77,30 @@ class PetaInvestasiController extends Controller
                     'jumlah_kawasan_ekonomi_khusus' => $province->kawasan_industri
                         ->where('is_kawasan_ekonomi_khusus', true)
                         ->count(),
-                        'nilai_pdrb_berlaku' => $latestPdrb ? intval($latestPdrb->nilai_pdrb_berlaku / 1000) : 'N/A',
- 
-
-
-
-                    'tahun_pdrb' => $latestPdrb ? $latestPdrb->tahun : 'N/A', // Ambil tahun dari data PDRB
-                    'tahun_pma' => $latestPma ? $latestPma->tahun : 'N/A', // Ambil tahun dari data PDRB
-                    
-                    'tahun_pmdn' => $latestPmdn ? $latestPmdn->tahun : 'N/A', // Ambil tahun dari data PDRB
+                    'nilai_pdrb_berlaku' => $latestPdrb ? intval($latestPdrb->nilai_pdrb_berlaku / 1000) : 'N/A',
+                    'tahun_pdrb' => $latestPdrb ? $latestPdrb->tahun : 'N/A',
+                    'tahun_pma' => $latestPma ? $latestPma->tahun : 'N/A',
+                    'tahun_pmdn' => $latestPmdn ? $latestPmdn->tahun : 'N/A',
                     'kawasan_industri' => $kawasanIndustriData,
+                    'peluang_investasi' => $peluangInvestasiData,
                     'nilai_pma' => $latestPma ? number_format($latestPma->nilai_pma / 1000000, 2, ',', '.')  : 'N/A',
                     'nilai_pmdn' => $latestPmdn ? number_format($latestPmdn->nilai_pmdn / 1000000, 2, ',', '.')  : 'N/A',
-                     
-                    
-
-
                     'sektor_terbesar' => $pdrbPerSektor ? [
                         'nama_sektor' => $pdrbPerSektor->sektor->nama_sektor,
                         'nilai_pdrb_per_sektor' => number_format(round($pdrbPerSektor->nilai_pdrb_per_sektor, 3), 3),
-                    ] : null, // Ambil nama sektor dan nilai PDRB jika ada
+                    ] : null,
+                    'total_peluang_investasi' => number_format($totalPeluangInvestasi/ 1000000000000, 2, ',', '.')
+
                 ];
             });
-
-        $sektorData = Sektor::with(['komoditas.provinsi'])->get()
+            $sektorData = Sektor::with(['komoditas.provinsi', 'peluang_investasi.provinsi'])->get()
             ->map(function ($sektor) {
+                // Mengambil provinsi terkait dengan komoditas
                 $provinsiIds = $sektor->komoditas->flatMap(function ($komoditas) {
                     return $komoditas->provinsi->pluck('provinsi_id');
                 })->unique();
         
+                // Map data komoditas dan peluang investasi
                 return [
                     'nama_sektor' => $sektor->nama_sektor,
                     'jumlah_provinsi' => $provinsiIds->count(),
@@ -100,15 +110,24 @@ class PetaInvestasiController extends Controller
                             'provinsi' => $komoditas->provinsi->map(function ($provinsi) {
                                 return [
                                     'nama' => $provinsi->nama_provinsi,
-                                    'id' => $provinsi->provinsi_id // Menambahkan provinsi_id
+                                    'id' => $provinsi->provinsi_id
                                 ];
                             }),
                         ];
                     }),
+                    'peluang_investasi' => $sektor->peluang_investasi->map(function ($peluang) {
+                        return [
+                            'nama_provinsi' => $peluang->provinsi->nama_provinsi, // Nama provinsi terkait
+                            'judul_projek' => $peluang->judul_projek, // Judul proyek
+                            'daerah' => $peluang->daerah, // Daerah proyek
+                            'link_menuju_page' => $peluang->link_menuju_page, // Link menuju halaman proyek
+                        ];
+                    }),
                 ];
             });
+        
 
-            $dataNasional = DataNasional::select('tahun', 'nilai_pmdn_nasional', 'nilai_pma_nasional', 'nilai_realisasi_investasi_nasional')
+        $dataNasional = DataNasional::select('tahun', 'nilai_pmdn_nasional', 'nilai_pma_nasional', 'nilai_realisasi_investasi_nasional')
             ->orderBy('tahun', 'asc')
             ->get()
             ->map(function ($data) {
@@ -119,14 +138,12 @@ class PetaInvestasiController extends Controller
                     'nilai_realisasi_investasi_nasional' => number_format($data->nilai_realisasi_investasi_nasional / 1000000, 2, ',', '.'),
                 ];
             });
-        
-
-        // dd($provinsi);
+// dd($sektorData);
         // Render halaman InvesmentMap dengan data provinsi, kawasan industri, sektor, dan data nasional
         return Inertia::render('PetaInvestasi/PetaInvestasi', [
             'provinsi' => $provinsi,
             'sektorData' => $sektorData,
-            'dataNasional' => $dataNasional, // Kirim semua data nasional ke view
+            'dataNasional' => $dataNasional,
         ]);
     }
 }

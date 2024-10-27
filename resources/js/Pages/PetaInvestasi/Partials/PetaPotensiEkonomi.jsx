@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import PetaPDRB from "@/Pages/PetaInvestasi/Partials/PetaPDRB";
+import PetaPeluangInvestasi from "@/Pages/PetaInvestasi/Partials/PetaPeluangInvestasi";
 import PetaKEK from "@/Pages/PetaInvestasi/Partials/PetaKEK";
-import LegendPDRB from "@/Pages/PetaInvestasi/Partials/LegendPDRB";
+import LegendPeluangInvestasi from "@/Pages/PetaInvestasi/Partials/LegendPeluangInvestasi";
 import LegendKEK from "@/Pages/PetaInvestasi/Partials/LegendKEK";
 
 const PetaPotensiEkonomi = () => {
@@ -13,59 +14,51 @@ const PetaPotensiEkonomi = () => {
     };
 
     return (
-        <>
-            <div className="relative w-[95%] bg-white shadow h-full m-auto mt-10 rounded-[12px] grid grid-cols-4">
+        <div className="relative w-[95%] bg-white shadow h-full m-auto mt-10 rounded-lg md:rounded-[12px] grid grid-cols-1 md:grid-cols-4">
+            {/* Legend based on active section */}
+            <div className="col-span-1 ">
                 {activeSection === "PDRB" ? (
-                    <LegendPDRB
-                        className="col-span-1"
-                        setHoveredColor={setHoveredColor}
-                    />
+                    <LegendPeluangInvestasi setHoveredColor={setHoveredColor} />
                 ) : (
-                    <LegendKEK
-                        className="col-span-1"
-                        setHoveredColor={setHoveredColor}
-                    />
+                    <LegendKEK setHoveredColor={setHoveredColor} />
                 )}
+            </div>
 
+            {/* Map based on active section */}
+            <div className="col-span-3 h-full ">
                 {activeSection === "PDRB" ? (
-                    <PetaPDRB
-                        className="col-span-3"
-                        hoveredColor={hoveredColor}
-                    />
+                    <PetaPeluangInvestasi hoveredColor={hoveredColor} />
                 ) : (
-                    <PetaKEK
-                        className="col-span-3"
-                        hoveredColor={hoveredColor}
-                    />
+                    <PetaKEK hoveredColor={hoveredColor} />
                 )}
+            </div>
 
-                {/* Floating Toggle Button */}
-                <div className="absolute top-4 right-4 z-[1000]">
-                    <div className="flex bg-white rounded-full w-48 h-[42px] drop-shadow-sm ">
-                        <button
-                            className={`m-auto h-[42px] w-full rounded-full z-10 drop-shadow-sm ${
-                                activeSection === "PDRB"
-                                    ? "bg-[#384AA0] text-white font-bold"
-                                    : "text-gray-600 font-bold"
-                            } transition`}
-                            onClick={() => toggleSection("PDRB")}
-                        >
-                            PDRB
-                        </button>
-                        <button
-                            className={`m-auto h-[42px] w-full rounded-full ${
-                                activeSection === "KEK"
-                                    ? "bg-[#384AA0] text-white font-bold"
-                                    : "text-gray-600 font-bold"
-                            } transition`}
-                            onClick={() => toggleSection("KEK")}
-                        >
-                            KEK
-                        </button>
-                    </div>
+            {/* Floating Toggle Button */}
+            <div className="absolute top-4 right-4 z-[1000]">
+                <div className="flex bg-white rounded-full w-[180px] md:w-[240px] h-[42px] shadow-md text-md overflow-hidden">
+                    <button
+                        className={`flex-1 h-full transition-all ${
+                            activeSection === "PDRB"
+                                ? "bg-[#384AA0] text-white font-bold"
+                                : "text-gray-600"
+                        }`}
+                        onClick={() => toggleSection("PDRB")}
+                    >
+                        INVESTASI
+                    </button>
+                    <button
+                        className={`flex-1 h-full transition-all ${
+                            activeSection === "KEK"
+                                ? "bg-[#384AA0] text-white font-bold"
+                                : "text-gray-600"
+                        }`}
+                        onClick={() => toggleSection("KEK")}
+                    >
+                        KEK
+                    </button>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

@@ -132,7 +132,7 @@ const ChartRealisasiInvestasi = () => {
         <div className="w-full p-6 bg-white rounded-2xl border-2 border-[#DFE3F6] mt-4">
             <div className="mb-4">
                 <p className="text-black font-bold">
-                    Realisasi Investasi Nasional
+                    Realisasi Investasi Indonesia
                 </p>
                 <p className="text-[#86858D] text-[14px]">Sumber: BPS (2024)</p>
             </div>

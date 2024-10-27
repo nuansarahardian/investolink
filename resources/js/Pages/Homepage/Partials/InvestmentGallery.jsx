@@ -14,9 +14,9 @@ const InvestmentGallery = () => {
         <svg fill="currentColor" viewBox="0 0 20 20" width={28} height={28}>
             <svg
                 viewBox="0 0 24 24"
-                fill="none"
+                fill="black"
                 xmlns="http://www.w3.org/2000/svg"
-                stroke="#ffffff"
+                stroke="#000000"
             >
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g
@@ -51,11 +51,11 @@ const InvestmentGallery = () => {
         <section className="py-16 bg-white">
             <div className="px-[48px] mx-auto ">
                 <h2 className="text-3xl font-bold text-[#2D3985] mb-[8px]">
-                    Galeri Proyek Investasi
+                    Potensi Investasi Prioritas
                 </h2>
                 <p className="text-[#86858D] mb-10">
-                    Eksplor beragam proyek investasi dalam negeri milik
-                    perusahaan-perusahaan terkemuka di Indonesia
+                    Beragam proyek dalam negeri milik Badan Usaha Milik Negara
+                    (BUMN)
                 </p>
 
                 {/* Flexbox untuk kartu proyek investasi */}
@@ -129,7 +129,7 @@ const InvestmentGallery = () => {
                     >
                         {/* Gambar Proyek */}
                         <img
-                            src={selectedProject.images}
+                            src={selectedProject.popup}
                             alt={selectedProject.title}
                             className="w-full h-full object-cover"
                         />

@@ -62,8 +62,8 @@ function SitusTerkait() {
                             <div
                                 className={`w-full rounded-full transition-all ${
                                     dot.props.className.includes("slick-active")
-                                        ? "gap-16 bg-[#A5B1E8] w-[76px] h-[8px] mt-6" // Active color
-                                        : "gap-16 bg-gray-300 w-[18px] h-[8px] mt-6" // Inactive color
+                                        ? "gap-16 bg-[#A5B1E8] w-[78px] h-[8px] mt-6" // Active color
+                                        : "gap-16 bg-gray-300 w-[16px] h-[8px] mt-6" // Inactive color
                                 }`}
                             ></div>
                         </li>
@@ -72,7 +72,7 @@ function SitusTerkait() {
             </div>
         ),
         responsive: [
-            {
+            { 
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 3,

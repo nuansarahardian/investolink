@@ -8,7 +8,7 @@ use App\Models\PMA;
 use App\Models\PMDN;
 use App\Models\Realisasi_Investasi;
 use App\Models\PDRBPerSektor; // Tambahkan model PDRBPerSektor
-use App\Models\Peluang_Investasi; // Tambahkan model Peluang_Investasi
+use App\Models\PeluangInvestasi; // Tambahkan model Peluang_Investasi
 use Inertia\Inertia;
 
 class ProfilDaerahController extends Controller
@@ -52,7 +52,7 @@ class ProfilDaerahController extends Controller
         $kawasanIndustri = $provinsi->kawasan_industri()
         ->get();
         // Mengambil data peluang investasi berdasarkan provinsi_id
-        $peluangInvestasi = Peluang_Investasi::where('provinsi_id', $provinsi_id) // Pastikan data berdasarkan provinsi_id
+        $peluangInvestasi = PeluangInvestasi::where('provinsi_id', $provinsi_id) // Pastikan data berdasarkan provinsi_id
             ->get();
 
         // Menyusun data PDRB per sektor menjadi array

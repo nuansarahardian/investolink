@@ -1,5 +1,4 @@
 import React from "react";
-import { withTranslation } from "react-google-multi-lang";
 
 const Title = () => {
     return (
@@ -15,4 +14,4 @@ const Title = () => {
     );
 };
 
-export default withTranslation(Title);
+export default Title;

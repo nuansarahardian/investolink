@@ -43,7 +43,7 @@ const Ekonomi = ({ provinsi, formatNumber }) => {
     return (
         <div className="gap-4 mt-8">
             {/* Bagian pertama: PDRB, Pendapatan, UMR, Profil Investasi */}
-            <div className="grid grid-cols-3 gap-x-4 gap-y-2 mt-4">
+            <div className="grid grid-cols-2  gap-y-2 mt-4">
                 <div className="text-[#86858D]">
                     <p>PDRB</p>
                     <p>Pendapatan Daerah</p>
@@ -85,7 +85,7 @@ const Ekonomi = ({ provinsi, formatNumber }) => {
             {/* Bagian kedua: Realisasi Penanaman Modal */}
             <div className="mt-8 mb-6">
                 <h2 className="text-lg font-bold">Realisasi Penanaman Modal</h2>
-                <div className="grid grid-cols-3 gap-x-4 gap-y-2 mt-4">
+                <div className="grid grid-cols-2  gap-y-2 mt-4 ">
                     <div className="text-[#86858D]">
                         <p>Penanaman Modal Dalam Negeri (PMDN)</p>
                         <p>Penanaman Modal Asing (PMA)</p>
@@ -115,7 +115,7 @@ const Ekonomi = ({ provinsi, formatNumber }) => {
                     Nilai Perdagangan Luar Negeri
                 </h2>
 
-                <div className="grid grid-cols-3 gap-x-4 gap-y-2 mt-4">
+                <div className="grid grid-cols-2  gap-y-2 mt-4">
                     <div className="text-[#86858D]">
                         <p>Nilai Ekspor</p>
                         <p>Nilai Impor</p>

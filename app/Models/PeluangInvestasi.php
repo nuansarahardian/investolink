@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Peluang_Investasi extends Model
+class PeluangInvestasi extends Model
 {
     use HasFactory;
 
@@ -19,16 +19,19 @@ class Peluang_Investasi extends Model
         'judul_projek',
         'daerah',
         'link_menuju_page',
-        'link_gambar'
+        'link_gambar',
+        'sektor_BKPMN',
+        'nilai_investasi_numerik',
+        'nilai_investasi'
     ];
 
     public function provinsi()
     {
-        return $this->belongsTo(Provinsi::class, 'provinsi_id');
+        return $this->belongsTo(Provinsi::class, 'provinsi_id', 'provinsi_id');
     }
 
     public function sektor()
     {
-        return $this->belongsTo(Sektor::class, 'sektor_id');
+        return $this->belongsTo(Sektor::class, 'sektor_id', 'sektor_id');
     }
 }

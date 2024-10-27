@@ -4,7 +4,6 @@ import { usePage } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
 import NavLink from "@/Components/NavLink";
 import SelectLanguage from "@/Components/common/SelectLanguage";
-import { withTranslation } from "react-google-multi-lang";
 
 import {
     Collapse,
@@ -31,7 +30,7 @@ const StickyNavbar = () => {
 
     const navItems = [
         { href: "/", label: "Beranda" },
-        { href: "/peta-investasi", label: "Peta Investasi" },
+        { href: "/peta-investasi", label: "Potensi Investasi Indonesia" },
     ];
 
     const navList = (
@@ -72,7 +71,6 @@ const StickyNavbar = () => {
                         <div className="hidden lg:block">{navList}</div>
                     </div>
                     <div className="flex items-center sm:gap-3 gap-1">
-                        <SelectLanguage></SelectLanguage>
                         {auth.user ? ( // Periksa apakah user sudah login
                             <div className="relative">
                                 <Dropdown>
@@ -201,4 +199,4 @@ const StickyNavbar = () => {
     );
 };
 
-export default withTranslation(StickyNavbar);
+export default StickyNavbar;

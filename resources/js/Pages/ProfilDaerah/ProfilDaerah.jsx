@@ -12,32 +12,30 @@ import PeluangInvestasi from "@/Pages/ProfilDaerah/Partials/PeluangInvestasi";
 const ProfilDaerah = () => {
     const { provinsi } = usePage().props;
 
-    // Function to format large numbers with commas, and handle undefined/null cases
     const formatNumber = (number) => {
         if (number === undefined || number === null) {
-            return "N/A"; // Return a default value when the number is undefined or null
+            return "N/A";
         }
         return number.toLocaleString("id-ID");
     };
-    // Mengambil status tab dari local storage, jika ada
+
     const getInitialTab = () => {
         const savedTab = localStorage.getItem("activeTab");
-        return savedTab ? savedTab : "Ekonomi"; // Default tab adalah 'Ekonomi'
+        return savedTab ? savedTab : "Ekonomi";
     };
 
-    // State untuk mengelola tab aktif
     const [activeTab, setActiveTab] = useState(getInitialTab);
 
-    // Simpan tab yang aktif ke local storage setiap kali berubah
     useEffect(() => {
         localStorage.setItem("activeTab", activeTab);
     }, [activeTab]);
+
     return (
         <>
             <NavBar />
             <BannerProvinsi />
-            <div className="p-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 min-w-full">
+            <div className="p-4 md:p-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
                     {/* Left Column - Profil Daerah */}
                     <LeftColumn
                         formatNumber={formatNumber}
@@ -45,11 +43,11 @@ const ProfilDaerah = () => {
                     />
 
                     {/* Right Column - Tabs for Ekonomi, Statistik, Peluang Investasi Prioritas */}
-                    <div className="col-span-2 bg-white px-8 py-2 shadow-lg rounded-lg border-2 border-slate-100">
+                    <div className="col-span-2 bg-white px-4 md:px-8 py-4 shadow-lg rounded-lg border-2 border-slate-100">
                         {/* Tab Buttons */}
-                        <div className="flex border-b-2 border-gray-200">
+                        <div className="flex border-b-2 border-gray-200 overflow-x-auto">
                             <button
-                                className={`px-4 py-2 font-semibold relative ${
+                                className={`px-4 py-2 font-semibold text-sm md:text-base relative whitespace-nowrap ${
                                     activeTab === "Ekonomi"
                                         ? "text-[#384AA0]"
                                         : "text-gray-500"
@@ -62,7 +60,7 @@ const ProfilDaerah = () => {
                                 )}
                             </button>
                             <button
-                                className={`px-4 py-2 font-semibold relative ${
+                                className={`px-4 py-2 font-semibold text-sm md:text-base relative whitespace-nowrap ${
                                     activeTab === "Statistik"
                                         ? "text-[#384AA0]"
                                         : "text-gray-500"
@@ -75,7 +73,7 @@ const ProfilDaerah = () => {
                                 )}
                             </button>
                             <button
-                                className={`px-4 py-2 font-semibold relative ${
+                                className={`px-4 py-2 font-semibold text-sm md:text-base relative whitespace-nowrap ${
                                     activeTab === "Peluang"
                                         ? "text-[#384AA0]"
                                         : "text-gray-500"
@@ -90,16 +88,18 @@ const ProfilDaerah = () => {
                         </div>
 
                         {/* Conditionally Rendered Content */}
-                        {activeTab === "Ekonomi" && (
-                            <Ekonomi
-                                provinsi={provinsi}
-                                formatNumber={formatNumber}
-                            />
-                        )}
+                        <div className="mt-4">
+                            {activeTab === "Ekonomi" && (
+                                <Ekonomi
+                                    provinsi={provinsi}
+                                    formatNumber={formatNumber}
+                                />
+                            )}
 
-                        {activeTab === "Statistik" && <Statistik />}
+                            {activeTab === "Statistik" && <Statistik />}
 
-                        {activeTab === "Peluang" && <PeluangInvestasi />}
+                            {activeTab === "Peluang" && <PeluangInvestasi />}
+                        </div>
                     </div>
                 </div>
             </div>
